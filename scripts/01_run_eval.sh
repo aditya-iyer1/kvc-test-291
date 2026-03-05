@@ -106,66 +106,66 @@ for METHOD in "${METHODS[@]}"; do
         fi
 
         echo ""
+        echo ""
         echo "  Budget: $LABEL  (max_capacity_prompts=$ABS_CAP)"
 
+        OUT_DIR="$RESULTS_DIR/budget_${LABEL}"
+        mkdir -p "$OUT_DIR"
+        TIMING_LOG="$RESULTS_DIR/timing/${METHOD}_${LABEL}.txt"
+
+        # Check if all datasets already done
+        ALL_DONE=true
         for DATASET in "${DATASETS[@]}"; do
-
-            OUT_DIR="$RESULTS_DIR/budget_${LABEL}"
             OUT_FILE="$OUT_DIR/${METHOD}_${DATASET}.json"
-
-            if [[ -f "$OUT_FILE" ]]; then
-                echo "    [SKIP] $DATASET ($METHOD/$LABEL) — result already exists"
-                continue
+            if [[ ! -f "$OUT_FILE" ]]; then
+                ALL_DONE=false
+                break
             fi
+        done
+        if [[ "$ALL_DONE" == "true" ]]; then
+            echo "    [SKIP] all datasets for $METHOD/$LABEL already exist"
+            continue
+        fi
 
-            mkdir -p "$OUT_DIR"
+        if [[ "$METHOD" == "FullKV" ]]; then
+            CAP_ARG="--max_capacity_prompts 7950"
+        else
+            CAP_ARG="--max_capacity_prompts_ratio $BUDGET"
+        fi
 
-            TIMING_LOG="$RESULTS_DIR/timing/${METHOD}_${LABEL}_${DATASET}.txt"
+        echo -n "    Running all datasets ... "
+        START_TS=$(date +%s)
 
-            echo -n "    Running $DATASET ... "
-            START_TS=$(date +%s)
+        CMD=(
+            python3 "$REPO_DIR/run_longbench.py"
+                --model_path  "$MODEL_PATH"
+                --method      "$METHOD"
+                --attn_implementation "$ATTN_IMPL"
+                $CAP_ARG
+                --save_dir    "$OUT_DIR"
+                --use_cache   True
+                --eval_batch_size 4
+                --seed        42
+        )
 
-            # ── Build the command ──────────────────────────────────────────────
-            if [[ "$METHOD" == "FullKV" ]]; then
-                CAP_ARG="--max_capacity_prompts 7950"
-            else
-                CAP_ARG="--max_capacity_prompts_ratio $BUDGET"
-            fi
+        CUDA_VISIBLE_DEVICES="$GPUS" \
+            "${CMD[@]}" \
+            > "$TIMING_LOG" 2>&1
 
-            CMD=(
-                python3 "$REPO_DIR/run_longbench.py"
-                    --model_path  "$MODEL_PATH"
-                    --method      "$METHOD"
-                    --attn_implementation "$ATTN_IMPL"
-                    $CAP_ARG
-                    --save_dir    "$OUT_DIR"
-                    --dataset     "$DATASET"
-                    --data_file   "$REPO_DIR/data/LongBench/${DATASET}.jsonl"
-                    --use_cache   True
-                    --seed        42
-            )
+        END_TS=$(date +%s)
+        ELAPSED=$(( END_TS - START_TS ))
 
-            CUDA_VISIBLE_DEVICES="$GPUS" \
-                "${CMD[@]}" \
-                > "$TIMING_LOG" 2>&1
-
-            END_TS=$(date +%s)
-            ELAPSED=$(( END_TS - START_TS ))
-
-            # Extract generated JSON from save_dir structure that run_longbench creates:
-            # <save_dir>/<model_name>_<max_capacity_prompts>/<dataset>/<method>.json
-            #   → copy to our flat OUT_FILE
-            MODEL_NAME=$(basename "$MODEL_PATH")
-            # run_longbench uses the abs integer in folder name; find it
+        # Copy results to flat structure
+        MODEL_NAME=$(basename "$MODEL_PATH")
+        for DATASET in "${DATASETS[@]}"; do
             GENERATED=$(find "$OUT_DIR" -name "${METHOD}.json" -path "*${DATASET}*" | head -1 || true)
             if [[ -n "$GENERATED" ]]; then
-                cp "$GENERATED" "$OUT_FILE"
+                cp "$GENERATED" "$OUT_DIR/${METHOD}_${DATASET}.json"
             fi
+        done
 
-            echo "done (${ELAPSED}s)"
-            echo "${ELAPSED}" >> "$TIMING_LOG"
-
-        done   # DATASET loop
+        echo "done (${ELAPSED}s)"
+        echo "${ELAPSED}" >> "$TIMING_LOG"
     done       # BUDGET loop
 done           # METHOD loop
 

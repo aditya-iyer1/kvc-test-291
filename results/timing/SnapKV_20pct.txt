@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/run_longbench.py", line 384, in <module>
+    from pyramidkv.monkeypatch import replace_llama,replace_mistral
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/pyramidkv/monkeypatch.py", line 8, in <module>
+    from pyramidkv.llama_model_think import llama_attn_forward_SnapKV_ThinK, think_model_forward
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/pyramidkv/llama_model_think.py", line 7, in <module>
+    from pyramidkv.cache_utils_think import Cache, DynamicCache
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/pyramidkv/cache_utils_think.py", line 12, in <module>
+    from transformers.utils import is_hqq_available, is_quanto_available, is_torchdynamo_compiling, logging
+ImportError: cannot import name 'is_quanto_available' from 'transformers.utils' (/opt/conda/lib/python3.12/site-packages/transformers/utils/__init__.py). Did you mean: 'is_quark_available'?
