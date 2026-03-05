@@ -50,12 +50,7 @@ MODEL_MAX_LEN=7950
 
 # ── LongBench datasets ─────────────────────────────────────────────────────────
 DATASETS=(
-    narrativeqa qasper multifieldqa_en
-    hotpotqa 2wikimqa musique
-    gov_report qmsum multi_news
-    trec triviaqa samsum
-    passage_count passage_retrieval_en
-    lcc repobench-p
+    triviaqa hotpotqa gov_report
 )
 
 mkdir -p "$RESULTS_DIR/timing"
@@ -145,6 +140,7 @@ for METHOD in "${METHODS[@]}"; do
                 --save_dir    "$OUT_DIR"
                 --use_cache   True
                 --eval_batch_size 4
+                --max_num_examples 10
                 --seed        42
         )
 

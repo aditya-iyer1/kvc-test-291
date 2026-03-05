@@ -1,10 +1,101 @@
-Traceback (most recent call last):
-  File "/home/jovyan/kvc-test-291/KVCache-Factory/run_longbench.py", line 384, in <module>
-    from pyramidkv.monkeypatch import replace_llama,replace_mistral
-  File "/home/jovyan/kvc-test-291/KVCache-Factory/pyramidkv/monkeypatch.py", line 8, in <module>
-    from pyramidkv.llama_model_think import llama_attn_forward_SnapKV_ThinK, think_model_forward
-  File "/home/jovyan/kvc-test-291/KVCache-Factory/pyramidkv/llama_model_think.py", line 7, in <module>
-    from pyramidkv.cache_utils_think import Cache, DynamicCache
-  File "/home/jovyan/kvc-test-291/KVCache-Factory/pyramidkv/cache_utils_think.py", line 12, in <module>
-    from transformers.utils import is_hqq_available, is_quanto_available, is_torchdynamo_compiling, logging
-ImportError: cannot import name 'is_quanto_available' from 'transformers.utils' (/opt/conda/lib/python3.12/site-packages/transformers/utils/__init__.py). Did you mean: 'is_quark_available'?
+Using SnapKV!
+Using SnapKV!
+Working on max_capacity_prompts 512 dataset narrativeqa - 0/16
+Loading data...
+Max Length is 36418
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s]Token indices sequence length is longer than the specified maximum sequence length for this model (35534 > 2048). Running this sequence through the model will result in indexing errors
+This is a friendly reminder - the current text generation call will exceed the model's predefined maximum length (2048). Depending on the model, you may observe exceptions, performance degradation, or nothing at all.
+ 33%|██████████████████████████▋                                                     | 1/3 [00:03<00:07,  3.77s/it] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:05<00:02,  2.77s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:06<00:00,  1.63s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:06<00:00,  2.04s/it]
+  [DONE] narrativeqa — 6s
+Working on max_capacity_prompts 512 dataset qasper - 1/16
+Loading data...
+Max Length is 14660
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:01<00:02,  1.49s/it] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:02<00:01,  1.29s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:05<00:00,  1.90s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:05<00:00,  1.76s/it]
+  [DONE] qasper — 7s
+Working on max_capacity_prompts 512 dataset multifieldqa_en - 2/16
+Loading data...
+Max Length is 10337
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:00<00:01,  1.19it/s] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:01<00:00,  1.16it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:02<00:00,  1.48it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:02<00:00,  1.38it/s]
+  [DONE] multifieldqa_en — 4s
+Working on max_capacity_prompts 512 dataset hotpotqa - 3/16
+Loading data...
+Max Length is 12697
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:00<00:01,  1.35it/s] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:01<00:00,  1.35it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:01<00:00,  2.05it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:01<00:00,  1.80it/s]
+  [DONE] hotpotqa — 6s
+Working on max_capacity_prompts 512 dataset 2wikimqa - 4/16
+Loading data...
+Max Length is 11950
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:00<00:00,  2.45it/s] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:01<00:00,  1.82it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:01<00:00,  2.07it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:01<00:00,  2.06it/s]
+  [DONE] 2wikimqa — 4s
+Working on max_capacity_prompts 512 dataset musique - 5/16
+Loading data...
+Max Length is 17355
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:00<00:00,  4.70it/s] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:00<00:00,  2.22it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:01<00:00,  2.21it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:01<00:00,  2.33it/s]
+  [DONE] musique — 6s
+Working on max_capacity_prompts 512 dataset gov_report - 6/16
+Loading data...
+Max Length is 40508
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:10<00:21, 10.51s/it] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:14<00:06,  6.43s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:24<00:00,  8.27s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:24<00:00,  8.18s/it]
+  [DONE] gov_report — 28s
+Working on max_capacity_prompts 512 dataset qmsum - 7/16
+Loading data...
+Max Length is 24585
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:03<00:06,  3.04s/it] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:03<00:01,  1.74s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.11s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.41s/it]
+  [DONE] qmsum — 8s
+Working on max_capacity_prompts 512 dataset multi_news - 8/16
+Loading data...
+Max Length is 10933
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:10<00:20, 10.45s/it] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:14<00:06,  6.45s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:24<00:00,  8.29s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:24<00:00,  8.19s/it]
+  [DONE] multi_news — 25s
+Working on max_capacity_prompts 512 dataset trec - 9/16
+Loading data...
+Max Length is 8714
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:01<00:02,  1.37s/it] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:02<00:01,  1.37s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.36s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.36s/it]
+  [DONE] trec — 7s
+Working on max_capacity_prompts 512 dataset triviaqa - 10/16
+Loading data...
+Max Length is 16633
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:00<00:01,  1.36it/s] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:01<00:00,  1.37it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:02<00:00,  1.39it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:02<00:00,  1.39it/s]
+  [DONE] triviaqa — 5s
+Working on max_capacity_prompts 512 dataset samsum - 11/16
+Loading data...
+Max Length is 12252
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:02<00:05,  2.68s/it] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:03<00:01,  1.56s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:06<00:00,  2.05s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:06<00:00,  2.03s/it]
+  [DONE] samsum — 8s
+Working on max_capacity_prompts 512 dataset passage_count - 12/16
+Loading data...
+Max Length is 22099
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:00<00:00,  7.00it/s] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:00<00:00,  5.66it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00,  6.37it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00,  6.29it/s]
+  [DONE] passage_count — 5s
+Working on max_capacity_prompts 512 dataset passage_retrieval_en - 13/16
+Loading data...
+Max Length is 11516
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:00<00:00,  9.15it/s] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:00<00:00,  7.60it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00,  8.42it/s]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:00<00:00,  8.33it/s]
+  [DONE] passage_retrieval_en — 4s
+Working on max_capacity_prompts 512 dataset lcc - 14/16
+Loading data...
+Max Length is 10029
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:01<00:02,  1.38s/it] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:02<00:01,  1.35s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.34s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.34s/it]
+  [DONE] lcc — 6s
+Working on max_capacity_prompts 512 dataset repobench-p - 15/16
+Loading data...
+Max Length is 18754
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s] 33%|██████████████████████████▋                                                     | 1/3 [00:01<00:02,  1.38s/it] 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:02<00:01,  1.39s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.38s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:04<00:00,  1.38s/it]
+  [DONE] repobench-p — 12s
+153
