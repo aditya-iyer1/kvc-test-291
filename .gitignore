@@ -1,0 +1,8 @@
+
+# runtime artifacts
+.ipynb_checkpoints/
+run.log
+run.pid
+results/budget_20pct/
+*.bak
+scripts/config.env
