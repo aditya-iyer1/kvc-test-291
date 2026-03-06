@@ -1,7 +1,7 @@
 # Analysis of KV Cache Compression Policies
 
 > **Course:** CSE 291 — Systems for Machine Learning
-> **Date:** March 03, 2026
+> **Date:** March 06, 2026
 
 ---
 
@@ -283,7 +283,7 @@ We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
 |--------| ---: || ---: || ---: || ---: |
 | StreamingLLM | — || — || — || — |
 | H2O | — || — || — || — |
-| SnapKV | — || — || — || — |
+| SnapKV | — || 24.54 || — || — |
 | PyramidKV | — || — || — || — |
 | Full KV (baseline) | — || — || — || — |
 
@@ -305,7 +305,7 @@ We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
 |--------| ---: || ---: || ---: || ---: || ---: || ---: |
 | StreamingLLM | — || — || — || — || — || — |
 | H2O | — || — || — || — || — || — |
-| SnapKV | — || — || — || — || — || — |
+| SnapKV | — || 37.47 || 0.0 || 36.14 || — || — |
 | PyramidKV | — || — || — || — || — || — |
 
 ![Fig 2 — Category Heatmap](results/figures/fig2_category_heatmap.png)
@@ -325,7 +325,25 @@ We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
 
 ### 4.4 Inference Speedup
 
-*Latency data not available — run scripts/03_speedup.sh first.*
+| Method | Budget | Cache Tokens | Prefill (ms) | Decode (ms) | Speedup (×) |
+|--------|--------|----------:|----------:|----------:|----------:|
+| StreamingLLM | 100pct | 7,950 | 33.6 | 1015.5 | 0.955× |
+| StreamingLLM | 50% | 3,975 | 33.6 | 1008.7 | 0.961× |
+| StreamingLLM | 20% | 1,590 | 33.6 | 1013.6 | 0.957× |
+| StreamingLLM | 10% | 795 | 33.6 | 1008.8 | 0.961× |
+| H2O | 100pct | 7,950 | 33.6 | 1007.8 | 0.962× |
+| H2O | 50% | 3,975 | 33.6 | 1009.0 | 0.961× |
+| H2O | 20% | 1,590 | 33.6 | 1059.2 | 0.917× |
+| H2O | 10% | 795 | 33.5 | 1061.7 | 0.915× |
+| SnapKV | 100pct | 7,950 | 33.6 | 1003.3 | 0.966× |
+| SnapKV | 50% | 3,975 | 33.6 | 995.0 | 0.974× |
+| SnapKV | 20% | 1,590 | 33.5 | 1004.4 | 0.965× |
+| SnapKV | 10% | 795 | 33.5 | 994.1 | 0.975× |
+| PyramidKV | 100pct | 7,950 | 33.5 | 993.9 | 0.975× |
+| PyramidKV | 50% | 3,975 | 33.5 | 996.4 | 0.973× |
+| PyramidKV | 20% | 1,590 | 33.5 | 997.3 | 0.972× |
+| PyramidKV | 10% | 795 | 33.5 | 997.8 | 0.972× |
+| **Full KV** | Full | 7,950 | 34.4 | 967.7 | 1.00× |
 
 *Measured on a single A100-40G GPU with a 4,096-token synthetic prompt and 50 decode steps.*
 *Speedup is relative to FullKV under the same conditions.*

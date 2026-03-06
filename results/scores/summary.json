@@ -1,0 +1,29 @@
+{
+  "SnapKV": {
+    "20pct": {
+      "overall": 24.54,
+      "categories": {
+        "Few-Shot": 36.14,
+        "Multi-Doc QA": 37.47,
+        "Summarization": 0.0
+      },
+      "datasets": {
+        "triviaqa": {
+          "score": 36.14,
+          "n": 29,
+          "category": "Few-Shot"
+        },
+        "hotpotqa": {
+          "score": 37.47,
+          "n": 50,
+          "category": "Multi-Doc QA"
+        },
+        "gov_report": {
+          "score": 0.0,
+          "n": 50,
+          "category": "Summarization"
+        }
+      }
+    }
+  }
+}
