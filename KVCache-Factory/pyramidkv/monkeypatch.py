@@ -22,10 +22,7 @@ def replace_llama(method, model_name=None):
         print("Using PyramidKV!")
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_PyramidKV
         try:
-    try:
-        transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_PyramidKV
-    except AttributeError:
-        pass
+            transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_PyramidKV
         except AttributeError:
             pass
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_PyramidKV
@@ -34,10 +31,7 @@ def replace_llama(method, model_name=None):
         print("Using StreamingLLM!")
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_StreamingLLM
         try:
-    try:
-        transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_StreamingLLM
-    except AttributeError:
-        pass
+            transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_StreamingLLM
         except AttributeError:
             pass
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_StreamingLLM
@@ -46,10 +40,7 @@ def replace_llama(method, model_name=None):
         print("Using H2O!")
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_H2O
         try:
-    try:
-        transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_H2O
-    except AttributeError:
-        pass
+            transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_H2O
         except AttributeError:
             pass
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_H2O
@@ -58,10 +49,7 @@ def replace_llama(method, model_name=None):
         print("Using CAM!")
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_CAM
         try:
-    try:
-        transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_CAM
-    except AttributeError:
-        pass
+            transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_CAM
         except AttributeError:
             pass
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_CAM
@@ -70,10 +58,7 @@ def replace_llama(method, model_name=None):
         print("Using SnapKV!")
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_SnapKV
         try:
-    try:
-        transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_SnapKV
-    except AttributeError:
-        pass
+            transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_SnapKV
         except AttributeError:
             pass
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_SnapKV
@@ -85,10 +70,7 @@ def replace_llama(method, model_name=None):
         transformers.models.llama.modeling_llama.LlamaForCausalLM.prepare_inputs_for_generation = prepare_inputs_for_generation_llama_new
         transformers.models.llama.modeling_llama.LlamaAttention.forward = minference_attn_forward
         try:
-    try:
-        transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = minference_attn_forward
-    except AttributeError:
-        pass
+            transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = minference_attn_forward
         except AttributeError:
             pass
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = minference_attn_forward
@@ -97,10 +79,7 @@ def replace_llama(method, model_name=None):
         print("Using L2Norm!")
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_L2Norm
         try:
-    try:
-        transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_L2Norm
-    except AttributeError:
-        pass
+            transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_L2Norm
         except AttributeError:
             pass
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_L2Norm
@@ -110,10 +89,7 @@ def replace_llama(method, model_name=None):
         transformers.models.llama.modeling_llama.LlamaModel.forward = adaptive_LlamaModel_forward
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_flash_attn2_forward_AdaKV
         try:
-    try:
-        transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_AdaKV
-    except AttributeError:
-        pass
+            transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_AdaKV
         except AttributeError:
             pass
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_flash_attn2_forward_AdaKV
@@ -123,10 +99,7 @@ def replace_llama(method, model_name=None):
         transformers.models.llama.modeling_llama.LlamaModel.forward = adaptive_LlamaModel_forward
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_flash_attn2_forward_HeadKV
         try:
-    try:
-        transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_HeadKV
-    except AttributeError:
-        pass
+            transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_HeadKV
         except AttributeError:
             pass
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_flash_attn2_forward_HeadKV
@@ -149,10 +122,7 @@ def replace_mistral(method):
         print("Using PyramidKV!")
         transformers.models.mistral.modeling_mistral.MistralAttention.forward = mistral_attn_forward_PyramidKV
         try:
-    try:
-        transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_PyramidKV
-    except AttributeError:
-        pass
+            transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_PyramidKV
         except AttributeError:
             pass
         transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_sdpa_attn_forward_PyramidKV
@@ -161,10 +131,7 @@ def replace_mistral(method):
         print("Using StreamingLLM!")
         transformers.models.mistral.modeling_mistral.MistralAttention.forward = mistral_attn_forward_StreamingLLM
         try:
-    try:
-        transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_StreamingLLM
-    except AttributeError:
-        pass
+            transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_StreamingLLM
         except AttributeError:
             pass
         transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_sdpa_attn_forward_StreamingLLM
@@ -173,10 +140,7 @@ def replace_mistral(method):
         print("Using H2O!")
         transformers.models.mistral.modeling_mistral.MistralAttention.forward = mistral_attn_forward_H2O
         try:
-    try:
-        transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_H2O
-    except AttributeError:
-        pass
+            transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_H2O
         except AttributeError:
             pass
         transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_sdpa_attn_forward_H2O
@@ -185,10 +149,7 @@ def replace_mistral(method):
         print("Using CAM!")
         transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_CAM
         try:
-    try:
-        transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_CAM
-    except AttributeError:
-        pass
+            transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_CAM
         except AttributeError:
             pass
         transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_CAM
@@ -197,10 +158,7 @@ def replace_mistral(method):
         print("Using SnapKV!")
         transformers.models.mistral.modeling_mistral.MistralAttention.forward = mistral_attn_forward_SnapKV
         try:
-    try:
-        transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_SnapKV
-    except AttributeError:
-        pass
+            transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_SnapKV
         except AttributeError:
             pass
         transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_sdpa_attn_forward_SnapKV
@@ -209,10 +167,7 @@ def replace_mistral(method):
         print("Using L2Norm!")
         transformers.models.mistral.modeling_mistral.MistralAttention.forward = mistral_attn_forward_L2Norm
         try:
-    try:
-        transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_L2Norm
-    except AttributeError:
-        pass
+            transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_L2Norm
         except AttributeError:
             pass
         transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_sdpa_attn_forward_L2Norm
@@ -222,10 +177,7 @@ def replace_mistral(method):
         transformers.models.mistral.modeling_mistral.MistralModel.forward  = adaptive_MistralModel_forward
         transformers.models.mistral.modeling_mistral.MistralAttention.forward = mistral_flash_attn2_forward_AdaKV
         try:
-    try:
-        transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_AdaKV
-    except AttributeError:
-        pass
+            transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_AdaKV
         except AttributeError:
             pass
         transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_flash_attn2_forward_AdaKV
@@ -235,10 +187,7 @@ def replace_mistral(method):
         transformers.models.mistral.modeling_mistral.MistralModel.forward  = adaptive_MistralModel_forward
         transformers.models.mistral.modeling_mistral.MistralAttention.forward = mistral_flash_attn2_forward_HeadKV
         try:
-    try:
-        transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_HeadKV
-    except AttributeError:
-        pass
+            transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_HeadKV
         except AttributeError:
             pass
         transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_flash_attn2_forward_HeadKV
