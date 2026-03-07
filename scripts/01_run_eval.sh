@@ -50,7 +50,12 @@ MODEL_MAX_LEN=7950
 
 # ── LongBench datasets ─────────────────────────────────────────────────────────
 DATASETS=(
-    triviaqa hotpotqa gov_report
+    narrativeqa
+    hotpotqa
+    multi_news
+    triviaqa
+    passage_retrieval_en
+    lcc
 )
 
 mkdir -p "$RESULTS_DIR/timing"
@@ -106,21 +111,6 @@ for METHOD in "${METHODS[@]}"; do
 
         OUT_DIR="$RESULTS_DIR/budget_${LABEL}"
         mkdir -p "$OUT_DIR"
-        TIMING_LOG="$RESULTS_DIR/timing/${METHOD}_${LABEL}.txt"
-
-        # Check if all datasets already done
-        ALL_DONE=true
-        for DATASET in "${DATASETS[@]}"; do
-            OUT_FILE="$OUT_DIR/${METHOD}_${DATASET}.json"
-            if [[ ! -f "$OUT_FILE" ]]; then
-                ALL_DONE=false
-                break
-            fi
-        done
-        if [[ "$ALL_DONE" == "true" ]]; then
-            echo "    [SKIP] all datasets for $METHOD/$LABEL already exist"
-            continue
-        fi
 
         if [[ "$METHOD" == "FullKV" ]]; then
             CAP_ARG="--max_capacity_prompts 7950"
@@ -128,40 +118,49 @@ for METHOD in "${METHODS[@]}"; do
             CAP_ARG="--max_capacity_prompts_ratio $BUDGET"
         fi
 
-        echo -n "    Running all datasets ... "
-        START_TS=$(date +%s)
-
-        CMD=(
-            python3 "$REPO_DIR/run_longbench.py"
-                --model_path  "$MODEL_PATH"
-                --method      "$METHOD"
-                --attn_implementation "$ATTN_IMPL"
-                $CAP_ARG
-                --save_dir    "$OUT_DIR"
-                --use_cache   True
-                --eval_batch_size 4
-                --max_num_examples 200
-                --seed        42
-        )
-
-        CUDA_VISIBLE_DEVICES="$GPUS" \
-            "${CMD[@]}" \
-            > "$TIMING_LOG" 2>&1
-
-        END_TS=$(date +%s)
-        ELAPSED=$(( END_TS - START_TS ))
-
-        # Copy results to flat structure
-        MODEL_NAME=$(basename "$MODEL_PATH")
         for DATASET in "${DATASETS[@]}"; do
+            OUT_FILE="$OUT_DIR/${METHOD}_${DATASET}.json"
+            if [[ -f "$OUT_FILE" ]]; then
+                echo "    [SKIP] $OUT_FILE already exists"
+                continue
+            fi
+            
+            TIMING_LOG="$RESULTS_DIR/timing/${METHOD}_${LABEL}_${DATASET}.txt"
+
+            echo -n "    Running dataset: $DATASET ... "
+            START_TS=$(date +%s)
+
+            CMD=(
+                python3 "$REPO_DIR/run_longbench.py"
+                    --model_path  "$MODEL_PATH"
+                    --method      "$METHOD"
+                    --attn_implementation "$ATTN_IMPL"
+                    $CAP_ARG
+                    --save_dir    "$OUT_DIR"
+                    --use_cache   True
+                    --eval_batch_size 4
+                    --max_num_examples 50
+                    --seed        42
+                    --dataset     "$DATASET"
+            )
+
+            CUDA_VISIBLE_DEVICES="$GPUS" \
+                "${CMD[@]}" \
+                > "$TIMING_LOG" 2>&1
+
+            END_TS=$(date +%s)
+            ELAPSED=$(( END_TS - START_TS ))
+
+            # Copy results to flat structure immediately
+            MODEL_NAME=$(basename "$MODEL_PATH")
             GENERATED=$(find "$OUT_DIR" -name "${METHOD}.json" -path "*${DATASET}*" | head -1 || true)
             if [[ -n "$GENERATED" ]]; then
-                cp "$GENERATED" "$OUT_DIR/${METHOD}_${DATASET}.json"
+                cp "$GENERATED" "$OUT_FILE"
             fi
-        done
 
-        echo "done (${ELAPSED}s)"
-        echo "${ELAPSED}" >> "$TIMING_LOG"
+            echo "done (${ELAPSED}s)"
+            echo "${ELAPSED}" >> "$TIMING_LOG"
+        done
     done       # BUDGET loop
 done           # METHOD loop
 
