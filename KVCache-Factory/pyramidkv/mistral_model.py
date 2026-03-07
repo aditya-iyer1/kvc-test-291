@@ -114,9 +114,9 @@ def mistral_attn_forward_H2O(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -164,9 +164,9 @@ def mistral_attn_forward_H2O(
     
     attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
 
-    if attn_weights.size() != (bsz, self.num_heads, q_len, kv_seq_len):
+    if attn_weights.size() != (bsz, self.config.num_attention_heads, q_len, kv_seq_len):
         raise ValueError(
-            f"Attention weights should be of size {(bsz, self.num_heads, q_len, kv_seq_len)}, but is"
+            f"Attention weights should be of size {(bsz, self.config.num_attention_heads, q_len, kv_seq_len)}, but is"
             f" {attn_weights.size()}"
         )
 
@@ -183,9 +183,9 @@ def mistral_attn_forward_H2O(
     attn_weights = nn.functional.dropout(attn_weights, p=self.attention_dropout, training=self.training)
     attn_output = torch.matmul(attn_weights, value_states)
 
-    if attn_output.size() != (bsz, self.num_heads, q_len, self.head_dim):
+    if attn_output.size() != (bsz, self.config.num_attention_heads, q_len, self.head_dim):
         raise ValueError(
-            f"`attn_output` should be of size {(bsz, self.num_heads, q_len, self.head_dim)}, but is"
+            f"`attn_output` should be of size {(bsz, self.config.num_attention_heads, q_len, self.head_dim)}, but is"
             f" {attn_output.size()}"
         )
 
@@ -234,9 +234,9 @@ def mistral_sdpa_attn_forward_H2O(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -373,9 +373,9 @@ def mistral_flash_attn2_forward_H2O(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
     
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -501,7 +501,7 @@ def mistral_flash_attn2_forward_H2O(
         is_causal=self.is_causal,
     )
 
-    attn_output = attn_output.reshape(bsz, q_len, self.num_heads * self.head_dim).contiguous()
+    attn_output = attn_output.reshape(bsz, q_len, self.config.num_attention_heads * self.head_dim).contiguous()
     attn_output = self.o_proj(attn_output)
 
     if not output_attentions:
@@ -533,9 +533,9 @@ def mistral_attn_forward_L2Norm(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -583,9 +583,9 @@ def mistral_attn_forward_L2Norm(
     
     attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
 
-    if attn_weights.size() != (bsz, self.num_heads, q_len, kv_seq_len):
+    if attn_weights.size() != (bsz, self.config.num_attention_heads, q_len, kv_seq_len):
         raise ValueError(
-            f"Attention weights should be of size {(bsz, self.num_heads, q_len, kv_seq_len)}, but is"
+            f"Attention weights should be of size {(bsz, self.config.num_attention_heads, q_len, kv_seq_len)}, but is"
             f" {attn_weights.size()}"
         )
 
@@ -602,9 +602,9 @@ def mistral_attn_forward_L2Norm(
     attn_weights = nn.functional.dropout(attn_weights, p=self.attention_dropout, training=self.training)
     attn_output = torch.matmul(attn_weights, value_states)
 
-    if attn_output.size() != (bsz, self.num_heads, q_len, self.head_dim):
+    if attn_output.size() != (bsz, self.config.num_attention_heads, q_len, self.head_dim):
         raise ValueError(
-            f"`attn_output` should be of size {(bsz, self.num_heads, q_len, self.head_dim)}, but is"
+            f"`attn_output` should be of size {(bsz, self.config.num_attention_heads, q_len, self.head_dim)}, but is"
             f" {attn_output.size()}"
         )
 
@@ -651,9 +651,9 @@ def mistral_sdpa_attn_forward_L2Norm(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -786,9 +786,9 @@ def mistral_flash_attn2_forward_L2Norm(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
     
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -952,9 +952,9 @@ def mistral_attn_forward_CAM(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -1002,9 +1002,9 @@ def mistral_attn_forward_CAM(
     
     attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
 
-    if attn_weights.size() != (bsz, self.num_heads, q_len, kv_seq_len):
+    if attn_weights.size() != (bsz, self.config.num_attention_heads, q_len, kv_seq_len):
         raise ValueError(
-            f"Attention weights should be of size {(bsz, self.num_heads, q_len, kv_seq_len)}, but is"
+            f"Attention weights should be of size {(bsz, self.config.num_attention_heads, q_len, kv_seq_len)}, but is"
             f" {attn_weights.size()}"
         )
 
@@ -1021,9 +1021,9 @@ def mistral_attn_forward_CAM(
     attn_weights = nn.functional.dropout(attn_weights, p=self.attention_dropout, training=self.training)
     attn_output = torch.matmul(attn_weights, value_states)
 
-    if attn_output.size() != (bsz, self.num_heads, q_len, self.head_dim):
+    if attn_output.size() != (bsz, self.config.num_attention_heads, q_len, self.head_dim):
         raise ValueError(
-            f"`attn_output` should be of size {(bsz, self.num_heads, q_len, self.head_dim)}, but is"
+            f"`attn_output` should be of size {(bsz, self.config.num_attention_heads, q_len, self.head_dim)}, but is"
             f" {attn_output.size()}"
         )
 
@@ -1072,9 +1072,9 @@ def mistral_sdpa_attn_forward_CAM(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -1211,9 +1211,9 @@ def mistral_flash_attn2_forward_CAM(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
     
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -1339,7 +1339,7 @@ def mistral_flash_attn2_forward_CAM(
         is_causal=self.is_causal,
     )
 
-    attn_output = attn_output.reshape(bsz, q_len, self.num_heads * self.head_dim).contiguous()
+    attn_output = attn_output.reshape(bsz, q_len, self.config.num_attention_heads * self.head_dim).contiguous()
     attn_output = self.o_proj(attn_output)
 
     if not output_attentions:
@@ -1371,9 +1371,9 @@ def mistral_attn_forward_StreamingLLM(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -1423,9 +1423,9 @@ def mistral_attn_forward_StreamingLLM(
 
     attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
 
-    if attn_weights.size() != (bsz, self.num_heads, q_len, kv_seq_len):
+    if attn_weights.size() != (bsz, self.config.num_attention_heads, q_len, kv_seq_len):
         raise ValueError(
-            f"Attention weights should be of size {(bsz, self.num_heads, q_len, kv_seq_len)}, but is"
+            f"Attention weights should be of size {(bsz, self.config.num_attention_heads, q_len, kv_seq_len)}, but is"
             f" {attn_weights.size()}"
         )
 
@@ -1442,9 +1442,9 @@ def mistral_attn_forward_StreamingLLM(
     attn_weights = nn.functional.dropout(attn_weights, p=self.attention_dropout, training=self.training)
     attn_output = torch.matmul(attn_weights, value_states)
 
-    if attn_output.size() != (bsz, self.num_heads, q_len, self.head_dim):
+    if attn_output.size() != (bsz, self.config.num_attention_heads, q_len, self.head_dim):
         raise ValueError(
-            f"`attn_output` should be of size {(bsz, self.num_heads, q_len, self.head_dim)}, but is"
+            f"`attn_output` should be of size {(bsz, self.config.num_attention_heads, q_len, self.head_dim)}, but is"
             f" {attn_output.size()}"
         )
 
@@ -1493,9 +1493,9 @@ def mistral_sdpa_attn_forward_StreamingLLM(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -1632,9 +1632,9 @@ def mistral_flash_attn2_forward_StreamingLLM(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
     
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -1760,7 +1760,7 @@ def mistral_flash_attn2_forward_StreamingLLM(
         is_causal=self.is_causal,
     )
 
-    attn_output = attn_output.reshape(bsz, q_len, self.num_heads * self.head_dim).contiguous()
+    attn_output = attn_output.reshape(bsz, q_len, self.config.num_attention_heads * self.head_dim).contiguous()
     attn_output = self.o_proj(attn_output)
 
     if not output_attentions:
@@ -1792,9 +1792,9 @@ def mistral_attn_forward_PyramidKV(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -1842,9 +1842,9 @@ def mistral_attn_forward_PyramidKV(
     
     attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
 
-    if attn_weights.size() != (bsz, self.num_heads, q_len, kv_seq_len):
+    if attn_weights.size() != (bsz, self.config.num_attention_heads, q_len, kv_seq_len):
         raise ValueError(
-            f"Attention weights should be of size {(bsz, self.num_heads, q_len, kv_seq_len)}, but is"
+            f"Attention weights should be of size {(bsz, self.config.num_attention_heads, q_len, kv_seq_len)}, but is"
             f" {attn_weights.size()}"
         )
 
@@ -1861,9 +1861,9 @@ def mistral_attn_forward_PyramidKV(
     attn_weights = nn.functional.dropout(attn_weights, p=self.attention_dropout, training=self.training)
     attn_output = torch.matmul(attn_weights, value_states)
 
-    if attn_output.size() != (bsz, self.num_heads, q_len, self.head_dim):
+    if attn_output.size() != (bsz, self.config.num_attention_heads, q_len, self.head_dim):
         raise ValueError(
-            f"`attn_output` should be of size {(bsz, self.num_heads, q_len, self.head_dim)}, but is"
+            f"`attn_output` should be of size {(bsz, self.config.num_attention_heads, q_len, self.head_dim)}, but is"
             f" {attn_output.size()}"
         )
 
@@ -1912,9 +1912,9 @@ def mistral_sdpa_attn_forward_PyramidKV(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -2051,9 +2051,9 @@ def mistral_flash_attn2_forward_PyramidKV(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
     
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -2179,7 +2179,7 @@ def mistral_flash_attn2_forward_PyramidKV(
         is_causal=self.is_causal,
     )
 
-    attn_output = attn_output.reshape(bsz, q_len, self.num_heads * self.head_dim).contiguous()
+    attn_output = attn_output.reshape(bsz, q_len, self.config.num_attention_heads * self.head_dim).contiguous()
     attn_output = self.o_proj(attn_output)
 
     if not output_attentions:
@@ -2211,9 +2211,9 @@ def mistral_attn_forward_SnapKV(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -2258,9 +2258,9 @@ def mistral_attn_forward_SnapKV(
 
     attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
 
-    if attn_weights.size() != (bsz, self.num_heads, q_len, kv_seq_len):
+    if attn_weights.size() != (bsz, self.config.num_attention_heads, q_len, kv_seq_len):
         raise ValueError(
-            f"Attention weights should be of size {(bsz, self.num_heads, q_len, kv_seq_len)}, but is"
+            f"Attention weights should be of size {(bsz, self.config.num_attention_heads, q_len, kv_seq_len)}, but is"
             f" {attn_weights.size()}"
         )
 
@@ -2277,9 +2277,9 @@ def mistral_attn_forward_SnapKV(
     attn_weights = nn.functional.dropout(attn_weights, p=self.attention_dropout, training=self.training)
     attn_output = torch.matmul(attn_weights, value_states)
 
-    if attn_output.size() != (bsz, self.num_heads, q_len, self.head_dim):
+    if attn_output.size() != (bsz, self.config.num_attention_heads, q_len, self.head_dim):
         raise ValueError(
-            f"`attn_output` should be of size {(bsz, self.num_heads, q_len, self.head_dim)}, but is"
+            f"`attn_output` should be of size {(bsz, self.config.num_attention_heads, q_len, self.head_dim)}, but is"
             f" {attn_output.size()}"
         )
 
@@ -2328,9 +2328,9 @@ def mistral_sdpa_attn_forward_SnapKV(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
 
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -2467,9 +2467,9 @@ def mistral_flash_attn2_forward_SnapKV(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
     
     kv_seq_len = key_states.shape[-2]
     # if past_key_value is not None:
@@ -2595,7 +2595,7 @@ def mistral_flash_attn2_forward_SnapKV(
         is_causal=self.is_causal,
     )
 
-    attn_output = attn_output.reshape(bsz, q_len, self.num_heads * self.head_dim).contiguous()
+    attn_output = attn_output.reshape(bsz, q_len, self.config.num_attention_heads * self.head_dim).contiguous()
     attn_output = self.o_proj(attn_output)
 
     if not output_attentions:
@@ -2628,9 +2628,9 @@ def mistral_flash_attn2_forward_AdaKV(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
     
     kv_seq_len = key_states.shape[-2]
 
@@ -2732,7 +2732,7 @@ def mistral_flash_attn2_forward_AdaKV(
                 is_causal=self.is_causal,
             )
             # attn_output = attn_output.reshape(bsz, q_len, self.hidden_size).contiguous()
-            attn_output = attn_output.reshape(bsz, q_len, self.num_heads * self.head_dim).contiguous()
+            attn_output = attn_output.reshape(bsz, q_len, self.config.num_attention_heads * self.head_dim).contiguous()
 
         else:
             self.kv_seq_len += q_len
@@ -2742,7 +2742,7 @@ def mistral_flash_attn2_forward_AdaKV(
             key_states, value_states = past_key_value.update(key_states, value_states, self.layer_idx, cache_kwargs)
 
             # NOTE: update meta data
-            self.kv_cluster.klen_sum += self.num_heads
+            self.kv_cluster.klen_sum += self.config.num_attention_heads
             self.kv_cluster.max_seqlen_k += 1
             self.kv_cluster.cu_klen += self.kv_cluster.cu_offset
             self.kv_cluster.head_lens += 1
@@ -2758,9 +2758,9 @@ def mistral_flash_attn2_forward_AdaKV(
 
             attn_output = flash_attn_varlen_func(query_states, key_states, value_states, cu_seqlens_q,
                                                  cu_seqlens_k, max_seqlen_q, max_seqlen_k, causal=True).reshape(
-                bsz, self.num_heads, q_len, self.head_dim)
+                bsz, self.config.num_attention_heads, q_len, self.head_dim)
             # attn_output = attn_output.transpose(0, 1).reshape(bsz, q_len, self.hidden_size)
-            attn_output = attn_output.transpose(0, 1).reshape(bsz, q_len, self.num_heads * self.head_dim).contiguous()
+            attn_output = attn_output.transpose(0, 1).reshape(bsz, q_len, self.config.num_attention_heads * self.head_dim).contiguous()
 
     attn_output = self.o_proj(attn_output)
 
@@ -2794,9 +2794,9 @@ def mistral_flash_attn2_forward_HeadKV(
     key_states = self.k_proj(hidden_states)
     value_states = self.v_proj(hidden_states)
 
-    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
-    key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
-    value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
+    query_states = query_states.view(bsz, q_len, self.config.num_attention_heads, self.head_dim).transpose(1, 2)
+    key_states = key_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
+    value_states = value_states.view(bsz, q_len, self.config.num_key_value_heads, self.head_dim).transpose(1, 2)
     
     kv_seq_len = key_states.shape[-2]
 
@@ -2900,7 +2900,7 @@ def mistral_flash_attn2_forward_HeadKV(
                 is_causal=self.is_causal,
             )
             # attn_output = attn_output.reshape(bsz, q_len, self.hidden_size).contiguous()
-            attn_output = attn_output.reshape(bsz, q_len, self.num_heads * self.head_dim).contiguous()
+            attn_output = attn_output.reshape(bsz, q_len, self.config.num_attention_heads * self.head_dim).contiguous()
 
         else:
             self.kv_seq_len += q_len
@@ -2910,7 +2910,7 @@ def mistral_flash_attn2_forward_HeadKV(
             key_states, value_states = past_key_value.update(key_states, value_states, self.layer_idx, cache_kwargs)
 
             # NOTE: update meta data
-            self.kv_cluster.klen_sum += self.num_heads
+            self.kv_cluster.klen_sum += self.config.num_attention_heads
             self.kv_cluster.max_seqlen_k += 1
             self.kv_cluster.cu_klen += self.kv_cluster.cu_offset
             self.kv_cluster.head_lens += 1
@@ -2926,9 +2926,9 @@ def mistral_flash_attn2_forward_HeadKV(
 
             attn_output = flash_attn_varlen_func(query_states, key_states, value_states, cu_seqlens_q,
                                                  cu_seqlens_k, max_seqlen_q, max_seqlen_k, causal=True).reshape(
-                bsz, self.num_heads, q_len, self.head_dim)
+                bsz, self.config.num_attention_heads, q_len, self.head_dim)
             # attn_output = attn_output.transpose(0, 1).reshape(bsz, q_len, self.hidden_size)
-            attn_output = attn_output.transpose(0, 1).reshape(bsz, q_len, self.num_heads * self.head_dim).contiguous()
+            attn_output = attn_output.transpose(0, 1).reshape(bsz, q_len, self.config.num_attention_heads * self.head_dim).contiguous()
 
     attn_output = self.o_proj(attn_output)
 
