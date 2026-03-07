@@ -1,8 +1,72 @@
 Using StreamingLLM!
+Using StreamingLLM!
+Loading checkpoint shards:   0%|                                                             | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|█████████████████▎                                  | 1/3 [13:03<26:07, 783.92s/it]Loading checkpoint shards:  67%|██████████████████████████████████▋                 | 2/3 [26:10<13:05, 785.44s/it]Loading checkpoint shards: 100%|████████████████████████████████████████████████████| 3/3 [38:35<00:00, 766.98s/it]Loading checkpoint shards: 100%|████████████████████████████████████████████████████| 3/3 [38:35<00:00, 771.81s/it]
+Working on max_capacity_prompts 512 dataset narrativeqa - 0/1
+Loading data...
+Max Length is 36418
+Finish loading model and tokenizer
+  0%|                                                                                       | 0/13 [00:00<?, ?it/s]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+  0%|                                                                                       | 0/13 [00:00<?, ?it/s]
 Traceback (most recent call last):
-  File "/home/jovyan/kvc-test-291/KVCache-Factory/run_longbench.py", line 385, in <module>
-    replace_llama(args.method.lower())
-  File "/home/jovyan/kvc-test-291/KVCache-Factory/pyramidkv/monkeypatch.py", line 37, in replace_llama
-    transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_StreamingLLM
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: module 'transformers.models.llama.modeling_llama' has no attribute 'LlamaSdpaAttention'. Did you mean: 'LlamaAttention'?
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/run_longbench.py", line 423, in <module>
+    main(args)
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/run_longbench.py", line 268, in main
+    output = model.generate(
+             ^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/generation/utils.py", line 2463, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/generation/utils.py", line 3429, in _sample
+    outputs = self(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/models/mistral/modeling_mistral.py", line 810, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/utils/generic.py", line 965, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/models/mistral/modeling_mistral.py", line 536, in forward
+    layer_outputs = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/models/mistral/modeling_mistral.py", line 249, in forward
+    hidden_states, self_attn_weights = self.self_attn(
+                                       ^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/pyramidkv/mistral_model.py", line 1374, in mistral_attn_forward_StreamingLLM
+    query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
+                                                 ^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1931, in __getattr__
+    raise AttributeError(
+AttributeError: 'MistralAttention' object has no attribute 'num_heads'

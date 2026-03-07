@@ -1,0 +1,96 @@
+{
+  "budget": "full",
+  "results": {
+    "FullKV": {
+      "triviaqa": {
+        "score": 51.63,
+        "n": 50,
+        "category": "Few-Shot"
+      },
+      "hotpotqa": {
+        "score": 47.91,
+        "n": 50,
+        "category": "Multi-Doc QA"
+      },
+      "gov_report": {
+        "score": 32.47,
+        "n": 50,
+        "category": "Summarization"
+      },
+      "narrativeqa": {
+        "score": 23.71,
+        "n": 50,
+        "category": "Single-Doc QA"
+      },
+      "qasper": {
+        "score": 38.55,
+        "n": 50,
+        "category": "Single-Doc QA"
+      },
+      "multifieldqa_en": {
+        "score": 48.99,
+        "n": 38,
+        "category": "Single-Doc QA"
+      },
+      "2wikimqa": {
+        "score": 31.16,
+        "n": 50,
+        "category": "Multi-Doc QA"
+      },
+      "musique": {
+        "score": 21.05,
+        "n": 50,
+        "category": "Multi-Doc QA"
+      },
+      "qmsum": {
+        "score": 24.59,
+        "n": 50,
+        "category": "Summarization"
+      },
+      "multi_news": {
+        "score": 27.2,
+        "n": 50,
+        "category": "Summarization"
+      },
+      "trec": {
+        "score": 0.0,
+        "n": 50,
+        "category": "Few-Shot"
+      },
+      "samsum": {
+        "score": 26.07,
+        "n": 50,
+        "category": "Few-Shot"
+      },
+      "passage_count": {
+        "score": 0.0,
+        "n": 50,
+        "category": "Synthetic"
+      },
+      "passage_retrieval_en": {
+        "score": 78.0,
+        "n": 50,
+        "category": "Synthetic"
+      },
+      "lcc": {
+        "score": 22.89,
+        "n": 50,
+        "category": "Code"
+      },
+      "repobench-p": {
+        "score": 25.5,
+        "n": 50,
+        "category": "Code"
+      },
+      "_category_avg": {
+        "Few-Shot": 25.9,
+        "Multi-Doc QA": 33.37,
+        "Summarization": 28.09,
+        "Single-Doc QA": 37.08,
+        "Synthetic": 39.0,
+        "Code": 24.2
+      },
+      "_overall_avg": 31.23
+    }
+  }
+}

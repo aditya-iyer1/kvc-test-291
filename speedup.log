@@ -1,0 +1,13 @@
+======================================================
+  Latency Benchmark
+======================================================
+  GPU        : 0
+  Seq len    : 4096 tokens
+  Decode steps: 50
+  AttnImpl   : sdpa
+
+Loading tokenizer...
+
+── Method: FullKV ──
+  Loading model for FullKV/full...
+Loading checkpoint shards:   0%|                                                             | 0/3 [00:00<?, ?it/s]
