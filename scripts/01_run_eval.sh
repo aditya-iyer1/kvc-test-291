@@ -115,7 +115,7 @@ for METHOD in "${METHODS[@]}"; do
         if [[ "$METHOD" == "FullKV" ]]; then
             CAP_ARG="--max_capacity_prompts 7950"
         else
-            CAP_ARG="--max_capacity_prompts_ratio $BUDGET"
+            CAP_ARG="--max_capacity_prompts $ABS_CAP"
         fi
 
         for DATASET in "${DATASETS[@]}"; do
@@ -156,7 +156,7 @@ for METHOD in "${METHODS[@]}"; do
             if [[ "$METHOD" == "FullKV" ]]; then
                 CAP_FOR_DIR=7950
             else
-                CAP_FOR_DIR=$ABS_CAP
+                CAP_FOR_DIR=512
             fi
             NESTED="$OUT_DIR/${MODEL_NAME}_${CAP_FOR_DIR}/${DATASET}/${METHOD}.json"
             if [[ -f "$NESTED" ]]; then
