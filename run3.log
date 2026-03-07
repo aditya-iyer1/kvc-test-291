@@ -3,7 +3,7 @@
 ======================================================
 Model      : mistralai/Mistral-7B-Instruct-v0.2
 GPU(s)     : 0
-Methods    : FullKV StreamingLLM H2O SnapKV PyramidKV
+Methods    : FullKV StreamingLLM SnapKV PyramidKV
 Budgets    : 0.1 0.2 0.5
 AttnImpl   : sdpa
 Results    : /home/jovyan/kvc-test-291/results
@@ -26,4 +26,92 @@ Results    : /home/jovyan/kvc-test-291/results
 
 
   Budget: 10pct  (max_capacity_prompts=795)
-    Running dataset: narrativeqa ... 
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_10pct/StreamingLLM_narrativeqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_10pct/StreamingLLM_hotpotqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_10pct/StreamingLLM_multi_news.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_10pct/StreamingLLM_triviaqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_10pct/StreamingLLM_passage_retrieval_en.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_10pct/StreamingLLM_lcc.json already exists
+
+
+  Budget: 20pct  (max_capacity_prompts=1590)
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_20pct/StreamingLLM_narrativeqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_20pct/StreamingLLM_hotpotqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_20pct/StreamingLLM_multi_news.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_20pct/StreamingLLM_triviaqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_20pct/StreamingLLM_passage_retrieval_en.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_20pct/StreamingLLM_lcc.json already exists
+
+
+  Budget: 50pct  (max_capacity_prompts=3975)
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_50pct/StreamingLLM_narrativeqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_50pct/StreamingLLM_hotpotqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_50pct/StreamingLLM_multi_news.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_50pct/StreamingLLM_triviaqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_50pct/StreamingLLM_passage_retrieval_en.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_50pct/StreamingLLM_lcc.json already exists
+===============================
+  Method: SnapKV
+===============================
+
+
+  Budget: 10pct  (max_capacity_prompts=795)
+    Running dataset: narrativeqa ... done (116s)
+    Running dataset: hotpotqa ... done (360s)
+    Running dataset: multi_news ... done (338s)
+    Running dataset: triviaqa ... done (376s)
+    Running dataset: passage_retrieval_en ... done (285s)
+    Running dataset: lcc ... done (150s)
+
+
+  Budget: 20pct  (max_capacity_prompts=1590)
+    Running dataset: narrativeqa ... done (112s)
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_20pct/SnapKV_hotpotqa.json already exists
+    Running dataset: multi_news ... done (341s)
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_20pct/SnapKV_triviaqa.json already exists
+    Running dataset: passage_retrieval_en ... done (286s)
+    Running dataset: lcc ... done (153s)
+
+
+  Budget: 50pct  (max_capacity_prompts=3975)
+    Running dataset: narrativeqa ... done (114s)
+    Running dataset: hotpotqa ... done (368s)
+    Running dataset: multi_news ... done (343s)
+    Running dataset: triviaqa ... done (380s)
+    Running dataset: passage_retrieval_en ... done (285s)
+    Running dataset: lcc ... done (153s)
+===============================
+  Method: PyramidKV
+===============================
+
+
+  Budget: 10pct  (max_capacity_prompts=795)
+    Running dataset: narrativeqa ... done (114s)
+    Running dataset: hotpotqa ... done (368s)
+    Running dataset: multi_news ... done (346s)
+    Running dataset: triviaqa ... done (382s)
+    Running dataset: passage_retrieval_en ... done (290s)
+    Running dataset: lcc ... done (153s)
+
+
+  Budget: 20pct  (max_capacity_prompts=1590)
+    Running dataset: narrativeqa ... done (114s)
+    Running dataset: hotpotqa ... done (368s)
+    Running dataset: multi_news ... done (343s)
+    Running dataset: triviaqa ... done (382s)
+    Running dataset: passage_retrieval_en ... done (290s)
+    Running dataset: lcc ... done (153s)
+
+
+  Budget: 50pct  (max_capacity_prompts=3975)
+    Running dataset: narrativeqa ... done (115s)
+    Running dataset: hotpotqa ... done (367s)
+    Running dataset: multi_news ... done (354s)
+    Running dataset: triviaqa ... done (379s)
+    Running dataset: passage_retrieval_en ... done (289s)
+    Running dataset: lcc ... done (154s)
+
+======================================================
+  All evaluations complete.
+  Next step: run scripts/02_score.sh
+======================================================

@@ -1,0 +1,23 @@
+Using SnapKV!
+Using SnapKV!
+Loading checkpoint shards:   0%|                                                             | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|█████████████████▋                                   | 1/3 [00:02<00:05,  2.75s/it]Loading checkpoint shards:  67%|███████████████████████████████████▎                 | 2/3 [00:05<00:02,  2.75s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:08<00:00,  2.72s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:08<00:00,  2.73s/it]
+Working on max_capacity_prompts 512 dataset multi_news - 0/1
+Loading data...
+Max Length is 10933
+Finish loading model and tokenizer
+  0%|                                                                                       | 0/13 [00:00<?, ?it/s]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+  8%|██████                                                                         | 1/13 [00:24<04:52, 24.35s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 15%|████████████▏                                                                  | 2/13 [00:47<04:21, 23.80s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 23%|██████████████████▏                                                            | 3/13 [01:11<03:58, 23.83s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 31%|████████████████████████▎                                                      | 4/13 [01:38<03:45, 25.08s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 38%|██████████████████████████████▍                                                | 5/13 [02:05<03:25, 25.65s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 46%|████████████████████████████████████▍                                          | 6/13 [02:31<03:00, 25.84s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 54%|██████████████████████████████████████████▌                                    | 7/13 [02:55<02:32, 25.37s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 62%|████████████████████████████████████████████████▌                              | 8/13 [03:21<02:06, 25.38s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 69%|██████████████████████████████████████████████████████▋                        | 9/13 [03:44<01:38, 24.68s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 77%|████████████████████████████████████████████████████████████                  | 10/13 [04:08<01:13, 24.59s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 85%|██████████████████████████████████████████████████████████████████            | 11/13 [04:37<00:51, 25.94s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 92%|████████████████████████████████████████████████████████████████████████      | 12/13 [05:13<00:28, 28.85s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+100%|██████████████████████████████████████████████████████████████████████████████| 13/13 [05:27<00:00, 24.48s/it]100%|██████████████████████████████████████████████████████████████████████████████| 13/13 [05:27<00:00, 25.21s/it]
+  [DONE] multi_news — 327s
+341

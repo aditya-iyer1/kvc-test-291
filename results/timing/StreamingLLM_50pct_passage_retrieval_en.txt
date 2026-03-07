@@ -1,0 +1,23 @@
+Using StreamingLLM!
+Using StreamingLLM!
+Loading checkpoint shards:   0%|                                                             | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|█████████████████▋                                   | 1/3 [00:03<00:06,  3.16s/it]Loading checkpoint shards:  67%|███████████████████████████████████▎                 | 2/3 [00:06<00:03,  3.51s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:10<00:00,  3.41s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:10<00:00,  3.40s/it]
+Working on max_capacity_prompts 512 dataset passage_retrieval_en - 0/1
+Loading data...
+Max Length is 11516
+Finish loading model and tokenizer
+  0%|                                                                                       | 0/13 [00:00<?, ?it/s]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+  8%|██████                                                                         | 1/13 [00:21<04:16, 21.37s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 15%|████████████▏                                                                  | 2/13 [00:40<03:40, 20.02s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 23%|██████████████████▏                                                            | 3/13 [01:02<03:30, 21.09s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 31%|████████████████████████▎                                                      | 4/13 [01:27<03:22, 22.48s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 38%|██████████████████████████████▍                                                | 5/13 [01:51<03:03, 22.96s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 46%|████████████████████████████████████▍                                          | 6/13 [02:11<02:35, 22.16s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 54%|██████████████████████████████████████████▌                                    | 7/13 [02:35<02:16, 22.67s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 62%|████████████████████████████████████████████████▌                              | 8/13 [02:56<01:50, 22.12s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 69%|██████████████████████████████████████████████████████▋                        | 9/13 [03:18<01:27, 21.98s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 77%|████████████████████████████████████████████████████████████                  | 10/13 [03:39<01:05, 21.78s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 85%|██████████████████████████████████████████████████████████████████            | 11/13 [04:01<00:43, 21.73s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 92%|████████████████████████████████████████████████████████████████████████      | 12/13 [04:24<00:22, 22.17s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+100%|██████████████████████████████████████████████████████████████████████████████| 13/13 [04:36<00:00, 19.01s/it]100%|██████████████████████████████████████████████████████████████████████████████| 13/13 [04:36<00:00, 21.23s/it]
+  [DONE] passage_retrieval_en — 276s
+292
