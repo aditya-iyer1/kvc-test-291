@@ -13,16 +13,16 @@
         "category": "Multi-Doc QA"
       },
       "gov_report": {
-        "score": 0.0,
+        "score": 19.05,
         "n": 50,
         "category": "Summarization"
       },
       "_category_avg": {
         "Few-Shot": 36.14,
         "Multi-Doc QA": 37.47,
-        "Summarization": 0.0
+        "Summarization": 19.05
       },
-      "_overall_avg": 24.54
+      "_overall_avg": 30.89
     }
   }
 }

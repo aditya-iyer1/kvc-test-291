@@ -140,7 +140,7 @@ for METHOD in "${METHODS[@]}"; do
                 --save_dir    "$OUT_DIR"
                 --use_cache   True
                 --eval_batch_size 4
-                --max_num_examples 10
+                --max_num_examples 200
                 --seed        42
         )
 

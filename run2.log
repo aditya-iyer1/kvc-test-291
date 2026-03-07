@@ -1,0 +1,24 @@
+======================================================
+  KV Cache Compression — LongBench Evaluation
+======================================================
+Model      : mistralai/Mistral-7B-Instruct-v0.2
+GPU(s)     : 0
+Methods    : FullKV StreamingLLM H2O SnapKV PyramidKV
+Budgets    : 0.1 0.2 0.5
+AttnImpl   : sdpa
+Results    : /home/jovyan/kvc-test-291/results
+
+===============================
+  Method: FullKV
+===============================
+
+
+  Budget: full  (max_capacity_prompts=-1)
+    Running all datasets ... done (19946s)
+===============================
+  Method: StreamingLLM
+===============================
+
+
+  Budget: 10pct  (max_capacity_prompts=795)
+    Running all datasets ... 
