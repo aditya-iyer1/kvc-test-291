@@ -153,12 +153,26 @@ for METHOD in "${METHODS[@]}"; do
 
             # Copy results to flat structure immediately
             MODEL_NAME=$(basename "$MODEL_PATH")
-            GENERATED=$(find "$OUT_DIR" -name "${METHOD}.json" -path "*${DATASET}*" | head -1 || true)
-            if [[ -n "$GENERATED" ]]; then
-                cp "$GENERATED" "$OUT_FILE"
+            if [[ "$METHOD" == "FullKV" ]]; then
+                CAP_FOR_DIR=7950
+            else
+                CAP_FOR_DIR=$ABS_CAP
+            fi
+            NESTED="$OUT_DIR/${MODEL_NAME}_${CAP_FOR_DIR}/${DATASET}/${METHOD}.json"
+            if [[ -f "$NESTED" ]]; then
+                LINE_COUNT=$(wc -l < "$NESTED" 2>/dev/null || echo 0)
+                if [[ $LINE_COUNT -gt 10 ]]; then
+                    cp "$NESTED" "$OUT_FILE"
+                else
+                    echo "    [WARN] $NESTED has only $LINE_COUNT lines, skipping copy"
+                fi
+            else
+                GENERATED=$(find "$OUT_DIR" -name "${METHOD}.json" -path "*${DATASET}*" | head -1 || true)
+                [[ -n "$GENERATED" ]] && cp "$GENERATED" "$OUT_FILE"
             fi
 
-            echo "done (${ELAPSED}s)"
+            echo ""
+            echo "    done (${ELAPSED}s)"
             echo "${ELAPSED}" >> "$TIMING_LOG"
         done
     done       # BUDGET loop
