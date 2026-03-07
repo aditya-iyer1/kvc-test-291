@@ -1,0 +1,29 @@
+======================================================
+  KV Cache Compression — LongBench Evaluation
+======================================================
+Model      : mistralai/Mistral-7B-Instruct-v0.2
+GPU(s)     : 0
+Methods    : FullKV StreamingLLM H2O SnapKV PyramidKV
+Budgets    : 0.1 0.2 0.5
+AttnImpl   : sdpa
+Results    : /home/jovyan/kvc-test-291/results
+
+===============================
+  Method: FullKV
+===============================
+
+
+  Budget: full  (max_capacity_prompts=-1)
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_full/FullKV_narrativeqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_full/FullKV_hotpotqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_full/FullKV_multi_news.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_full/FullKV_triviaqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_full/FullKV_passage_retrieval_en.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results/budget_full/FullKV_lcc.json already exists
+===============================
+  Method: StreamingLLM
+===============================
+
+
+  Budget: 10pct  (max_capacity_prompts=795)
+    Running dataset: narrativeqa ... 

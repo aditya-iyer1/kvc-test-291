@@ -1,0 +1,8 @@
+Using StreamingLLM!
+Traceback (most recent call last):
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/run_longbench.py", line 385, in <module>
+    replace_llama(args.method.lower())
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/pyramidkv/monkeypatch.py", line 37, in replace_llama
+    transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_StreamingLLM
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'transformers.models.llama.modeling_llama' has no attribute 'LlamaSdpaAttention'. Did you mean: 'LlamaAttention'?
