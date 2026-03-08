@@ -1,0 +1,46 @@
+{
+  "budget": "full",
+  "results": {
+    "FullKV": {
+      "narrativeqa": {
+        "score": 26.77,
+        "n": 200,
+        "category": "Single-Doc QA"
+      },
+      "hotpotqa": {
+        "score": 42.77,
+        "n": 200,
+        "category": "Multi-Doc QA"
+      },
+      "multi_news": {
+        "score": 27.12,
+        "n": 200,
+        "category": "Summarization"
+      },
+      "triviaqa": {
+        "score": 52.46,
+        "n": 200,
+        "category": "Few-Shot"
+      },
+      "passage_retrieval_en": {
+        "score": 80.0,
+        "n": 200,
+        "category": "Synthetic"
+      },
+      "lcc": {
+        "score": 22.96,
+        "n": 200,
+        "category": "Code"
+      },
+      "_category_avg": {
+        "Single-Doc QA": 26.77,
+        "Multi-Doc QA": 42.77,
+        "Summarization": 27.12,
+        "Few-Shot": 52.46,
+        "Synthetic": 80.0,
+        "Code": 22.96
+      },
+      "_overall_avg": 42.01
+    }
+  }
+}

@@ -168,7 +168,8 @@ for METHOD in "${METHODS[@]}"; do
                     echo "    [WARN] $NESTED has only $LINE_COUNT lines, skipping copy"
                 fi
             else
-                GENERATED=$(find "$OUT_DIR" -name "${METHOD}.json" -path "*${DATASET}*" | head -1 || true)
+                MODEL_BASENAME=$(basename "$MODEL_PATH" | tr '[:upper:]' '[:lower:]')
+                GENERATED=$(find "$OUT_DIR" -name "${METHOD}.json" -path "*${DATASET}*" -path "*${MODEL_BASENAME}*" | head -1 || true)
                 [[ -n "$GENERATED" ]] && cp "$GENERATED" "$OUT_FILE"
             fi
 
