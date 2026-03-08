@@ -29,7 +29,7 @@ source "$CONFIG_FILE"
 
 # ── Defaults ───────────────────────────────────────────────────────────────────
 GPUS="0"
-METHODS_STR="FullKV,StreamingLLM,H2O,SnapKV,PyramidKV"   # methods to run
+METHODS_STR="FullKV,StreamingLLM,SnapKV,PyramidKV"   # methods to run
 BUDGETS_STR="0.1,0.2,0.5"                                  # cache budget ratios
 
 # ── Parse CLI overrides ────────────────────────────────────────────────────────
@@ -138,13 +138,14 @@ for METHOD in "${METHODS[@]}"; do
                     $CAP_ARG
                     --save_dir    "$OUT_DIR"
                     --use_cache   True
-                    --eval_batch_size 4
-                    --max_num_examples 50
+                    --eval_batch_size 1
+                    --max_num_examples 200
                     --seed        42
                     --dataset     "$DATASET"
             )
 
             CUDA_VISIBLE_DEVICES="$GPUS" \
+                PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
                 "${CMD[@]}" \
                 > "$TIMING_LOG" 2>&1
 
@@ -156,7 +157,7 @@ for METHOD in "${METHODS[@]}"; do
             if [[ "$METHOD" == "FullKV" ]]; then
                 CAP_FOR_DIR=7950
             else
-                CAP_FOR_DIR=512
+                CAP_FOR_DIR=$ABS_CAP
             fi
             NESTED="$OUT_DIR/${MODEL_NAME}_${CAP_FOR_DIR}/${DATASET}/${METHOD}.json"
             if [[ -f "$NESTED" ]]; then

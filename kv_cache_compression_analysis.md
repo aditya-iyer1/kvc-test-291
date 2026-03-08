@@ -1,7 +1,7 @@
 # Analysis of KV Cache Compression Policies
 
 > **Course:** CSE 291 — Systems for Machine Learning
-> **Date:** March 07, 2026
+> **Date:** March 08, 2026
 
 ---
 
@@ -281,11 +281,11 @@ We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
 
 | Method | 10% || 20% || 50% || Full |
 |--------| ---: || ---: || ---: || ---: |
-| StreamingLLM | 18.45 || 18.45 || 18.45 || — |
+| StreamingLLM | 26.35 || 27.41 || 27.37 || — |
 | H2O | — || — || — || — |
-| SnapKV | 25.89 || 25.89 || 25.89 || — |
-| PyramidKV | 29.1 || 29.1 || 29.1 || — |
-| Full KV (baseline) | — || — || — || 21.31 |
+| SnapKV | 30.53 || 30.8 || 24.65 || — |
+| PyramidKV | 36.84 || 29.38 || 21.5 || — |
+| Full KV (baseline) | — || — || — || 31.23 |
 
 *Scores are averaged equally across all 16 datasets. Higher is better.*
 
@@ -303,10 +303,10 @@ We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
 
 | Method | Single-Doc QA || Multi-Doc QA || Summarization || Few-Shot || Synthetic || Code |
 |--------| ---: || ---: || ---: || ---: || ---: || ---: |
-| StreamingLLM | 23.2 || 13.81 || 0.0 || 65.98 || 7.69 || 0.0 |
+| StreamingLLM | 20.47 || 20.24 || 16.64 || 82.69 || 7.69 || 16.74 |
 | H2O | — || — || — || — || — || — |
-| SnapKV | 27.52 || 37.77 || 0.0 || 36.17 || 53.85 || 0.0 |
-| PyramidKV | 25.15 || 43.64 || 0.0 || 59.65 || 46.15 || 0.0 |
+| SnapKV | 28.24 || 35.73 || 14.87 || 35.86 || 61.54 || 8.56 |
+| PyramidKV | 26.96 || 39.95 || 14.59 || 42.2 || 46.15 || 6.43 |
 
 ![Fig 2 — Category Heatmap](results/figures/fig2_category_heatmap.png)
 
@@ -316,10 +316,10 @@ We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
 
 | Method | Single-Doc QA || Multi-Doc QA || Summarization || Few-Shot || Synthetic || Code |
 |--------| ---: || ---: || ---: || ---: || ---: || ---: |
-| StreamingLLM | 23.2 || 13.81 || 0.0 || 65.98 || 7.69 || 0.0 |
+| StreamingLLM | 20.81 || 18.65 || 20.28 || 76.63 || 7.69 || 14.02 |
 | H2O | — || — || — || — || — || — |
-| SnapKV | 27.52 || 37.77 || 0.0 || 36.17 || 53.85 || 0.0 |
-| PyramidKV | 25.15 || 43.64 || 0.0 || 59.65 || 46.15 || 0.0 |
+| SnapKV | 28.11 || 44.22 || 16.95 || 39.99 || 46.15 || 7.76 |
+| PyramidKV | 27.33 || 38.14 || 13.74 || 66.7 || 61.54 || 13.57 |
 
 ---
 
@@ -327,23 +327,23 @@ We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
 
 | Method | Budget | Cache Tokens | Prefill (ms) | Decode (ms) | Speedup (×) |
 |--------|--------|----------:|----------:|----------:|----------:|
-| StreamingLLM | 100pct | 7,950 | 589.8 | 1757.5 | 0.998× |
-| StreamingLLM | 50% | 3,975 | 591.7 | 1773.2 | 0.991× |
-| StreamingLLM | 20% | 1,590 | 539.9 | 1875.9 | 0.97× |
-| StreamingLLM | 10% | 795 | 536.2 | 1888.3 | 0.966× |
-| H2O | 100pct | 7,950 | 594.4 | 1782.3 | 0.986× |
-| H2O | 50% | 3,975 | 596.0 | 2265.3 | 0.819× |
-| H2O | 20% | 1,590 | 544.0 | 2331.8 | 0.815× |
-| H2O | 10% | 795 | 538.4 | 2364.8 | 0.807× |
-| SnapKV | 100pct | 7,950 | 586.4 | 1866.0 | 0.955× |
-| SnapKV | 50% | 3,975 | 589.1 | 1906.0 | 0.939× |
-| SnapKV | 20% | 1,590 | 543.3 | 1897.7 | 0.96× |
-| SnapKV | 10% | 795 | 539.2 | 1872.5 | 0.971× |
-| PyramidKV | 100pct | 7,950 | 591.2 | 1768.7 | 0.993× |
-| PyramidKV | 50% | 3,975 | 594.8 | 1824.2 | 0.968× |
-| PyramidKV | 20% | 1,590 | 541.0 | 1960.2 | 0.937× |
-| PyramidKV | 10% | 795 | 536.0 | 2066.2 | 0.9× |
-| **Full KV** | Full | 7,950 | 586.2 | 1756.5 | 1.00× |
+| StreamingLLM | 100pct | 7,950 | 589.5 | 1784.2 | 0.994× |
+| StreamingLLM | 50% | 3,975 | 592.2 | 1866.6 | 0.959× |
+| StreamingLLM | 20% | 1,590 | 539.1 | 1991.6 | 0.932× |
+| StreamingLLM | 10% | 795 | 538.0 | 1872.8 | 0.979× |
+| H2O | 100pct | 7,950 | 593.8 | 1797.4 | 0.987× |
+| H2O | 50% | 3,975 | 596.5 | 2270.8 | 0.823× |
+| H2O | 20% | 1,590 | 553.2 | 2320.4 | 0.821× |
+| H2O | 10% | 795 | 539.2 | 2326.3 | 0.823× |
+| SnapKV | 100pct | 7,950 | 596.2 | 1762.5 | 1.0× |
+| SnapKV | 50% | 3,975 | 592.4 | 1829.8 | 0.974× |
+| SnapKV | 20% | 1,590 | 555.6 | 1875.4 | 0.97× |
+| SnapKV | 10% | 795 | 541.1 | 1858.0 | 0.983× |
+| PyramidKV | 100pct | 7,950 | 593.0 | 1780.1 | 0.994× |
+| PyramidKV | 50% | 3,975 | 595.5 | 1829.9 | 0.973× |
+| PyramidKV | 20% | 1,590 | 545.7 | 1874.5 | 0.975× |
+| PyramidKV | 10% | 795 | 536.1 | 1905.2 | 0.966× |
+| **Full KV** | Full | 7,950 | 585.7 | 1773.3 | 1.00× |
 
 *Measured on a single A100-40G GPU with a 4,096-token synthetic prompt and 50 decode steps.*
 *Speedup is relative to FullKV under the same conditions.*

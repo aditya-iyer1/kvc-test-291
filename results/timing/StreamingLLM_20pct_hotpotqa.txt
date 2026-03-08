@@ -1,23 +1,23 @@
 Using StreamingLLM!
 Using StreamingLLM!
-Loading checkpoint shards:   0%|                                                             | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|█████████████████▋                                   | 1/3 [00:03<00:06,  3.24s/it]Loading checkpoint shards:  67%|███████████████████████████████████▎                 | 2/3 [00:06<00:03,  3.03s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:10<00:00,  3.46s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:10<00:00,  3.36s/it]
-Working on max_capacity_prompts 512 dataset hotpotqa - 0/1
+Loading checkpoint shards:   0%|                                                             | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|█████████████████▋                                   | 1/3 [00:03<00:06,  3.35s/it]Loading checkpoint shards:  67%|███████████████████████████████████▎                 | 2/3 [00:06<00:03,  3.36s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:09<00:00,  3.30s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:09<00:00,  3.31s/it]
+Working on max_capacity_prompts 1590 dataset hotpotqa - 0/1
 Loading data...
 Max Length is 12697
 Finish loading model and tokenizer
   0%|                                                                                       | 0/13 [00:00<?, ?it/s]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
-  8%|██████                                                                         | 1/13 [00:30<06:05, 30.45s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
- 15%|████████████▏                                                                  | 2/13 [00:55<05:03, 27.56s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
- 23%|██████████████████▏                                                            | 3/13 [01:23<04:37, 27.75s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
- 31%|████████████████████████▎                                                      | 4/13 [01:51<04:07, 27.54s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
- 38%|██████████████████████████████▍                                                | 5/13 [02:19<03:42, 27.81s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
- 46%|████████████████████████████████████▍                                          | 6/13 [02:44<03:08, 26.91s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
- 54%|██████████████████████████████████████████▌                                    | 7/13 [03:13<02:44, 27.43s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
- 62%|████████████████████████████████████████████████▌                              | 8/13 [03:42<02:20, 28.13s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
- 69%|██████████████████████████████████████████████████████▋                        | 9/13 [04:11<01:53, 28.44s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
- 77%|████████████████████████████████████████████████████████████                  | 10/13 [04:40<01:25, 28.56s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
- 85%|██████████████████████████████████████████████████████████████████            | 11/13 [05:11<00:58, 29.12s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
- 92%|████████████████████████████████████████████████████████████████████████      | 12/13 [05:39<00:28, 28.84s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
-100%|██████████████████████████████████████████████████████████████████████████████| 13/13 [05:52<00:00, 24.06s/it]100%|██████████████████████████████████████████████████████████████████████████████| 13/13 [05:52<00:00, 27.11s/it]
-  [DONE] hotpotqa — 352s
-367
+  8%|██████                                                                         | 1/13 [00:30<06:08, 30.67s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 15%|████████████▏                                                                  | 2/13 [00:55<05:02, 27.48s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 23%|██████████████████▏                                                            | 3/13 [01:23<04:35, 27.52s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 31%|████████████████████████▎                                                      | 4/13 [01:50<04:05, 27.27s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 38%|██████████████████████████████▍                                                | 5/13 [02:18<03:39, 27.49s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 46%|████████████████████████████████████▍                                          | 6/13 [02:43<03:06, 26.60s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 54%|██████████████████████████████████████████▌                                    | 7/13 [03:11<02:42, 27.12s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 62%|████████████████████████████████████████████████▌                              | 8/13 [03:40<02:18, 27.79s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 69%|██████████████████████████████████████████████████████▋                        | 9/13 [04:09<01:52, 28.07s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 77%|████████████████████████████████████████████████████████████                  | 10/13 [04:37<01:24, 28.13s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 85%|██████████████████████████████████████████████████████████████████            | 11/13 [05:07<00:57, 28.68s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 92%|████████████████████████████████████████████████████████████████████████      | 12/13 [05:35<00:28, 28.43s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+100%|██████████████████████████████████████████████████████████████████████████████| 13/13 [05:48<00:00, 23.74s/it]100%|██████████████████████████████████████████████████████████████████████████████| 13/13 [05:48<00:00, 26.79s/it]
+  [DONE] hotpotqa — 348s
+363

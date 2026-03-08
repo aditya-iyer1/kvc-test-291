@@ -21,8 +21,10 @@ PROJECT_DIR="$(dirname "$SCRIPT_DIR")"
 source "$SCRIPT_DIR/config.env"
 
 GPU="0"
-SEQ_LEN=4096      # synthetic prompt length (tokens)
-N_DECODE=50       # number of decode steps per run
+# SEQ_LEN=4096      # synthetic prompt length (tokens)
+SEQ_LEN=16384
+# N_DECODE=50       # number of decode steps per run
+N_DECODE=200
 N_WARMUP=3        # warmup iterations before timing
 
 while [[ $# -gt 0 ]]; do
@@ -69,8 +71,18 @@ if tokenizer.pad_token is None:
 
 # ── Build a fixed-length prompt ───────────────────────────────────────────────
 # Repeat a token to fill the context window
-filler_token_id = tokenizer.encode("the", add_special_tokens=False)[0]
-input_ids = torch.tensor([[filler_token_id] * seq_len], dtype=torch.long).cuda()
+
+# filler_token_id = tokenizer.encode("the", add_special_tokens=False)[0]
+# input_ids = torch.tensor([[filler_token_id] * seq_len], dtype=torch.long).cuda()
+
+# Random tokens for realistic attention sparsity (ADDED TO REPLACE ABOVE 2 LINES)
+import random
+random.seed(42)
+vocab_size = tokenizer.vocab_size
+input_ids = torch.tensor(
+    [[random.randint(100, vocab_size - 100) for _ in range(seq_len)]],
+    dtype=torch.long
+).cuda()
 
 METHODS  = ["FullKV", "StreamingLLM", "H2O", "SnapKV", "PyramidKV"]
 BUDGETS  = [1.0, 0.5, 0.2, 0.1]
