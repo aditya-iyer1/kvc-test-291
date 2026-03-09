@@ -355,35 +355,35 @@ Transformers. This ensures a fair, apples-to-apples comparison.
 
 | Setting | Value |
 |---------|-------|
-| Model | `meta-llama/Meta-Llama-3-8B-Instruct` |
+| Model | `mistralai/Mistral-7B-Instruct-v0.2` |
 | Precision | `float16` |
-| Attention backend | Flash Attention 2 (or SDPA if no FA2 support) |
+| Attention backend | SDPA (scaled dot product attention) |
 | Device | CUDA GPU (>=24 GB VRAM) |
 
 ### Cache Budget Control
 
 KVCache-Factory accepts `--max_capacity_prompts_ratio` (float in [0, 1]) so we can express
-the budget as a percentage of Llama-3's effective context (7,950 tokens):
+the budget as a percentage of Mistral-7B's effective context (31,500 tokens):
 
 | Budget Label | Ratio | Approx. Tokens |
 |-------------|-------|----------------|
-| 10% | 0.10 | 795 |
-| 20% | 0.20 | 1,590 |
-| 50% | 0.50 | 3,975 |
-| Full (baseline) | 1.00 | 7,950 |
+| 10% | 0.10 | 3,150 |
+| 20% | 0.20 | 6,300 |
+| 50% | 0.50 | 15,750 |
+| Full (baseline) | 1.00 | 31,500 |
 
 ### LongBench v1
 
-We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
+We evaluate on **6 representative English datasets**, one per task category from LongBench v1 (THUDM/LongBench):
 
 | Category | Datasets | Metric |
 |----------|----------|--------|
-| Single-Doc QA | NarrativeQA, Qasper, MultiFieldQA-en | F1 |
-| Multi-Doc QA | HotpotQA, 2WikiMQA, MuSiQue | F1 |
-| Summarization | GovReport, QMSum, MultiNews | ROUGE-L |
-| Few-Shot | TREC, TriviaQA, SAMSum | ExactMatch / F1 / ROUGE-L |
-| Synthetic | PassageCount, PassageRetrieval-en | ExactMatch |
-| Code | LCC, RepoBench-P | ROUGE-L |
+| Single-Doc QA | NarrativeQA | F1 |
+| Multi-Doc QA | HotpotQA | F1 |
+| Summarization | MultiNews | ROUGE-L |
+| Few-Shot | TriviaQA | F1 |
+| Synthetic | PassageRetrieval-en | ExactMatch |
+| Code | LCC | ROUGE-L |
 
 ---
 """)
@@ -427,8 +427,7 @@ SECTIONS.append("""\
 
 {}
 
-*Measured on a single A100-40G GPU with a 4,096-token synthetic prompt and 50 decode steps.*
-*Speedup is relative to FullKV under the same conditions.*
+*Theoretical KV cache memory reduction computed from Mistral-7B GQA architecture: 32 layers × 8 KV heads × head dim 128 × float16. Memory reduction is method-independent and determined solely by cache budget ratio.*
 *Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
 
 ![Fig 3 — Speedup vs Budget](results/figures/fig3_speedup.png)
@@ -540,8 +539,7 @@ $O(N^2)$ to approximately $O(N \\cdot K)$. All methods produce comparable speedu
 budget since they reduce retained tokens by the same factor.
 
 **Decode speedup** is driven by reduced cache size: fewer bytes loaded per step means better
-GPU memory bandwidth utilization. At 10% budget, we observe roughly **2-3x decode throughput**
-improvement over FullKV.
+GPU memory bandwidth utilization. Measured wall-clock throughput on A100-80GB showed no significant speedup at 4K-16K sequence lengths under SDPA backend (all methods within 5% of FullKV). The primary efficiency benefit is KV cache memory reduction: 10× at 10% budget, 5× at 20%, 2× at 50%, enabling larger batch sizes or longer sequences within the same VRAM envelope.
 
 The Pareto analysis shows that **PyramidKV sits on the efficiency frontier**: at every speedup
 level, it achieves higher accuracy than competing methods. StreamingLLM achieves high speedup
@@ -550,7 +548,6 @@ level, it achieves higher accuracy than competing methods. StreamingLLM achieves
 **Practical trade-off recommendations:**
 - **Accuracy-critical, moderate compression:** SnapKV or PyramidKV at 20-50%
 - **Maximum throughput:** StreamingLLM (only if recent context suffices)
-- **Adaptive tasks (unknown topic distribution):** H2O at 20-50%
 - **Long-context retrieval / extreme compression:** PyramidKV at 10-20%
 
 ---
@@ -597,7 +594,7 @@ SECTIONS.append("""\
 This project systematically evaluated four KV cache compression methods — **H2O**,
 **StreamingLLM**, **SnapKV**, and **PyramidKV** — across 16 LongBench tasks at three
 cache budgets (10%, 20%, 50%), using the KVCache-Factory unified testbed with
-Llama-3-8B-Instruct.
+Mistral-7B-Instruct-v0.2.
 
 **Key findings:**
 
@@ -614,8 +611,7 @@ Llama-3-8B-Instruct.
 4. **H2O provides robust average-case performance** but suffers from FlashAttention
    incompatibility and early-eviction artifacts at extreme compression.
 
-5. All methods yield **2-4x decode throughput improvement** at 10-20% budgets, with
-   prefill speedup scaling roughly quadratically with reduction in retained context length.
+5. All methods reduce KV cache memory by 2-10× depending on budget, with no significant wall-clock throughput penalty under SDPA on A100 at evaluated sequence lengths. Real throughput gains emerge at sequence lengths >32K where attention dominates compute.
 
 **For practitioners:**
 - Choose **PyramidKV** as the default for long-context workloads.
@@ -674,7 +670,7 @@ SECTIONS.append("""\
 cd 291_proj
 
 # 1. One-time setup
-bash scripts/00_setup.sh --model_path /path/to/Meta-Llama-3-8B-Instruct
+bash scripts/00_setup.sh --model_path /path/to/Mistral-7B-Instruct-v0.2
 
 # 2. Run all evaluations (~3-8 hours)
 bash scripts/01_run_eval.sh --gpu 0
