@@ -297,6 +297,8 @@ We evaluate on **6 representative English datasets**, one per task category from
 | SnapKV | 26.09 | 42.31 | 26.94 | 51.24 | 77.0 | 22.98 |
 | PyramidKV | 25.59 | 41.16 | 26.96 | 52.33 | 77.5 | 22.98 |
 
+
+![Fig 7 — Compression vs Budget](results_mistral_run5/figures/fig7_spidermap_budget.png)
 ---
 
 
