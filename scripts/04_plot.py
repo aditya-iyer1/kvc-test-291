@@ -62,21 +62,19 @@ plt.rcParams.update({
 METHOD_COLORS = {
     "FullKV":      "#3A3A3A",
     "StreamingLLM":"#E15759",
-    "H2O":         "#F28E2B",
     "SnapKV":      "#4E79A7",
     "PyramidKV":   "#59A14F",
 }
 METHOD_MARKERS = {
     "FullKV":      "D",
     "StreamingLLM":"s",
-    "H2O":         "^",
     "SnapKV":      "o",
     "PyramidKV":   "P",
 }
 
 BUDGET_ORDER   = ["10pct", "20pct", "50pct", "full"]
 BUDGET_LABELS  = {"10pct":"10%", "20pct":"20%", "50pct":"50%", "full":"Full"}
-METHODS_COMP   = ["StreamingLLM", "H2O", "SnapKV", "PyramidKV"]  # excluding FullKV for plots
+METHODS_COMP   = ["StreamingLLM", "SnapKV", "PyramidKV"]  # excluding FullKV for plots
 CATEGORIES     = ["Single-Doc QA","Multi-Doc QA","Summarization","Few-Shot","Synthetic","Code"]
 
 def safe_get(d, *keys, default=None):
@@ -85,6 +83,11 @@ def safe_get(d, *keys, default=None):
             return default
         d = d[k]
     return d
+
+def theoretical_kv_cache_gb(n_tokens):
+    return 2 * 32 * 8 * 128 * n_tokens * 2 / 1e9
+
+BUDGET_TOKENS = {"10pct": 3150, "20pct": 6300, "50pct": 15750, "full": 31500}
 
 # ════════════════════════════════════════════════════════════════════════════════
 # Fig 1 — Overall accuracy vs cache budget (line plot)
@@ -163,78 +166,88 @@ print("  Saved: fig2_category_heatmap.png")
 # ════════════════════════════════════════════════════════════════════════════════
 if latency:
     rows = latency.get("rows", [])
-    # Group by method × budget
-    speedup_by = {}  # method → {budget: speedup}
+    tps_4k_by = {}
+    tps_16k_by = {}
     for r in rows:
         m = r["method"]
         b = r["budget"]
-        s = r.get("speedup_total", 1.0)
-        speedup_by.setdefault(m, {})[b] = s
+        if "tokens_per_sec_4k" in r:
+            tps_4k_by.setdefault(m, {})[b] = r["tokens_per_sec_4k"]
+        if "tokens_per_sec_16k" in r:
+            tps_16k_by.setdefault(m, {})[b] = r["tokens_per_sec_16k"]
 
     budgets_plot = [b for b in BUDGET_ORDER if b != "full"]
     x = np.arange(len(budgets_plot))
-    n = len(METHODS_COMP)
-    width = 0.18
 
     fig, ax = plt.subplots(figsize=(9, 5))
-    for idx, method in enumerate(METHODS_COMP):
-        offsets = (idx - n/2 + 0.5) * width
-        vals = [speedup_by.get(method, {}).get(b, 1.0) for b in budgets_plot]
-        bars = ax.bar(x + offsets, vals, width,
-                      label=method, color=METHOD_COLORS[method],
-                      edgecolor="white", linewidth=0.6)
-        for bar, v in zip(bars, vals):
-            ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
-                    f"{v:.2f}×", ha="center", va="bottom", fontsize=8)
+    
+    full_gb = theoretical_kv_cache_gb(BUDGET_TOKENS["full"])
+    vals = [full_gb / theoretical_kv_cache_gb(BUDGET_TOKENS[b]) for b in budgets_plot]
+
+    bars = ax.bar(x, vals, 0.4, color="steelblue", edgecolor="white", linewidth=0.6)
+    for bar, v in zip(bars, vals):
+        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.1,
+                f"{v:.1f}×", ha="center", va="bottom", fontsize=10, fontweight="bold")
 
     ax.axhline(1.0, color="gray", ls="--", lw=1.0, alpha=0.7, label="FullKV baseline")
     ax.set_xlabel("KV Cache Budget")
-    ax.set_ylabel("Speedup (×) over FullKV")
-    ax.set_title("Fig 3 — Inference Speedup vs Cache Budget")
+    ax.set_ylabel("KV Cache Memory Reduction (×)")
+    ax.set_title("Fig 3 — Theoretical KV Cache Memory Reduction vs Cache Budget")
     ax.set_xticks(x)
     ax.set_xticklabels([BUDGET_LABELS[b] for b in budgets_plot])
     ax.legend(framealpha=0.9)
     ax.grid(axis="y", alpha=0.3, ls="--")
+    
+    ax.annotate("Memory reduction is method-independent — determined solely by cache budget.\n"
+                "Mistral-7B GQA: 32 layers × 8 KV heads × 128 dim × float16",
+                xy=(0.5, -0.18), xycoords="axes fraction", ha="center", va="top",
+                fontsize=9, color="dimgray")
+
     fig.tight_layout()
+    fig.subplots_adjust(bottom=0.22)
     fig.savefig(os.path.join(FIGS_DIR, "fig3_speedup.png"))
     plt.close(fig)
     print("  Saved: fig3_speedup.png")
 
     # ── Fig 4 — Accuracy–Speedup Pareto scatter ────────────────────────────────
-    fig, ax = plt.subplots(figsize=(7, 5))
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5), sharey=True)
 
-    for method in METHODS_COMP:
-        xs, ys, ls_vals = [], [], []
-        for b in BUDGET_ORDER:
-            if b == "full":
-                continue
-            acc  = safe_get(summary, method, b, "overall")
-            spd  = speedup_by.get(method, {}).get(b, None)
-            if acc is None or spd is None:
-                continue
-            xs.append(spd)
-            ys.append(acc)
-            ls_vals.append(b)
+    for ax, tps_dict, title, xlabel in zip(axes, [tps_4k_by, tps_16k_by], ["Accuracy vs Throughput (4K)", "Accuracy vs Throughput (16K)"], ["Tokens / Sec (4K Seq)", "Tokens / Sec (16K Seq)"]):
+        for method in METHODS_COMP:
+            xs, ys, ls_vals = [], [], []
+            for b in BUDGET_ORDER:
+                if b == "full":
+                    continue
+                acc  = safe_get(summary, method, b, "overall")
+                spd  = tps_dict.get(method, {}).get(b, None)
+                if acc is None or spd is None:
+                    continue
+                xs.append(spd)
+                ys.append(acc)
+                ls_vals.append(b)
 
-        if xs:
-            ax.scatter(xs, ys, s=100, color=METHOD_COLORS[method],
-                       marker=METHOD_MARKERS[method], zorder=5, label=method)
-            ax.plot(xs, ys, lw=1.2, color=METHOD_COLORS[method], alpha=0.5)
-            for x_val, y_val, lbl in zip(xs, ys, ls_vals):
-                ax.annotate(BUDGET_LABELS[lbl], (x_val, y_val),
-                            textcoords="offset points", xytext=(4, 4), fontsize=8)
+            if xs:
+                ax.scatter(xs, ys, s=100, color=METHOD_COLORS[method],
+                           marker=METHOD_MARKERS.get(method, "o"), zorder=5, label=method)
+                ax.plot(xs, ys, lw=1.2, color=METHOD_COLORS.get(method, "gray"), alpha=0.5)
+                for x_val, y_val, lbl in zip(xs, ys, ls_vals):
+                    ax.annotate(BUDGET_LABELS[lbl], (x_val, y_val),
+                                textcoords="offset points", xytext=(4, 4), fontsize=8)
 
-    # FullKV reference
-    full_acc = safe_get(summary, "FullKV", "full", "overall")
-    if full_acc:
-        ax.axhline(full_acc, ls="--", color=METHOD_COLORS["FullKV"],
-                   lw=1.5, label=f"FullKV ({full_acc:.1f})", alpha=0.8)
+        # FullKV reference
+        full_acc = safe_get(summary, "FullKV", "full", "overall")
+        if full_acc:
+            ax.axhline(full_acc, ls="--", color=METHOD_COLORS.get("FullKV", "gray"),
+                       lw=1.5, label=f"FullKV ({full_acc:.1f})", alpha=0.8)
 
-    ax.set_xlabel("Speedup (×) over FullKV")
-    ax.set_ylabel("LongBench Score (avg)")
-    ax.set_title("Fig 4 — Accuracy–Efficiency Trade-off")
-    ax.legend(framealpha=0.9)
-    ax.grid(alpha=0.3, ls="--")
+        ax.set_xlabel(xlabel)
+        if ax == axes[0]:
+            ax.set_ylabel("LongBench Score (avg)")
+        ax.set_title(title)
+        ax.legend(framealpha=0.9)
+        ax.grid(alpha=0.3, ls="--")
+
+    fig.suptitle("Fig 4 — Accuracy–Efficiency Trade-off", fontsize=14)
     fig.tight_layout()
     fig.savefig(os.path.join(FIGS_DIR, "fig4_accuracy_vs_speedup.png"))
     plt.close(fig)

@@ -99,7 +99,8 @@ for method in METHODS:
         
         with torch.no_grad():
             try:
-                out = model(inputs_4k, use_cache=True)
+                attention_mask_4k = torch.ones_like(inputs_4k)
+                out = model(inputs_4k, attention_mask=attention_mask_4k, use_cache=True)
                 del out
             except Exception as e:
                 print(f"  Forward pass failed for {method}/{label}. Error: {e}")
@@ -107,10 +108,11 @@ for method in METHODS:
         peak_vram_gb = torch.cuda.max_memory_allocated() / (1024**3)
 
         def measure_throughput(inputs):
+            attention_mask = torch.ones_like(inputs)
             try:
                 with torch.no_grad():
                     for _ in range(n_warmup):
-                        model.generate(inputs, max_new_tokens=2, min_new_tokens=2, do_sample=False, num_beams=1)
+                        model.generate(inputs, attention_mask=attention_mask, pad_token_id=tokenizer.eos_token_id, max_new_tokens=2, min_new_tokens=2, do_sample=False, num_beams=1)
             except Exception:
                 return 0.0, 0.0
 
@@ -121,14 +123,14 @@ for method in METHODS:
                     torch.cuda.synchronize()
                     t0 = time.perf_counter()
                     with torch.no_grad():
-                        model(inputs, use_cache=True)
+                        model(inputs, attention_mask=attention_mask, use_cache=True)
                     torch.cuda.synchronize()
                     prefill_times.append(time.perf_counter() - t0)
 
                     torch.cuda.synchronize()
                     t0 = time.perf_counter()
                     with torch.no_grad():
-                        model.generate(inputs, max_new_tokens=n_decode, min_new_tokens=n_decode, do_sample=False, num_beams=1)
+                        model.generate(inputs, attention_mask=attention_mask, pad_token_id=tokenizer.eos_token_id, max_new_tokens=n_decode, min_new_tokens=n_decode, do_sample=False, num_beams=1)
                     torch.cuda.synchronize()
                     total_times.append(time.perf_counter() - t0)
                 

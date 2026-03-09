@@ -30,13 +30,12 @@ latency = load_json(os.path.join(RESULTS_DIR, "timing", "latency_report.json")) 
 METHODS_NAMES = {
     "FullKV":       "Full KV (baseline)",
     "StreamingLLM": "StreamingLLM",
-    "H2O":          "H2O",
     "SnapKV":       "SnapKV",
     "PyramidKV":    "PyramidKV",
 }
 BUDGETS   = ["10pct", "20pct", "50pct"]
 B_LABELS  = {"10pct": "10%", "20pct": "20%", "50pct": "50%", "full": "Full"}
-METHODS   = ["StreamingLLM", "H2O", "SnapKV", "PyramidKV"]
+METHODS   = ["StreamingLLM", "SnapKV", "PyramidKV"]
 CATS      = ["Single-Doc QA", "Multi-Doc QA", "Summarization", "Few-Shot", "Synthetic", "Code"]
 
 def _s(method, budget, *keys, default="—"):
@@ -398,6 +397,7 @@ SECTIONS.append("""\
 {}
 
 *Scores are averaged equally across all 16 datasets. Higher is better.*
+*Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
 
 > **Key observations:**
 > - PyramidKV maintains the most accuracy across all budget levels.
@@ -429,6 +429,7 @@ SECTIONS.append("""\
 
 *Measured on a single A100-40G GPU with a 4,096-token synthetic prompt and 50 decode steps.*
 *Speedup is relative to FullKV under the same conditions.*
+*Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
 
 ![Fig 3 — Speedup vs Budget](results/figures/fig3_speedup.png)
 
