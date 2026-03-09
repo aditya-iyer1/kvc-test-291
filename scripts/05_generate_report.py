@@ -85,6 +85,8 @@ def speedup_table():
     for r in rows_data:
         if r["method"] == "FullKV":
             continue
+        if r["budget"] == "100pct":
+            continue
         lines.append("| {} | {} | {:.1f}× | {:.1f} | {:.1f} | {:.3f}× |".format(
             r["method"],
             B_LABELS.get(r["budget"], r["budget"]),
@@ -162,7 +164,7 @@ only a *budget* of $K \\ll N$ tokens in the cache at each layer. This report:
 
 1. Surveys three evaluated methods (StreamingLLM, SnapKV, PyramidKV) and one excluded baseline (H2O, OOM).
 2. Describes our unified experimental testbed built on [KVCache-Factory](https://github.com/Zefan-Cai/KVCache-Factory).
-3. Evaluates all methods on **LongBench v1** across 16 datasets and 6 task categories
+3. Evaluates all methods on **LongBench v1** across 6 representative datasets (one per task category)
    at cache budgets of **10%, 20%, and 50%** of the full context.
 4. Provides theoretical and empirical analysis of each method's strengths and weaknesses.
 
@@ -408,12 +410,12 @@ SECTIONS.append("""\
 
 {}
 
-*Scores are averaged equally across all 16 datasets. Higher is better.*
+*Scores are averaged equally across all 6 datasets. Higher is better.*
 *Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
 
 > **Key observations:**
 > - PyramidKV maintains the most accuracy across all budget levels.
-> - H2O and SnapKV are competitive at 20-50% but diverge sharply at 10%.
+> - SnapKV and PyramidKV converge toward FullKV accuracy at 50% budget; PyramidKV leads at 10%.
 > - StreamingLLM suffers the largest degradation at all budgets, reflecting the loss
 >   of mid-context information.
 
