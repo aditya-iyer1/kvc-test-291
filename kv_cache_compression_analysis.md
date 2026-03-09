@@ -1,7 +1,7 @@
 # Analysis of KV Cache Compression Policies
 
 > **Course:** CSE 291 — Systems for Machine Learning
-> **Date:** March 08, 2026
+> **Date:** March 09, 2026
 
 ---
 
@@ -282,12 +282,12 @@ We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
 | Method | 10% || 20% || 50% || Full |
 |--------| ---: || ---: || ---: || ---: |
 | StreamingLLM | 26.35 || 27.41 || 27.37 || — |
-| H2O | — || — || — || — |
 | SnapKV | 30.53 || 30.8 || 24.65 || — |
 | PyramidKV | 36.84 || 29.38 || 21.5 || — |
 | Full KV (baseline) | — || — || — || 31.23 |
 
 *Scores are averaged equally across all 16 datasets. Higher is better.*
+*Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
 
 > **Key observations:**
 > - PyramidKV maintains the most accuracy across all budget levels.
@@ -304,7 +304,6 @@ We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
 | Method | Single-Doc QA || Multi-Doc QA || Summarization || Few-Shot || Synthetic || Code |
 |--------| ---: || ---: || ---: || ---: || ---: || ---: |
 | StreamingLLM | 20.47 || 20.24 || 16.64 || 82.69 || 7.69 || 16.74 |
-| H2O | — || — || — || — || — || — |
 | SnapKV | 28.24 || 35.73 || 14.87 || 35.86 || 61.54 || 8.56 |
 | PyramidKV | 26.96 || 39.95 || 14.59 || 42.2 || 46.15 || 6.43 |
 
@@ -317,7 +316,6 @@ We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
 | Method | Single-Doc QA || Multi-Doc QA || Summarization || Few-Shot || Synthetic || Code |
 |--------| ---: || ---: || ---: || ---: || ---: || ---: |
 | StreamingLLM | 20.81 || 18.65 || 20.28 || 76.63 || 7.69 || 14.02 |
-| H2O | — || — || — || — || — || — |
 | SnapKV | 28.11 || 44.22 || 16.95 || 39.99 || 46.15 || 7.76 |
 | PyramidKV | 27.33 || 38.14 || 13.74 || 66.7 || 61.54 || 13.57 |
 
@@ -347,6 +345,7 @@ We evaluate on all **16 English datasets** from LongBench v1 (THUDM/LongBench):
 
 *Measured on a single A100-40G GPU with a 4,096-token synthetic prompt and 50 decode steps.*
 *Speedup is relative to FullKV under the same conditions.*
+*Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
 
 ![Fig 3 — Speedup vs Budget](results/figures/fig3_speedup.png)
 
