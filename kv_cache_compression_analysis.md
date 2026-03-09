@@ -1,7 +1,7 @@
 # Analysis of KV Cache Compression Policies
 
 > **Course:** CSE 291 — Systems for Machine Learning
-> **Date:** March 09, 2026
+> **Date:** March 08, 2026
 
 ---
 
@@ -117,9 +117,13 @@ StreamingLLM maintains a fixed-size cache comprising:
 
 All other tokens are permanently evicted once they fall out of the window.
 
+
 $$
+
 \text{Cache}_t = \underbrace{[t_1, \ldots, t_{k_s}]}_{\text{sinks}} \cup \underbrace{[t_{t-W+1}, \ldots, t_t]}_{\text{recent window}}
+
 $$
+
 
 #### Theoretical Justification
 
@@ -279,12 +283,12 @@ We evaluate on **6 representative English datasets**, one per task category from
 
 ### 4.1 Overall LongBench Accuracy
 
-| Method | 10% || 20% || 50% || Full |
-|--------| ---: || ---: || ---: || ---: |
-| StreamingLLM | 30.08 || 29.32 || 32.13 || — |
-| SnapKV | 38.8 || 40.77 || 41.09 || — |
-| PyramidKV | 41.49 || 41.29 || 41.09 || — |
-| Full KV (baseline) | — || — || — || 42.01 |
+| Method | 10% | 20% | 50% | Full |
+|--------| ---: | ---: | ---: | ---: |
+| StreamingLLM | 26.35 | 27.41 | 27.37 | — |
+| SnapKV | 30.53 | 30.8 | 24.65 | — |
+| PyramidKV | 36.84 | 29.38 | 21.5 | — |
+| Full KV (baseline) | — | — | — | 31.23 |
 
 *Scores are averaged equally across all 6 datasets. Higher is better.*
 *Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
@@ -295,29 +299,29 @@ We evaluate on **6 representative English datasets**, one per task category from
 > - StreamingLLM suffers the largest degradation at all budgets, reflecting the loss
 >   of mid-context information.
 
-![Fig 1 — Accuracy vs Budget](results/figures/fig1_accuracy_by_budget.png)
+![Fig 1 — Accuracy vs Budget](results_mistral_run5/figures/fig1_accuracy_by_budget.png)
 
 ---
 
 ### 4.2 Category-Level Results at 20% Budget
 
-| Method | Single-Doc QA || Multi-Doc QA || Summarization || Few-Shot || Synthetic || Code |
-|--------| ---: || ---: || ---: || ---: || ---: || ---: |
-| StreamingLLM | 21.48 || 32.69 || 26.15 || 60.58 || 13.0 || 22.0 |
-| SnapKV | 26.44 || 41.84 || 27.05 || 48.87 || 77.0 || 23.39 |
-| PyramidKV | 25.13 || 40.89 || 27.06 || 54.39 || 77.0 || 23.28 |
+| Method | Single-Doc QA | Multi-Doc QA | Summarization | Few-Shot | Synthetic | Code |
+|--------| ---: | ---: | ---: | ---: | ---: | ---: |
+| StreamingLLM | 20.47 | 20.24 | 16.64 | 82.69 | 7.69 | 16.74 |
+| SnapKV | 28.24 | 35.73 | 14.87 | 35.86 | 61.54 | 8.56 |
+| PyramidKV | 26.96 | 39.95 | 14.59 | 42.2 | 46.15 | 6.43 |
 
-![Fig 2 — Category Heatmap](results/figures/fig2_category_heatmap.png)
+![Fig 2 — Category Heatmap](results_mistral_run5/figures/fig2_category_heatmap.png)
 
 ---
 
 ### 4.3 Category-Level Results at 10% Budget
 
-| Method | Single-Doc QA || Multi-Doc QA || Summarization || Few-Shot || Synthetic || Code |
-|--------| ---: || ---: || ---: || ---: || ---: || ---: |
-| StreamingLLM | 21.44 || 31.46 || 24.89 || 68.43 || 12.5 || 21.78 |
-| SnapKV | 23.79 || 41.07 || 25.59 || 47.18 || 71.5 || 23.64 |
-| PyramidKV | 24.09 || 41.07 || 25.24 || 62.2 || 73.0 || 23.33 |
+| Method | Single-Doc QA | Multi-Doc QA | Summarization | Few-Shot | Synthetic | Code |
+|--------| ---: | ---: | ---: | ---: | ---: | ---: |
+| StreamingLLM | 20.81 | 18.65 | 20.28 | 76.63 | 7.69 | 14.02 |
+| SnapKV | 28.11 | 44.22 | 16.95 | 39.99 | 46.15 | 7.76 |
+| PyramidKV | 27.33 | 38.14 | 13.74 | 66.7 | 61.54 | 13.57 |
 
 ---
 
@@ -325,21 +329,24 @@ We evaluate on **6 representative English datasets**, one per task category from
 
 | Method | Budget | Mem Reduction | TPS 4K | TPS 16K | Speedup (×) |
 |--------|--------|----------:|----------:|----------:|----------:|
-| StreamingLLM | 50% | 0.9× | 27.7 | 27.2 | 0.911× |
-| StreamingLLM | 20% | 1.0× | 27.7 | 27.6 | 0.982× |
-| StreamingLLM | 10% | 1.0× | 27.1 | 28.2 | 1.007× |
-| SnapKV | 50% | 0.9× | 27.7 | 27.2 | 0.911× |
-| SnapKV | 20% | 1.0× | 25.5 | 27.7 | 0.982× |
-| SnapKV | 10% | 1.0× | 27.5 | 27.7 | 1.007× |
-| PyramidKV | 50% | 0.9× | 27.4 | 26.7 | 0.911× |
-| PyramidKV | 20% | 1.0× | 27.0 | 27.7 | 0.981× |
-| PyramidKV | 10% | 1.0× | 27.0 | 27.4 | 1.007× |
-| **Full KV** | Full | 1.0× | 29.1 | 18.6 | 1.000× |
+| StreamingLLM | 50% | 0.0× | 0.0 | 0.0 | 0.959× |
+| StreamingLLM | 20% | 0.0× | 0.0 | 0.0 | 0.932× |
+| StreamingLLM | 10% | 0.0× | 0.0 | 0.0 | 0.979× |
+| H2O | 50% | 0.0× | 0.0 | 0.0 | 0.823× |
+| H2O | 20% | 0.0× | 0.0 | 0.0 | 0.821× |
+| H2O | 10% | 0.0× | 0.0 | 0.0 | 0.823× |
+| SnapKV | 50% | 0.0× | 0.0 | 0.0 | 0.974× |
+| SnapKV | 20% | 0.0× | 0.0 | 0.0 | 0.970× |
+| SnapKV | 10% | 0.0× | 0.0 | 0.0 | 0.983× |
+| PyramidKV | 50% | 0.0× | 0.0 | 0.0 | 0.973× |
+| PyramidKV | 20% | 0.0× | 0.0 | 0.0 | 0.975× |
+| PyramidKV | 10% | 0.0× | 0.0 | 0.0 | 0.966× |
+| **Full KV** | Full | 1.0× | 0.0 | 0.0 | 1.000× |
 
 *Theoretical KV cache memory reduction computed from Mistral-7B GQA architecture: 32 layers × 8 KV heads × head dim 128 × float16. Memory reduction is method-independent and determined solely by cache budget ratio.*
 *Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
 
-![Fig 3 — Speedup vs Budget](results/figures/fig3_speedup.png)
+![Fig 3 — Speedup vs Budget](results_mistral_run5/figures/fig3_speedup.png)
 
 ---
 
@@ -438,7 +445,7 @@ H2O) catch up as their approximation errors shrink with larger caches.
 
 ### 5.2 Efficiency-Accuracy Trade-off
 
-![Fig 4 — Accuracy-Speedup Pareto](results/figures/fig4_accuracy_vs_speedup.png)
+![Fig 4 — Accuracy-Speedup Pareto](results_mistral_run5/figures/fig4_accuracy_vs_speedup.png)
 
 **Prefill speedup** comes from shorter KV cache length, reducing attention computation from
 $O(N^2)$ to approximately $O(N \cdot K)$. All methods produce comparable speedup at a given
@@ -477,7 +484,7 @@ pooling cost but remains a tiny fraction of the $O(N^2)$ attention cost.
 
 ### 5.4 Task-Category Profile
 
-![Fig 5 — Radar Chart](results/figures/fig5_dataset_radar.png)
+![Fig 5 — Radar Chart](results_mistral_run5/figures/fig5_dataset_radar.png)
 
 The radar chart reveals that no single method dominates across all categories, reflecting the
 fundamental diversity of attention patterns across task types:

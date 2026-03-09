@@ -55,24 +55,24 @@ def _s(method, budget, *keys, default="—"):
 
 def overall_table():
     cols = BUDGETS + ["full"]
-    header  = "| Method |" + "|".join(" {} |".format(B_LABELS[b]) for b in cols)
-    divider = "|--------|" + "|".join(" ---: |" for _ in cols)
+    header  = "| Method |" + "".join(" {} |".format(B_LABELS[b]) for b in cols)
+    divider = "|--------|" + "".join(" ---: |" for _ in cols)
     rows = [header, divider]
     for m in METHODS + ["FullKV"]:
         label = METHODS_NAMES[m]
         vals  = [_s(m, b, "overall") for b in BUDGETS]
         vals.append(_s(m, "full", "overall"))
-        rows.append("| {} |".format(label) + "|".join(" {} |".format(v) for v in vals))
+        rows.append("| {} |".format(label) + "".join(" {} |".format(v) for v in vals))
     return "\n".join(rows)
 
 def category_table(budget):
-    header  = "| Method |" + "|".join(" {} |".format(c) for c in CATS)
-    divider = "|--------|" + "|".join(" ---: |" for _ in CATS)
+    header  = "| Method |" + "".join(" {} |".format(c) for c in CATS)
+    divider = "|--------|" + "".join(" ---: |" for _ in CATS)
     rows = [header, divider]
     for m in METHODS:
         label = METHODS_NAMES[m]
         vals  = [_s(m, budget, "categories", c) for c in CATS]
-        rows.append("| {} |".format(label) + "|".join(" {} |".format(v) for v in vals))
+        rows.append("| {} |".format(label) + "".join(" {} |".format(v) for v in vals))
     return "\n".join(rows)
 
 def speedup_table():
@@ -240,9 +240,13 @@ StreamingLLM maintains a fixed-size cache comprising:
 
 All other tokens are permanently evicted once they fall out of the window.
 
+
 $$
+
 \\text{Cache}_t = \\underbrace{[t_1, \\ldots, t_{k_s}]}_{\\text{sinks}} \\cup \\underbrace{[t_{t-W+1}, \\ldots, t_t]}_{\\text{recent window}}
+
 $$
+
 
 #### Theoretical Justification
 
@@ -419,7 +423,7 @@ SECTIONS.append("""\
 > - StreamingLLM suffers the largest degradation at all budgets, reflecting the loss
 >   of mid-context information.
 
-![Fig 1 — Accuracy vs Budget](results/figures/fig1_accuracy_by_budget.png)
+![Fig 1 — Accuracy vs Budget](results_mistral_run5/figures/fig1_accuracy_by_budget.png)
 
 ---
 
@@ -427,7 +431,7 @@ SECTIONS.append("""\
 
 {}
 
-![Fig 2 — Category Heatmap](results/figures/fig2_category_heatmap.png)
+![Fig 2 — Category Heatmap](results_mistral_run5/figures/fig2_category_heatmap.png)
 
 ---
 
@@ -444,7 +448,7 @@ SECTIONS.append("""\
 *Theoretical KV cache memory reduction computed from Mistral-7B GQA architecture: 32 layers × 8 KV heads × head dim 128 × float16. Memory reduction is method-independent and determined solely by cache budget ratio.*
 *Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
 
-![Fig 3 — Speedup vs Budget](results/figures/fig3_speedup.png)
+![Fig 3 — Speedup vs Budget](results_mistral_run5/figures/fig3_speedup.png)
 
 ---
 """.format(overall_table(), category_table("20pct"), category_table("10pct"), speedup_table()))
@@ -546,7 +550,7 @@ H2O) catch up as their approximation errors shrink with larger caches.
 
 ### 5.2 Efficiency-Accuracy Trade-off
 
-![Fig 4 — Accuracy-Speedup Pareto](results/figures/fig4_accuracy_vs_speedup.png)
+![Fig 4 — Accuracy-Speedup Pareto](results_mistral_run5/figures/fig4_accuracy_vs_speedup.png)
 
 **Prefill speedup** comes from shorter KV cache length, reducing attention computation from
 $O(N^2)$ to approximately $O(N \\cdot K)$. All methods produce comparable speedup at a given
@@ -585,7 +589,7 @@ pooling cost but remains a tiny fraction of the $O(N^2)$ attention cost.
 
 ### 5.4 Task-Category Profile
 
-![Fig 5 — Radar Chart](results/figures/fig5_dataset_radar.png)
+![Fig 5 — Radar Chart](results_mistral_run5/figures/fig5_dataset_radar.png)
 
 The radar chart reveals that no single method dominates across all categories, reflecting the
 fundamental diversity of attention patterns across task types:
