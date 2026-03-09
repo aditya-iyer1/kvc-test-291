@@ -57,46 +57,12 @@ pairs to keep in the cache and discard the rest. They differ in **which tokens t
 **when eviction occurs** (prompt vs. generation phase), and **how they allocate the budget
 across layers**.
 
-### 2.1 H2O — Heavy-Hitter Oracle
+### 2.1 H2O
 
 **Paper:** Zhang et al., *H2O: Heavy-Hitter Oracle for Efficient Generative Inference of
 Large Language Models*, NeurIPS 2023.
 
-#### Mechanism
-
-H2O is motivated by the empirical observation that attention scores are **highly skewed**:
-a small fraction of tokens (called *Heavy Hitters*, H2) accumulate a disproportionate
-share of attention mass across all heads and layers. Formally, they define the importance
-score of token $i$ at step $t$ as the cumulative attention it has received:
-
-$$
-s_i^{(t)} = \sum_{\tau=i+1}^{t} \alpha_{\tau,i}
-$$
-
-where $\alpha_{\tau,i}$ is the attention weight from position $\tau$ to position $i$.
-
-At each decoding step, H2O maintains a sliding budget of $K$ tokens, split between:
-- **Recent tokens** (a fixed window of the most recent $k_r$ positions)
-- **Heavy hitters** (top-$(K - k_r)$ tokens by cumulative attention score)
-
-Tokens that fall out of the recent window and are not heavy hitters are evicted.
-
-#### Theoretical Justification
-
-The eviction policy is shown to have a **submodular** structure: the objective (maximizing
-the total attention received by retained tokens) is monotone submodular, which means the
-greedy criterion of keeping the highest-score tokens is near-optimal. The authors prove
-an approximation ratio of $(1 - 1/e)$ relative to the optimal selection.
-
-#### Strengths & Limitations
-
-| Aspect | Detail |
-|--------|--------|
-| **+** | Adapts to input content; "important" is data-driven |
-| **+** | Strong on tasks where key facts are spread across context |
-| **−** | Requires materializing full attention weights → not directly FlashAttention-2 compatible |
-| **−** | Cumulative scoring causes early-token bias from cold-start |
-| **−** | Discards positional information for mid-range tokens |
+**Note**: H2O was initially included but excluded from evaluation: it requires materializing the full attention weight matrix, which is compatible with the customized KVCache-Factory SDPA backend at long context lengths and caused OOM errors on all tested datasets. The eviction mechanism is briefly described in the references.
 
 ---
 
@@ -236,8 +202,8 @@ entropy is high in lower layers and low in upper layers.
 
 ### Framework: KVCache-Factory
 
-All four methods are evaluated using [**KVCache-Factory**](https://github.com/Zefan-Cai/KVCache-Factory)
-(Zefan Cai, UW-Madison), a unified inference framework that implements H2O, StreamingLLM,
+All three methods are evaluated using [**KVCache-Factory**](https://github.com/Zefan-Cai/KVCache-Factory)
+(Zefan Cai, UW-Madison), a unified inference framework that implements StreamingLLM,
 SnapKV, and PyramidKV via *monkey-patching* the attention modules in HuggingFace
 Transformers. This ensures a fair, apples-to-apples comparison.
 
@@ -282,11 +248,11 @@ We evaluate on **6 representative English datasets**, one per task category from
 ### 4.1 Overall LongBench Accuracy
 
 | Method | 10% | 20% | 50% | Full |
-|--------| ---: | ---: | ---: | ---: |
-| StreamingLLM | 26.35 | 27.41 | 27.37 | — |
-| SnapKV | 30.53 | 30.8 | 24.65 | — |
-| PyramidKV | 36.84 | 29.38 | 21.5 | — |
-| Full KV (baseline) | — | — | — | 31.23 |
+|--------|----:|----:|----:|----:|
+| StreamingLLM | 30.08 | 29.32 | 32.13 | — |
+| SnapKV | 38.80 | 40.77 | 41.09 | — |
+| PyramidKV | 41.49 | 41.29 | 41.09 | — |
+| Full KV (baseline) | — | — | — | 42.01 |
 
 *Scores are averaged equally across all 6 datasets. Higher is better.*
 *Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
@@ -304,10 +270,10 @@ We evaluate on **6 representative English datasets**, one per task category from
 ### 4.2 Category-Level Results at 20% Budget
 
 | Method | Single-Doc QA | Multi-Doc QA | Summarization | Few-Shot | Synthetic | Code |
-|--------| ---: | ---: | ---: | ---: | ---: | ---: |
-| StreamingLLM | 20.47 | 20.24 | 16.64 | 82.69 | 7.69 | 16.74 |
-| SnapKV | 28.24 | 35.73 | 14.87 | 35.86 | 61.54 | 8.56 |
-| PyramidKV | 26.96 | 39.95 | 14.59 | 42.2 | 46.15 | 6.43 |
+|--------|--------------:|-------------:|--------------:|---------:|----------:|-----:|
+| StreamingLLM | 21.48 | 32.69 | 26.15 | 60.58 | 13.0 | 22.0 |
+| SnapKV | 26.44 | 41.84 | 27.05 | 48.87 | 77.0 | 23.39 |
+| PyramidKV | 25.13 | 40.89 | 27.06 | 54.39 | 77.0 | 23.28 |
 
 ![Fig 2 — Category Heatmap](results_mistral_run5/figures/fig2_category_heatmap.png)
 
@@ -316,30 +282,41 @@ We evaluate on **6 representative English datasets**, one per task category from
 ### 4.3 Category-Level Results at 10% Budget
 
 | Method | Single-Doc QA | Multi-Doc QA | Summarization | Few-Shot | Synthetic | Code |
-|--------| ---: | ---: | ---: | ---: | ---: | ---: |
-| StreamingLLM | 20.81 | 18.65 | 20.28 | 76.63 | 7.69 | 14.02 |
-| SnapKV | 28.11 | 44.22 | 16.95 | 39.99 | 46.15 | 7.76 |
-| PyramidKV | 27.33 | 38.14 | 13.74 | 66.7 | 61.54 | 13.57 |
+|--------|--------------:|-------------:|--------------:|---------:|----------:|-----:|
+| StreamingLLM | 21.44 | 31.46 | 24.89 | 68.43 | 12.5 | 21.78 |
+| SnapKV | 23.79 | 41.07 | 25.59 | 47.18 | 71.5 | 23.64 |
+| PyramidKV | 24.09 | 41.07 | 25.24 | 62.2 | 73.0 | 23.33 |
 
 ---
 
+### 4.31 Category-Level Results at 50% Budget
+
+| Method | Single-Doc QA | Multi-Doc QA | Summarization | Few-Shot | Synthetic | Code |
+|--------|--------------:|-------------:|--------------:|---------:|----------:|-----:|
+| StreamingLLM | 23.61 | 36.75 | 26.83 | 56.1 | 26.5 | 23.0 |
+| SnapKV | 26.09 | 42.31 | 26.94 | 51.24 | 77.0 | 22.98 |
+| PyramidKV | 25.59 | 41.16 | 26.96 | 52.33 | 77.5 | 22.98 |
+
+---
+
+
 ### 4.4 Inference Speedup
 
-| Method | Budget | Mem Reduction | TPS 4K | TPS 16K | Speedup (×) |
-|--------|--------|----------:|----------:|----------:|----------:|
-| StreamingLLM | 50% | 0.0× | 0.0 | 0.0 | 0.959× |
-| StreamingLLM | 20% | 0.0× | 0.0 | 0.0 | 0.932× |
-| StreamingLLM | 10% | 0.0× | 0.0 | 0.0 | 0.979× |
-| H2O | 50% | 0.0× | 0.0 | 0.0 | 0.823× |
-| H2O | 20% | 0.0× | 0.0 | 0.0 | 0.821× |
-| H2O | 10% | 0.0× | 0.0 | 0.0 | 0.823× |
-| SnapKV | 50% | 0.0× | 0.0 | 0.0 | 0.974× |
-| SnapKV | 20% | 0.0× | 0.0 | 0.0 | 0.970× |
-| SnapKV | 10% | 0.0× | 0.0 | 0.0 | 0.983× |
-| PyramidKV | 50% | 0.0× | 0.0 | 0.0 | 0.973× |
-| PyramidKV | 20% | 0.0× | 0.0 | 0.0 | 0.975× |
-| PyramidKV | 10% | 0.0× | 0.0 | 0.0 | 0.966× |
-| **Full KV** | Full | 1.0× | 0.0 | 0.0 | 1.000× |
+| Method | Budget | Speedup (×) |
+|--------|--------|-------------:|
+| StreamingLLM | 50% | 0.959× |
+| StreamingLLM | 20% | 0.932× |
+| StreamingLLM | 10% | 0.979× |
+| H2O | 50% | 0.823× |
+| H2O | 20% | 0.821× |
+| H2O | 10% | 0.823× |
+| SnapKV | 50% | 0.974× |
+| SnapKV | 20% | 0.970× |
+| SnapKV | 10% | 0.983× |
+| PyramidKV | 50% | 0.973× |
+| PyramidKV | 20% | 0.975× |
+| PyramidKV | 10% | 0.966× |
+| **Full KV** | Full | 1.000× |
 
 *Theoretical KV cache memory reduction computed from Mistral-7B GQA architecture: 32 layers × 8 KV heads × head dim 128 × float16. Memory reduction is method-independent and determined solely by cache budget ratio.*
 *Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
@@ -373,29 +350,6 @@ above-random but well below the full-KV baseline.
 query target at an arbitrary position in the document. With only ~4 + window_size tokens
 retained from early context, the probability of retaining the target passage is inversely
 proportional to the context length.
-
----
-
-#### H2O
-
-H2O's content-adaptive eviction gives it an advantage over StreamingLLM on tasks where
-attention is genuinely sparse. However, the **cumulative-scoring approximation** causes
-early tokens to accumulate high scores simply by virtue of being read first, even if their
-information is redundant with what has already been integrated into the residual stream.
-
-**Why it works on Few-Shot (TREC, TriviaQA):** These tasks have short prompts with in-context
-demonstrations. The few-shot examples are naturally "heavy hitters" because the model attends
-to them repeatedly, so H2O retains the right tokens.
-
-**Why it struggles on Summarization at low budgets:** Long documents require integrating many
-paragraphs. At 10% budget, H2O's evolving score distribution may prune sections before the
-model has had a chance to integrate them, particularly in early layers where scores are not
-yet stable.
-
-**FlashAttention incompatibility:** In its original form, H2O requires access to the full
-attention weight matrix, which FlashAttention computes in tiled blocks without materializing
-it. KVCache-Factory implements H2O with SDPA attention, which is slower but correct — muting
-some of H2O's latency advantage.
 
 ---
 
@@ -498,10 +452,7 @@ fundamental diversity of attention patterns across task types:
 
 ## 6. Conclusion
 
-This project systematically evaluated four KV cache compression methods — **H2O**,
-**StreamingLLM**, **SnapKV**, and **PyramidKV** — across 16 LongBench tasks at three
-cache budgets (10%, 20%, 50%), using the KVCache-Factory unified testbed with
-Mistral-7B-Instruct-v0.2.
+This project systematically evaluated three KV cache compression methods — **StreamingLLM**, **SnapKV**, and **PyramidKV** — across 16 LongBench tasks at three cache budgets (10%, 20%, 50%), using the KVCache-Factory unified testbed with Mistral-7B-Instruct-v0.2.
 
 **Key findings:**
 
