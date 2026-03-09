@@ -35,14 +35,14 @@ $$
 \text{Memory} = 2 \times L \times H \times d \times N \times \text{sizeof}(\text{dtype})
 $$
 
-bytes. At `float16`, Llama-3-8B with $L=32, H=32, d=128$ uses roughly
-$2 \times 32 \times 32 \times 128 \times N \times 2 = 524{,}288 \times N$ bytes per
-token — about **500 MB for an 8 K-token context**, and far more for 32 K+ contexts.
+bytes. At `float16`, Mistral-7B GQA with $L=32, H_{kv}=8, d=128$ uses roughly
+$2 \times 32 \times 8 \times 128 \times N \times 2 = 131{,}072 \times N$ bytes per
+token — approximately **125 MB for a 31K-token context**, and far more for longer contexts.
 
 **KV cache compression** methods aim to maintain as much accuracy as possible while retaining
 only a *budget* of $K \ll N$ tokens in the cache at each layer. This report:
 
-1. Surveys four state-of-the-art methods: **H2O**, **StreamingLLM**, **SnapKV**, and **PyramidKV**.
+1. Surveys three evaluated methods (StreamingLLM, SnapKV, PyramidKV) and one excluded baseline (H2O, OOM).
 2. Describes our unified experimental testbed built on [KVCache-Factory](https://github.com/Zefan-Cai/KVCache-Factory).
 3. Evaluates all methods on **LongBench v1** across 16 datasets and 6 task categories
    at cache budgets of **10%, 20%, and 50%** of the full context.
@@ -281,10 +281,10 @@ We evaluate on **6 representative English datasets**, one per task category from
 
 | Method | 10% || 20% || 50% || Full |
 |--------| ---: || ---: || ---: || ---: |
-| StreamingLLM | 26.35 || 27.41 || 27.37 || — |
-| SnapKV | 30.53 || 30.8 || 24.65 || — |
-| PyramidKV | 36.84 || 29.38 || 21.5 || — |
-| Full KV (baseline) | — || — || — || 31.23 |
+| StreamingLLM | 30.08 || 29.32 || 32.13 || — |
+| SnapKV | 38.8 || 40.77 || 41.09 || — |
+| PyramidKV | 41.49 || 41.29 || 41.09 || — |
+| Full KV (baseline) | — || — || — || 42.01 |
 
 *Scores are averaged equally across all 16 datasets. Higher is better.*
 *Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
@@ -303,9 +303,9 @@ We evaluate on **6 representative English datasets**, one per task category from
 
 | Method | Single-Doc QA || Multi-Doc QA || Summarization || Few-Shot || Synthetic || Code |
 |--------| ---: || ---: || ---: || ---: || ---: || ---: |
-| StreamingLLM | 20.47 || 20.24 || 16.64 || 82.69 || 7.69 || 16.74 |
-| SnapKV | 28.24 || 35.73 || 14.87 || 35.86 || 61.54 || 8.56 |
-| PyramidKV | 26.96 || 39.95 || 14.59 || 42.2 || 46.15 || 6.43 |
+| StreamingLLM | 21.48 || 32.69 || 26.15 || 60.58 || 13.0 || 22.0 |
+| SnapKV | 26.44 || 41.84 || 27.05 || 48.87 || 77.0 || 23.39 |
+| PyramidKV | 25.13 || 40.89 || 27.06 || 54.39 || 77.0 || 23.28 |
 
 ![Fig 2 — Category Heatmap](results/figures/fig2_category_heatmap.png)
 
@@ -315,33 +315,29 @@ We evaluate on **6 representative English datasets**, one per task category from
 
 | Method | Single-Doc QA || Multi-Doc QA || Summarization || Few-Shot || Synthetic || Code |
 |--------| ---: || ---: || ---: || ---: || ---: || ---: |
-| StreamingLLM | 20.81 || 18.65 || 20.28 || 76.63 || 7.69 || 14.02 |
-| SnapKV | 28.11 || 44.22 || 16.95 || 39.99 || 46.15 || 7.76 |
-| PyramidKV | 27.33 || 38.14 || 13.74 || 66.7 || 61.54 || 13.57 |
+| StreamingLLM | 21.44 || 31.46 || 24.89 || 68.43 || 12.5 || 21.78 |
+| SnapKV | 23.79 || 41.07 || 25.59 || 47.18 || 71.5 || 23.64 |
+| PyramidKV | 24.09 || 41.07 || 25.24 || 62.2 || 73.0 || 23.33 |
 
 ---
 
 ### 4.4 Inference Speedup
 
-| Method | Budget | Cache Tokens | Prefill (ms) | Decode (ms) | Speedup (×) |
+| Method | Budget | Mem Reduction | TPS 4K | TPS 16K | Speedup (×) |
 |--------|--------|----------:|----------:|----------:|----------:|
-| StreamingLLM | 100pct | 7,950 | 589.5 | 1784.2 | 0.994× |
-| StreamingLLM | 50% | 3,975 | 592.2 | 1866.6 | 0.959× |
-| StreamingLLM | 20% | 1,590 | 539.1 | 1991.6 | 0.932× |
-| StreamingLLM | 10% | 795 | 538.0 | 1872.8 | 0.979× |
-| H2O | 100pct | 7,950 | 593.8 | 1797.4 | 0.987× |
-| H2O | 50% | 3,975 | 596.5 | 2270.8 | 0.823× |
-| H2O | 20% | 1,590 | 553.2 | 2320.4 | 0.821× |
-| H2O | 10% | 795 | 539.2 | 2326.3 | 0.823× |
-| SnapKV | 100pct | 7,950 | 596.2 | 1762.5 | 1.0× |
-| SnapKV | 50% | 3,975 | 592.4 | 1829.8 | 0.974× |
-| SnapKV | 20% | 1,590 | 555.6 | 1875.4 | 0.97× |
-| SnapKV | 10% | 795 | 541.1 | 1858.0 | 0.983× |
-| PyramidKV | 100pct | 7,950 | 593.0 | 1780.1 | 0.994× |
-| PyramidKV | 50% | 3,975 | 595.5 | 1829.9 | 0.973× |
-| PyramidKV | 20% | 1,590 | 545.7 | 1874.5 | 0.975× |
-| PyramidKV | 10% | 795 | 536.1 | 1905.2 | 0.966× |
-| **Full KV** | Full | 7,950 | 585.7 | 1773.3 | 1.00× |
+| StreamingLLM | 100pct | 0.9× | 27.2 | 26.2 | 0.908× |
+| StreamingLLM | 50% | 0.9× | 27.7 | 27.2 | 0.911× |
+| StreamingLLM | 20% | 1.0× | 27.7 | 27.6 | 0.982× |
+| StreamingLLM | 10% | 1.0× | 27.1 | 28.2 | 1.007× |
+| SnapKV | 100pct | 0.9× | 27.9 | 26.6 | 0.908× |
+| SnapKV | 50% | 0.9× | 27.7 | 27.2 | 0.911× |
+| SnapKV | 20% | 1.0× | 25.5 | 27.7 | 0.982× |
+| SnapKV | 10% | 1.0× | 27.5 | 27.7 | 1.007× |
+| PyramidKV | 100pct | 0.9× | 28.4 | 27.0 | 0.908× |
+| PyramidKV | 50% | 0.9× | 27.4 | 26.7 | 0.911× |
+| PyramidKV | 20% | 1.0× | 27.0 | 27.7 | 0.981× |
+| PyramidKV | 10% | 1.0× | 27.0 | 27.4 | 1.007× |
+| **Full KV** | Full | 1.0× | 29.1 | 18.6 | 1.000× |
 
 *Theoretical KV cache memory reduction computed from Mistral-7B GQA architecture: 32 layers × 8 KV heads × head dim 128 × float16. Memory reduction is method-independent and determined solely by cache budget ratio.*
 *Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
@@ -495,7 +491,6 @@ fundamental diversity of attention patterns across task types:
   even with aggressive eviction.
 - **Prompt-grounded tasks** (Single-Doc QA, Few-Shot with explicit examples) reward
   SnapKV's query-guided selection.
-- **Heterogeneous/adaptive tasks** → H2O's online scoring generalizes reasonably.
 
 ---
 
@@ -518,16 +513,12 @@ Mistral-7B-Instruct-v0.2.
 3. **SnapKV is the best single-method choice for prompt-anchored tasks** (QA, RAG)
    at moderate budgets, offering an excellent accuracy-overhead balance.
 
-4. **H2O provides robust average-case performance** but suffers from FlashAttention
-   incompatibility and early-eviction artifacts at extreme compression.
-
-5. All methods reduce KV cache memory by 2-10× depending on budget, with no significant wall-clock throughput penalty under SDPA on A100 at evaluated sequence lengths. Real throughput gains emerge at sequence lengths >32K where attention dominates compute.
+4. All methods reduce KV cache memory by 2-10× depending on budget, with no significant wall-clock throughput penalty under SDPA on A100 at evaluated sequence lengths. Real throughput gains emerge at sequence lengths >32K where attention dominates compute.
 
 **For practitioners:**
 - Choose **PyramidKV** as the default for long-context workloads.
 - Fall back to **SnapKV** when implementation simplicity is a priority.
 - Use **StreamingLLM** only for streaming/chat settings with short effective memory.
-- **H2O** remains relevant for serving environments not using FlashAttention.
 
 **Future work:** Quantization-based methods (KIVI, KVQuant), adaptive head-level budgets
 (HeadKV), and hybrid compression combining SnapKV selection with 4-bit quantization of

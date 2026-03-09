@@ -79,20 +79,25 @@ def speedup_table():
     if not latency:
         return "*Latency data not available — run scripts/03_speedup.sh first.*"
     rows_data = latency.get("rows", [])
-    header  = "| Method | Budget | Cache Tokens | Prefill (ms) | Decode (ms) | Speedup (\u00d7) |"
+    header  = "| Method | Budget | Mem Reduction | TPS 4K | TPS 16K | Speedup (×) |"
     divider = "|--------|--------|----------:|----------:|----------:|----------:|"
     lines = [header, divider]
     for r in rows_data:
         if r["method"] == "FullKV":
             continue
-        lines.append("| {} | {} | {:,} | {} | {} | {}\u00d7 |".format(
-            r["method"], B_LABELS.get(r["budget"], r["budget"]),
-            r["max_capacity"], r["prefill_ms"], r["decode_ms"], r["speedup_total"]
+        lines.append("| {} | {} | {:.1f}× | {:.1f} | {:.1f} | {:.3f}× |".format(
+            r["method"],
+            B_LABELS.get(r["budget"], r["budget"]),
+            r.get("memory_reduction_ratio", 0),
+            r.get("tokens_per_sec_4k", 0),
+            r.get("tokens_per_sec_16k", 0),
+            r.get("speedup_total", 1.0),
         ))
     for r in rows_data:
         if r["method"] == "FullKV":
-            lines.append("| **Full KV** | Full | {:,} | {} | {} | 1.00\u00d7 |".format(
-                r["max_capacity"], r["prefill_ms"], r["decode_ms"]
+            lines.append("| **Full KV** | Full | 1.0× | {:.1f} | {:.1f} | 1.000× |".format(
+                r.get("tokens_per_sec_4k", 0),
+                r.get("tokens_per_sec_16k", 0),
             ))
             break
     return "\n".join(lines)
