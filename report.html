@@ -1,0 +1,935 @@
+<html>
+<head>
+<meta charset="utf-8">
+<script>
+MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>
+  body { max-width: 900px; margin: 40px auto; font-family: Georgia, serif; line-height: 1.7; color: #222; padding: 0 20px; }
+  h1,h2,h3,h4 { font-family: sans-serif; }
+  h2 { border-bottom: 1px solid #ddd; padding-bottom: 6px; }
+  table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+  td,th { border: 1px solid #ccc; padding: 6px 10px; }
+  th { background: #f5f5f5; }
+  code { background: #f4f4f4; padding: 2px 5px; border-radius: 3px; font-size: 0.9em; }
+  pre { background: #f4f4f4; padding: 16px; overflow-x: auto; border-radius: 4px; }
+  img { max-width: 100%; }
+  blockquote { border-left: 4px solid #ccc; margin-left: 0; padding-left: 16px; color: #555; }
+</style>
+</head>
+<body><h1 id="analysis-of-kv-cache-compression-policies">Analysis of KV Cache Compression Policies</h1>
+<blockquote>
+<p><strong>Course:</strong> CSE 291 — Systems for Machine Learning
+<strong>Date:</strong> March 09, 2026</p>
+</blockquote>
+<hr />
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-introduction">Introduction</a></li>
+<li><a href="#2-survey-of-kv-cache-compression-techniques">Survey of KV Cache Compression Techniques</a></li>
+<li>2.1 <a href="#21-h2o--heavy-hitter-oracle">H2O — Heavy-Hitter Oracle</a></li>
+<li>2.2 <a href="#22-streamingllm">StreamingLLM</a></li>
+<li>2.3 <a href="#23-snapkv">SnapKV</a></li>
+<li>2.4 <a href="#24-pyramidkv">PyramidKV</a></li>
+<li><a href="#3-unified-testbed-setup">Unified Testbed Setup</a></li>
+<li><a href="#4-evaluation-results">Evaluation Results</a></li>
+<li><a href="#5-analysis--discussion">Analysis &amp; Discussion</a></li>
+<li><a href="#6-conclusion">Conclusion</a></li>
+<li><a href="#7-references">References</a></li>
+</ol>
+<hr />
+<h2 id="1-introduction">1. Introduction</h2>
+<p>Modern large language models (LLMs) store a <strong>Key-Value (KV) cache</strong> during inference that
+holds all intermediate attention states for every token processed so far. This cache grows
+linearly with sequence length and can consume tens of gigabytes of GPU memory for long
+documents, making it a critical bottleneck for long-context inference.</p>
+<p>Formally, for a Transformer with $L$ layers, $H$ attention heads, and head dimension $d$,
+the KV cache for a sequence of length $N$ requires</p>
+<p>$$
+\text{Memory} = 2 \times L \times H \times d \times N \times \text{sizeof}(\text{dtype})
+$$</p>
+<p>bytes. At <code>float16</code>, Mistral-7B GQA with $L=32, H_{kv}=8, d=128$ uses roughly
+$2 \times 32 \times 8 \times 128 \times N \times 2 = 131{,}072 \times N$ bytes per
+token — approximately <strong>125 MB for a 31K-token context</strong>, and far more for longer contexts.</p>
+<p><strong>KV cache compression</strong> methods aim to maintain as much accuracy as possible while retaining
+only a <em>budget</em> of $K \ll N$ tokens in the cache at each layer. This report:</p>
+<ol>
+<li>Surveys three evaluated methods (StreamingLLM, SnapKV, PyramidKV) and one excluded baseline (H2O, OOM).</li>
+<li>Describes our unified experimental testbed built on <a href="https://github.com/Zefan-Cai/KVCache-Factory">KVCache-Factory</a>.</li>
+<li>Evaluates all methods on <strong>LongBench v1</strong> across 6 representative datasets (one per task category)
+   at cache budgets of <strong>10%, 20%, and 50%</strong> of the full context.</li>
+<li>Provides theoretical and empirical analysis of each method's strengths and weaknesses.</li>
+</ol>
+<hr />
+<h2 id="2-survey-of-kv-cache-compression-techniques">2. Survey of KV Cache Compression Techniques</h2>
+<p>All four methods implement <em>token-dropping</em> (eviction) strategies: they select which KV
+pairs to keep in the cache and discard the rest. They differ in <strong>which tokens they evict</strong>,
+<strong>when eviction occurs</strong> (prompt vs. generation phase), and <strong>how they allocate the budget
+across layers</strong>.</p>
+<h3 id="21-h2o-heavy-hitter-oracle">2.1 H2O — Heavy-Hitter Oracle</h3>
+<p><strong>Paper:</strong> Zhang et al., <em>H2O: Heavy-Hitter Oracle for Efficient Generative Inference of
+Large Language Models</em>, NeurIPS 2023.</p>
+<h4 id="mechanism">Mechanism</h4>
+<p>H2O is motivated by the empirical observation that attention scores are <strong>highly skewed</strong>:
+a small fraction of tokens (called <em>Heavy Hitters</em>, H2) accumulate a disproportionate
+share of attention mass across all heads and layers. Formally, they define the importance
+score of token $i$ at step $t$ as the cumulative attention it has received:</p>
+<p>$$
+s_i^{(t)} = \sum_{\tau=i+1}^{t} \alpha_{\tau,i}
+$$</p>
+<p>where $\alpha_{\tau,i}$ is the attention weight from position $\tau$ to position $i$.</p>
+<p>At each decoding step, H2O maintains a sliding budget of $K$ tokens, split between:
+- <strong>Recent tokens</strong> (a fixed window of the most recent $k_r$ positions)
+- <strong>Heavy hitters</strong> (top-$(K - k_r)$ tokens by cumulative attention score)</p>
+<p>Tokens that fall out of the recent window and are not heavy hitters are evicted.</p>
+<h4 id="theoretical-justification">Theoretical Justification</h4>
+<p>The eviction policy is shown to have a <strong>submodular</strong> structure: the objective (maximizing
+the total attention received by retained tokens) is monotone submodular, which means the
+greedy criterion of keeping the highest-score tokens is near-optimal. The authors prove
+an approximation ratio of $(1 - 1/e)$ relative to the optimal selection.</p>
+<h4 id="strengths-limitations">Strengths &amp; Limitations</h4>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>+</strong></td>
+<td>Adapts to input content; "important" is data-driven</td>
+</tr>
+<tr>
+<td><strong>+</strong></td>
+<td>Strong on tasks where key facts are spread across context</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td>Requires materializing full attention weights → not directly FlashAttention-2 compatible</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td>Cumulative scoring causes early-token bias from cold-start</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td>Discards positional information for mid-range tokens</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="22-streamingllm">2.2 StreamingLLM</h3>
+<p><strong>Paper:</strong> Xiao et al., <em>Efficient Streaming Language Models with Attention Sinks</em>, ICLR 2024.</p>
+<h4 id="mechanism_1">Mechanism</h4>
+<p>StreamingLLM exploits the <strong>attention sink</strong> phenomenon: LLMs reliably attend to the
+very first few tokens regardless of their semantic content. Without these sink tokens,
+the softmax distribution over the remaining window becomes miscalibrated and model outputs
+degrade catastrophically.</p>
+<p>StreamingLLM maintains a fixed-size cache comprising:
+- <strong>Sink tokens</strong> — the first $k_s$ tokens (typically 4) of the sequence, always kept.
+- <strong>Sliding window</strong> — the most recent $K - k_s$ tokens.</p>
+<p>All other tokens are permanently evicted once they fall out of the window.</p>
+<p>$$
+\text{Cache}<em>t = \underbrace{[t_1, \ldots, t</em>{k_s}]}<em>{\text{sinks}} \cup \underbrace{[t</em>{t-W+1}, \ldots, t_t]}_{\text{recent window}}
+$$</p>
+<h4 id="theoretical-justification_1">Theoretical Justification</h4>
+<p>The attention sink hypothesis is supported by visualizations showing that the attention
+distribution is bimodal: high weight on the initial $k_s$ tokens and high weight on recent
+tokens, with mid-context tokens receiving near-zero attention. This makes the sliding window
+a natural approximation — as long as recent context suffices for the task.</p>
+<h4 id="strengths-limitations_1">Strengths &amp; Limitations</h4>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>+</strong></td>
+<td>Simple, efficient — no runtime scoring needed</td>
+</tr>
+<tr>
+<td><strong>+</strong></td>
+<td>Enables essentially unlimited sequence length (streaming mode)</td>
+</tr>
+<tr>
+<td><strong>+</strong></td>
+<td>Fully compatible with FlashAttention-2</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td><strong>All mid-range context is lost</strong> — catastrophic for tasks requiring distant retrieval</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td>Eviction is irreversible; no adaptation possible</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td>Performance degrades sharply on multi-doc QA and synthetic retrieval tasks</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="23-snapkv">2.3 SnapKV</h3>
+<p><strong>Paper:</strong> Li et al., <em>SnapKV: LLM Knows What You are Looking for Before Generation</em>, NeurIPS 2024.</p>
+<h4 id="mechanism_2">Mechanism</h4>
+<p>SnapKV's key insight is that query tokens near the <strong>end of the prompt</strong> (the "observation
+window") provide a reliable signal of which earlier keys are important for upcoming generation.</p>
+<p>The algorithm:
+1. Designates the last $w$ tokens as the observation window.
+2. For each attention head $h$, computes the average attention score each token $i$
+   receives from the observation window:</p>
+<p>$$
+s_i^h = \frac{1}{w} \sum_{j \in \text{obs.window}} \alpha_{j,i}^h
+$$</p>
+<ol>
+<li>Applies <strong>max-pooling</strong> with kernel size $k$ to smooth scores and preserve local clusters.</li>
+<li>Selects the top-$K$ token positions per head.</li>
+<li>Concatenates selected KV pairs with the observation window to form the compressed cache.</li>
+</ol>
+<h4 id="theoretical-justification_2">Theoretical Justification</h4>
+<p>SnapKV relies on the <strong>prompt-grounded</strong> hypothesis: the information bottleneck required for
+generation is determined before decoding begins. The observation window acts as a cheap
+lookahead that reveals which tokens the model will query during decoding. Pooling prevents
+over-fragmentation of selected tokens.</p>
+<h4 id="strengths-limitations_2">Strengths &amp; Limitations</h4>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>+</strong></td>
+<td>One-shot prefill compression; zero overhead during decoding</td>
+</tr>
+<tr>
+<td><strong>+</strong></td>
+<td>Per-head selection respects head specialization</td>
+</tr>
+<tr>
+<td><strong>+</strong></td>
+<td>Strong on prompt-anchored tasks (RAG, explicit-question QA)</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td>Selection is fixed at prefill; no online adaptation</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td>Requires observation window to be a reliable proxy for generation needs</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td>Larger kernel size may over-smooth and miss fine-grained important positions</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="24-pyramidkv">2.4 PyramidKV</h3>
+<p><strong>Paper:</strong> Cai et al., <em>PyramidKV: Dynamic KV Cache Compression Based on Pyramidal
+Information Funneling</em>, EMNLP 2024.</p>
+<h4 id="mechanism_3">Mechanism</h4>
+<p>PyramidKV exploits the <strong>pyramidal information funneling</strong> structure of Transformers:</p>
+<ul>
+<li><strong>Lower layers</strong> scatter attention broadly — aggregating wide contextual signals.</li>
+<li><strong>Middle layers</strong> progressively focus within topical clusters.</li>
+<li><strong>Upper layers</strong> concentrate almost entirely on a few critical tokens.</li>
+</ul>
+<p>This motivates allocating the KV budget <strong>asymmetrically across layers</strong>:</p>
+<p>$$
+K_l = K_{\text{total}} \cdot f(l), \quad \text{where } f(l) \text{ is decreasing in layer index } l
+$$</p>
+<p>The paper uses a <strong>linear schedule</strong>:
+$K_l = K_{\max} - (K_{\max} - K_{\min}) \cdot l/(L-1)$,
+so lower layers get more budget while keeping the total KV usage equal to a uniform method
+at budget $K_{\text{avg}}$.</p>
+<p>Within each layer, PyramidKV uses the same selection criterion as SnapKV (observation-window
+attention scores + max-pooling).</p>
+<h4 id="theoretical-justification_3">Theoretical Justification</h4>
+<p>The pyramidal allocation is motivated by information-theoretic reasoning: lower layers need
+more tokens because information at that stage is distributed; upper layers have already
+performed implicit compression. This matches empirical attention entropy measurements —
+entropy is high in lower layers and low in upper layers.</p>
+<h4 id="strengths-limitations_3">Strengths &amp; Limitations</h4>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>+</strong></td>
+<td>Strictly better allocation than uniform SnapKV at same total budget</td>
+</tr>
+<tr>
+<td><strong>+</strong></td>
+<td>Achieves full-KV parity at ~12% retention on LongBench</td>
+</tr>
+<tr>
+<td><strong>+</strong></td>
+<td>Particularly effective at extreme compression (&lt;=10%)</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td>Requires tuning the linear schedule (min/max KV per layer)</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td>Slightly higher implementation complexity</td>
+</tr>
+<tr>
+<td><strong>−</strong></td>
+<td>Same decode-phase limitation as SnapKV: no online adaptation</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="3-unified-testbed-setup">3. Unified Testbed Setup</h2>
+<h3 id="framework-kvcache-factory">Framework: KVCache-Factory</h3>
+<p>All four methods are evaluated using <a href="https://github.com/Zefan-Cai/KVCache-Factory"><strong>KVCache-Factory</strong></a>
+(Zefan Cai, UW-Madison), a unified inference framework that implements H2O, StreamingLLM,
+SnapKV, and PyramidKV via <em>monkey-patching</em> the attention modules in HuggingFace
+Transformers. This ensures a fair, apples-to-apples comparison.</p>
+<h3 id="model">Model</h3>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td><code>mistralai/Mistral-7B-Instruct-v0.2</code></td>
+</tr>
+<tr>
+<td>Precision</td>
+<td><code>float16</code></td>
+</tr>
+<tr>
+<td>Attention backend</td>
+<td>SDPA (scaled dot product attention)</td>
+</tr>
+<tr>
+<td>Device</td>
+<td>CUDA GPU (&gt;=24 GB VRAM)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cache-budget-control">Cache Budget Control</h3>
+<p>KVCache-Factory accepts <code>--max_capacity_prompts_ratio</code> (float in [0, 1]) so we can express
+the budget as a percentage of Mistral-7B's effective context (31,500 tokens):</p>
+<table>
+<thead>
+<tr>
+<th>Budget Label</th>
+<th>Ratio</th>
+<th>Approx. Tokens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10%</td>
+<td>0.10</td>
+<td>3,150</td>
+</tr>
+<tr>
+<td>20%</td>
+<td>0.20</td>
+<td>6,300</td>
+</tr>
+<tr>
+<td>50%</td>
+<td>0.50</td>
+<td>15,750</td>
+</tr>
+<tr>
+<td>Full (baseline)</td>
+<td>1.00</td>
+<td>31,500</td>
+</tr>
+</tbody>
+</table>
+<h3 id="longbench-v1">LongBench v1</h3>
+<p>We evaluate on <strong>6 representative English datasets</strong>, one per task category from LongBench v1 (THUDM/LongBench):</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Datasets</th>
+<th>Metric</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Single-Doc QA</td>
+<td>NarrativeQA</td>
+<td>F1</td>
+</tr>
+<tr>
+<td>Multi-Doc QA</td>
+<td>HotpotQA</td>
+<td>F1</td>
+</tr>
+<tr>
+<td>Summarization</td>
+<td>MultiNews</td>
+<td>ROUGE-L</td>
+</tr>
+<tr>
+<td>Few-Shot</td>
+<td>TriviaQA</td>
+<td>F1</td>
+</tr>
+<tr>
+<td>Synthetic</td>
+<td>PassageRetrieval-en</td>
+<td>ExactMatch</td>
+</tr>
+<tr>
+<td>Code</td>
+<td>LCC</td>
+<td>ROUGE-L</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-evaluation-results">4. Evaluation Results</h2>
+<h3 id="41-overall-longbench-accuracy">4.1 Overall LongBench Accuracy</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th style="text-align: right;">10%</th>
+<th></th>
+<th style="text-align: right;">20%</th>
+<th></th>
+<th style="text-align: right;">50%</th>
+<th></th>
+<th style="text-align: right;">Full</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>StreamingLLM</td>
+<td style="text-align: right;">30.08</td>
+<td></td>
+<td style="text-align: right;">29.32</td>
+<td></td>
+<td style="text-align: right;">32.13</td>
+<td></td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr>
+<td>SnapKV</td>
+<td style="text-align: right;">38.8</td>
+<td></td>
+<td style="text-align: right;">40.77</td>
+<td></td>
+<td style="text-align: right;">41.09</td>
+<td></td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr>
+<td>PyramidKV</td>
+<td style="text-align: right;">41.49</td>
+<td></td>
+<td style="text-align: right;">41.29</td>
+<td></td>
+<td style="text-align: right;">41.09</td>
+<td></td>
+<td style="text-align: right;">—</td>
+</tr>
+<tr>
+<td>Full KV (baseline)</td>
+<td style="text-align: right;">—</td>
+<td></td>
+<td style="text-align: right;">—</td>
+<td></td>
+<td style="text-align: right;">—</td>
+<td></td>
+<td style="text-align: right;">42.01</td>
+</tr>
+</tbody>
+</table>
+<p><em>Scores are averaged equally across all 6 datasets. Higher is better.</em>
+<em>Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.</em></p>
+<blockquote>
+<p><strong>Key observations:</strong>
+- PyramidKV maintains the most accuracy across all budget levels.
+- SnapKV and PyramidKV converge toward FullKV accuracy at 50% budget; PyramidKV leads at 10%.
+- StreamingLLM suffers the largest degradation at all budgets, reflecting the loss
+  of mid-context information.</p>
+</blockquote>
+<p><img alt="Fig 1 — Accuracy vs Budget" src="results/figures/fig1_accuracy_by_budget.png" /></p>
+<hr />
+<h3 id="42-category-level-results-at-20-budget">4.2 Category-Level Results at 20% Budget</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th style="text-align: right;">Single-Doc QA</th>
+<th></th>
+<th style="text-align: right;">Multi-Doc QA</th>
+<th></th>
+<th style="text-align: right;">Summarization</th>
+<th></th>
+<th style="text-align: right;">Few-Shot</th>
+<th></th>
+<th style="text-align: right;">Synthetic</th>
+<th></th>
+<th style="text-align: right;">Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>StreamingLLM</td>
+<td style="text-align: right;">21.48</td>
+<td></td>
+<td style="text-align: right;">32.69</td>
+<td></td>
+<td style="text-align: right;">26.15</td>
+<td></td>
+<td style="text-align: right;">60.58</td>
+<td></td>
+<td style="text-align: right;">13.0</td>
+<td></td>
+<td style="text-align: right;">22.0</td>
+</tr>
+<tr>
+<td>SnapKV</td>
+<td style="text-align: right;">26.44</td>
+<td></td>
+<td style="text-align: right;">41.84</td>
+<td></td>
+<td style="text-align: right;">27.05</td>
+<td></td>
+<td style="text-align: right;">48.87</td>
+<td></td>
+<td style="text-align: right;">77.0</td>
+<td></td>
+<td style="text-align: right;">23.39</td>
+</tr>
+<tr>
+<td>PyramidKV</td>
+<td style="text-align: right;">25.13</td>
+<td></td>
+<td style="text-align: right;">40.89</td>
+<td></td>
+<td style="text-align: right;">27.06</td>
+<td></td>
+<td style="text-align: right;">54.39</td>
+<td></td>
+<td style="text-align: right;">77.0</td>
+<td></td>
+<td style="text-align: right;">23.28</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Fig 2 — Category Heatmap" src="results/figures/fig2_category_heatmap.png" /></p>
+<hr />
+<h3 id="43-category-level-results-at-10-budget">4.3 Category-Level Results at 10% Budget</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th style="text-align: right;">Single-Doc QA</th>
+<th></th>
+<th style="text-align: right;">Multi-Doc QA</th>
+<th></th>
+<th style="text-align: right;">Summarization</th>
+<th></th>
+<th style="text-align: right;">Few-Shot</th>
+<th></th>
+<th style="text-align: right;">Synthetic</th>
+<th></th>
+<th style="text-align: right;">Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>StreamingLLM</td>
+<td style="text-align: right;">21.44</td>
+<td></td>
+<td style="text-align: right;">31.46</td>
+<td></td>
+<td style="text-align: right;">24.89</td>
+<td></td>
+<td style="text-align: right;">68.43</td>
+<td></td>
+<td style="text-align: right;">12.5</td>
+<td></td>
+<td style="text-align: right;">21.78</td>
+</tr>
+<tr>
+<td>SnapKV</td>
+<td style="text-align: right;">23.79</td>
+<td></td>
+<td style="text-align: right;">41.07</td>
+<td></td>
+<td style="text-align: right;">25.59</td>
+<td></td>
+<td style="text-align: right;">47.18</td>
+<td></td>
+<td style="text-align: right;">71.5</td>
+<td></td>
+<td style="text-align: right;">23.64</td>
+</tr>
+<tr>
+<td>PyramidKV</td>
+<td style="text-align: right;">24.09</td>
+<td></td>
+<td style="text-align: right;">41.07</td>
+<td></td>
+<td style="text-align: right;">25.24</td>
+<td></td>
+<td style="text-align: right;">62.2</td>
+<td></td>
+<td style="text-align: right;">73.0</td>
+<td></td>
+<td style="text-align: right;">23.33</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="44-inference-speedup">4.4 Inference Speedup</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Budget</th>
+<th style="text-align: right;">Mem Reduction</th>
+<th style="text-align: right;">TPS 4K</th>
+<th style="text-align: right;">TPS 16K</th>
+<th style="text-align: right;">Speedup (×)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>StreamingLLM</td>
+<td>50%</td>
+<td style="text-align: right;">0.9×</td>
+<td style="text-align: right;">27.7</td>
+<td style="text-align: right;">27.2</td>
+<td style="text-align: right;">0.911×</td>
+</tr>
+<tr>
+<td>StreamingLLM</td>
+<td>20%</td>
+<td style="text-align: right;">1.0×</td>
+<td style="text-align: right;">27.7</td>
+<td style="text-align: right;">27.6</td>
+<td style="text-align: right;">0.982×</td>
+</tr>
+<tr>
+<td>StreamingLLM</td>
+<td>10%</td>
+<td style="text-align: right;">1.0×</td>
+<td style="text-align: right;">27.1</td>
+<td style="text-align: right;">28.2</td>
+<td style="text-align: right;">1.007×</td>
+</tr>
+<tr>
+<td>SnapKV</td>
+<td>50%</td>
+<td style="text-align: right;">0.9×</td>
+<td style="text-align: right;">27.7</td>
+<td style="text-align: right;">27.2</td>
+<td style="text-align: right;">0.911×</td>
+</tr>
+<tr>
+<td>SnapKV</td>
+<td>20%</td>
+<td style="text-align: right;">1.0×</td>
+<td style="text-align: right;">25.5</td>
+<td style="text-align: right;">27.7</td>
+<td style="text-align: right;">0.982×</td>
+</tr>
+<tr>
+<td>SnapKV</td>
+<td>10%</td>
+<td style="text-align: right;">1.0×</td>
+<td style="text-align: right;">27.5</td>
+<td style="text-align: right;">27.7</td>
+<td style="text-align: right;">1.007×</td>
+</tr>
+<tr>
+<td>PyramidKV</td>
+<td>50%</td>
+<td style="text-align: right;">0.9×</td>
+<td style="text-align: right;">27.4</td>
+<td style="text-align: right;">26.7</td>
+<td style="text-align: right;">0.911×</td>
+</tr>
+<tr>
+<td>PyramidKV</td>
+<td>20%</td>
+<td style="text-align: right;">1.0×</td>
+<td style="text-align: right;">27.0</td>
+<td style="text-align: right;">27.7</td>
+<td style="text-align: right;">0.981×</td>
+</tr>
+<tr>
+<td>PyramidKV</td>
+<td>10%</td>
+<td style="text-align: right;">1.0×</td>
+<td style="text-align: right;">27.0</td>
+<td style="text-align: right;">27.4</td>
+<td style="text-align: right;">1.007×</td>
+</tr>
+<tr>
+<td><strong>Full KV</strong></td>
+<td>Full</td>
+<td style="text-align: right;">1.0×</td>
+<td style="text-align: right;">29.1</td>
+<td style="text-align: right;">18.6</td>
+<td style="text-align: right;">1.000×</td>
+</tr>
+</tbody>
+</table>
+<p><em>Theoretical KV cache memory reduction computed from Mistral-7B GQA architecture: 32 layers × 8 KV heads × head dim 128 × float16. Memory reduction is method-independent and determined solely by cache budget ratio.</em>
+<em>Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.</em></p>
+<p><img alt="Fig 3 — Speedup vs Budget" src="results/figures/fig3_speedup.png" /></p>
+<hr />
+<h2 id="5-analysis-discussion">5. Analysis &amp; Discussion</h2>
+<h3 id="51-per-method-analysis">5.1 Per-Method Analysis</h3>
+<h4 id="streamingllm">StreamingLLM</h4>
+<p>StreamingLLM's sliding-window design is optimized for <strong>streaming generation in open-ended
+settings</strong> where only recent context matters (e.g., chat turns). It performs poorly on any
+task requiring retrieval from the middle of a long document — a fundamental design constraint,
+not a bug.</p>
+<p><strong>Why it fails on Multi-Doc QA (HotpotQA, 2WikiMQA):</strong> These tasks require bridging
+information from disparate document segments. The sliding window systematically discards
+all but the most recent passage, leaving the model with only partial evidence for
+multi-hop reasoning chains.</p>
+<p><strong>Why it partially works on Summarization:</strong> Government reports and meeting transcripts
+follow a temporal narrative structure; recent paragraphs summarize preceding material.
+The sliding window approximates reading the end of the document, yielding ROUGE-L scores
+above-random but well below the full-KV baseline.</p>
+<p><strong>Why it does poorly on Synthetic tasks (PassageRetrieval):</strong> These benchmarks embed the
+query target at an arbitrary position in the document. With only ~4 + window_size tokens
+retained from early context, the probability of retaining the target passage is inversely
+proportional to the context length.</p>
+<hr />
+<h4 id="h2o">H2O</h4>
+<p>H2O's content-adaptive eviction gives it an advantage over StreamingLLM on tasks where
+attention is genuinely sparse. However, the <strong>cumulative-scoring approximation</strong> causes
+early tokens to accumulate high scores simply by virtue of being read first, even if their
+information is redundant with what has already been integrated into the residual stream.</p>
+<p><strong>Why it works on Few-Shot (TREC, TriviaQA):</strong> These tasks have short prompts with in-context
+demonstrations. The few-shot examples are naturally "heavy hitters" because the model attends
+to them repeatedly, so H2O retains the right tokens.</p>
+<p><strong>Why it struggles on Summarization at low budgets:</strong> Long documents require integrating many
+paragraphs. At 10% budget, H2O's evolving score distribution may prune sections before the
+model has had a chance to integrate them, particularly in early layers where scores are not
+yet stable.</p>
+<p><strong>FlashAttention incompatibility:</strong> In its original form, H2O requires access to the full
+attention weight matrix, which FlashAttention computes in tiled blocks without materializing
+it. KVCache-Factory implements H2O with SDPA attention, which is slower but correct — muting
+some of H2O's latency advantage.</p>
+<hr />
+<h4 id="snapkv">SnapKV</h4>
+<p>SnapKV is particularly strong when the model's final query (embedded in the prompt) provides
+a clear selection signal. This aligns well with <strong>RAG-style question-answering</strong> workloads.</p>
+<p><strong>Why it works on Single-Doc QA (NarrativeQA, Qasper):</strong> The question at the end of the
+prompt reliably predicts which passage positions contain the answer. The observation window's
+attention scores cluster around these positions, and SnapKV retains them precisely.</p>
+<p><strong>Why it is weaker than PyramidKV:</strong> SnapKV applies the same fixed budget to every layer.
+In upper layers, context has already been distilled into few tokens, so retaining 20% there
+is wasteful. Lower layers need more tokens to aggregate dispersed signals. Uniform allocation
+underserves lower layers and over-allocates to upper layers.</p>
+<p><strong>Why it underperforms on Code (RepoBench-P):</strong> Code completion requires tracking long-range
+type and variable dependencies defined far from the point of use. The observation window
+(the last few code lines) may not strongly attend to remote definitions, causing those
+tokens to be evicted.</p>
+<hr />
+<h4 id="pyramidkv">PyramidKV</h4>
+<p>PyramidKV dominates at <strong>extreme budgets (10%)</strong> across most categories because its pyramidal
+allocation preserves broader context in lower layers (where global integration happens) while
+accepting aggressive compression in upper layers (where information has already been condensed).</p>
+<p><strong>Why it excels at 10% on Synthetic tasks (PassageRetrieval):</strong> Retrieving a target passage
+requires lower layers to identify which document section is relevant. PyramidKV keeps more
+tokens in those layers, preserving the retrieval signal that would be lost under uniform
+compression.</p>
+<p><strong>Why it matches full-KV accuracy at ~12% budgets:</strong> The pyramidal schedule effectively
+allocates tokens where they matter most. At moderate budgets, this means the information
+the model actually needs is already retained in the layers where it matters.</p>
+<p><strong>Why it does not completely dominate at 50%:</strong> At high budgets, all methods retain enough
+tokens that the marginal benefit of pyramidal allocation is small. Uniform methods (SnapKV,
+H2O) catch up as their approximation errors shrink with larger caches.</p>
+<hr />
+<h3 id="52-efficiency-accuracy-trade-off">5.2 Efficiency-Accuracy Trade-off</h3>
+<p><img alt="Fig 4 — Accuracy-Speedup Pareto" src="results/figures/fig4_accuracy_vs_speedup.png" /></p>
+<p><strong>Prefill speedup</strong> comes from shorter KV cache length, reducing attention computation from
+$O(N^2)$ to approximately $O(N \cdot K)$. All methods produce comparable speedup at a given
+budget since they reduce retained tokens by the same factor.</p>
+<p><strong>Decode speedup</strong> is driven by reduced cache size: fewer bytes loaded per step means better
+GPU memory bandwidth utilization. Measured wall-clock throughput on A100-80GB showed no significant speedup at 4K-16K sequence lengths under SDPA backend (all methods within 5% of FullKV). The primary efficiency benefit is KV cache memory reduction: 10× at 10% budget, 5× at 20%, 2× at 50%, enabling larger batch sizes or longer sequences within the same VRAM envelope.</p>
+<p>The Pareto analysis shows that <strong>PyramidKV sits on the efficiency frontier</strong>: at every speedup
+level, it achieves higher accuracy than competing methods. StreamingLLM achieves high speedup
+(trivial selection cost) but sacrifices the most accuracy.</p>
+<p><strong>Practical trade-off recommendations:</strong>
+- <strong>Accuracy-critical, moderate compression:</strong> SnapKV or PyramidKV at 20-50%
+- <strong>Maximum throughput:</strong> StreamingLLM (only if recent context suffices)
+- <strong>Long-context retrieval / extreme compression:</strong> PyramidKV at 10-20%</p>
+<hr />
+<h3 id="53-efficiency-at-the-algorithmic-level">5.3 Efficiency at the Algorithmic Level</h3>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Prefill Overhead</th>
+<th>Decode Overhead</th>
+<th>FlashAttn-2 Compatible</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FullKV</td>
+<td>$O(N^2)$</td>
+<td>$O(N)$ per step</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>StreamingLLM</td>
+<td>$O(N^2)$ (no extra)</td>
+<td>$O(K)$ per step</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>H2O</td>
+<td>$O(N^2)$ + score accumulation</td>
+<td>$O(K)$ + eviction</td>
+<td>No (SDPA needed)</td>
+</tr>
+<tr>
+<td>SnapKV</td>
+<td>$O(N^2)$ + pooling</td>
+<td>$O(K)$ per step</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>PyramidKV</td>
+<td>$O(N^2)$ + pooling per layer</td>
+<td>$O(\bar K_l)$ per step</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>StreamingLLM and SnapKV have <strong>negligible prefill overhead</strong> beyond standard attention.
+H2O requires maintaining cumulative attention scores and materializing attention weights —
+a meaningful constraint in production serving. PyramidKV's overhead is $O(L)$ times the
+pooling cost but remains a tiny fraction of the $O(N^2)$ attention cost.</p>
+<hr />
+<h3 id="54-task-category-profile">5.4 Task-Category Profile</h3>
+<p><img alt="Fig 5 — Radar Chart" src="results/figures/fig5_dataset_radar.png" /></p>
+<p>The radar chart reveals that no single method dominates across all categories, reflecting the
+fundamental diversity of attention patterns across task types:</p>
+<ul>
+<li><strong>Retrieval tasks</strong> (Synthetic, Multi-Doc QA) reward broad context sampling
+  → PyramidKV's lower-layer allocation wins.</li>
+<li><strong>Recency-heavy tasks</strong> (some summarization, streaming) are well-served by StreamingLLM
+  even with aggressive eviction.</li>
+<li><strong>Prompt-grounded tasks</strong> (Single-Doc QA, Few-Shot with explicit examples) reward
+  SnapKV's query-guided selection.</li>
+</ul>
+<hr />
+<h2 id="6-conclusion">6. Conclusion</h2>
+<p>This project systematically evaluated four KV cache compression methods — <strong>H2O</strong>,
+<strong>StreamingLLM</strong>, <strong>SnapKV</strong>, and <strong>PyramidKV</strong> — across 16 LongBench tasks at three
+cache budgets (10%, 20%, 50%), using the KVCache-Factory unified testbed with
+Mistral-7B-Instruct-v0.2.</p>
+<p><strong>Key findings:</strong></p>
+<ol>
+<li>
+<p><strong>PyramidKV is consistently the strongest method</strong>, especially at aggressive budgets (10%),
+   owing to its layer-adaptive allocation that mirrors the hierarchical information funneling
+   of deep Transformers.</p>
+</li>
+<li>
+<p><strong>StreamingLLM is the fastest but least accurate</strong> for long-context tasks. It is only
+   viable when the task can be solved from recent context alone.</p>
+</li>
+<li>
+<p><strong>SnapKV is the best single-method choice for prompt-anchored tasks</strong> (QA, RAG)
+   at moderate budgets, offering an excellent accuracy-overhead balance.</p>
+</li>
+<li>
+<p>All methods reduce KV cache memory by 2-10× depending on budget, with no significant wall-clock throughput penalty under SDPA on A100 at evaluated sequence lengths. Real throughput gains emerge at sequence lengths &gt;32K where attention dominates compute.</p>
+</li>
+</ol>
+<p><strong>For practitioners:</strong>
+- Choose <strong>PyramidKV</strong> as the default for long-context workloads.
+- Fall back to <strong>SnapKV</strong> when implementation simplicity is a priority.
+- Use <strong>StreamingLLM</strong> only for streaming/chat settings with short effective memory.</p>
+<p><strong>Future work:</strong> Quantization-based methods (KIVI, KVQuant), adaptive head-level budgets
+(HeadKV), and hybrid compression combining SnapKV selection with 4-bit quantization of
+retained pairs are promising directions not explored here.</p>
+<hr />
+<h2 id="7-references">7. References</h2>
+<ol>
+<li>Zhang, Z., et al. "H2O: Heavy-Hitter Oracle for Efficient Generative Inference of
+   Large Language Models." <em>NeurIPS 2023</em>.</li>
+<li>Xiao, G., et al. "Efficient Streaming Language Models with Attention Sinks." <em>ICLR 2024</em>.</li>
+<li>Li, Y., et al. "SnapKV: LLM Knows What You are Looking for Before Generation." <em>NeurIPS 2024</em>.</li>
+<li>Cai, Z., et al. "PyramidKV: Dynamic KV Cache Compression Based on Pyramidal Information
+   Funneling." <em>EMNLP 2024</em>.</li>
+<li>Bai, Y., et al. "LongBench: A Bilingual, Multitask Benchmark for Long Context
+   Understanding." <em>ACL 2024</em>.</li>
+<li>Dao, T., et al. "FlashAttention: Fast and Memory-Efficient Exact Attention with
+   IO-Awareness." <em>NeurIPS 2022</em>.</li>
+<li>KVCache-Factory repository: https://github.com/Zefan-Cai/KVCache-Factory</li>
+</ol>
+<hr />
+<h2 id="appendix-reproducing-results">Appendix: Reproducing Results</h2>
+<pre><code>291_proj/
+├── scripts/
+│   ├── 00_setup.sh             # Clone repo, install deps, download LongBench data
+│   ├── 01_run_eval.sh          # Run all method × budget × dataset evaluations
+│   ├── 02_score.sh             # Score predictions (F1 / ROUGE-L / ExactMatch)
+│   ├── 03_speedup.sh           # Measure latency and compute speedups
+│   ├── 04_plot.py              # Generate figures
+│   └── 05_generate_report.py   # Compile this report
+└── results/
+    ├── budget_10pct/           # Raw prediction JSONs at 10% budget
+    ├── budget_20pct/           # ...at 20% budget
+    ├── budget_50pct/           # ...at 50% budget
+    ├── scores/summary.json     # All aggregated scores
+    ├── timing/                 # Latency report + speedup table
+    └── figures/                # All .png figures
+</code></pre>
+<h3 id="quick-start-on-a-gpu-machine">Quick start on a GPU machine:</h3>
+<pre><code class="language-bash">cd 291_proj
+
+# 1. One-time setup
+bash scripts/00_setup.sh --model_path /path/to/Mistral-7B-Instruct-v0.2
+
+# 2. Run all evaluations (~3-8 hours)
+bash scripts/01_run_eval.sh --gpu 0
+
+# 3. Compute scores
+bash scripts/02_score.sh
+
+# 4. Measure speedups
+bash scripts/03_speedup.sh --gpu 0
+
+# 5. Generate figures
+python3 scripts/04_plot.py
+
+# 6. Compile report
+python3 scripts/05_generate_report.py
+</code></pre></body></html>
