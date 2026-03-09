@@ -17,6 +17,13 @@ import os, json, datetime
 SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
 RESULTS_DIR = os.path.join(PROJECT_DIR, "results")
+config_path = os.path.join(SCRIPT_DIR, "config.env")
+if os.path.exists(config_path):
+    with open(config_path) as f:
+        for line in f:
+            if line.startswith("RESULTS_DIR="):
+                RESULTS_DIR = line.strip().split("=", 1)[1].strip('"\'')
+                break
 
 def load_json(path):
     if not os.path.exists(path):
@@ -141,14 +148,14 @@ $$
 \\text{Memory} = 2 \\times L \\times H \\times d \\times N \\times \\text{sizeof}(\\text{dtype})
 $$
 
-bytes. At `float16`, Llama-3-8B with $L=32, H=32, d=128$ uses roughly
-$2 \\times 32 \\times 32 \\times 128 \\times N \\times 2 = 524{,}288 \\times N$ bytes per
-token — about **500 MB for an 8 K-token context**, and far more for 32 K+ contexts.
+bytes. At `float16`, Mistral-7B GQA with $L=32, H_{kv}=8, d=128$ uses roughly
+$2 \\times 32 \\times 8 \\times 128 \\times N \\times 2 = 131{,}072 \\times N$ bytes per
+token — approximately **125 MB for a 31K-token context**, and far more for longer contexts.
 
 **KV cache compression** methods aim to maintain as much accuracy as possible while retaining
 only a *budget* of $K \\ll N$ tokens in the cache at each layer. This report:
 
-1. Surveys four state-of-the-art methods: **H2O**, **StreamingLLM**, **SnapKV**, and **PyramidKV**.
+1. Surveys three evaluated methods (StreamingLLM, SnapKV, PyramidKV) and one excluded baseline (H2O, OOM).
 2. Describes our unified experimental testbed built on [KVCache-Factory](https://github.com/Zefan-Cai/KVCache-Factory).
 3. Evaluates all methods on **LongBench v1** across 16 datasets and 6 task categories
    at cache budgets of **10%, 20%, and 50%** of the full context.
@@ -582,7 +589,6 @@ fundamental diversity of attention patterns across task types:
   even with aggressive eviction.
 - **Prompt-grounded tasks** (Single-Doc QA, Few-Shot with explicit examples) reward
   SnapKV's query-guided selection.
-- **Heterogeneous/adaptive tasks** → H2O's online scoring generalizes reasonably.
 
 ---
 """)
@@ -608,16 +614,12 @@ Mistral-7B-Instruct-v0.2.
 3. **SnapKV is the best single-method choice for prompt-anchored tasks** (QA, RAG)
    at moderate budgets, offering an excellent accuracy-overhead balance.
 
-4. **H2O provides robust average-case performance** but suffers from FlashAttention
-   incompatibility and early-eviction artifacts at extreme compression.
-
-5. All methods reduce KV cache memory by 2-10× depending on budget, with no significant wall-clock throughput penalty under SDPA on A100 at evaluated sequence lengths. Real throughput gains emerge at sequence lengths >32K where attention dominates compute.
+4. All methods reduce KV cache memory by 2-10× depending on budget, with no significant wall-clock throughput penalty under SDPA on A100 at evaluated sequence lengths. Real throughput gains emerge at sequence lengths >32K where attention dominates compute.
 
 **For practitioners:**
 - Choose **PyramidKV** as the default for long-context workloads.
 - Fall back to **SnapKV** when implementation simplicity is a priority.
 - Use **StreamingLLM** only for streaming/chat settings with short effective memory.
-- **H2O** remains relevant for serving environments not using FlashAttention.
 
 **Future work:** Quantization-based methods (KIVI, KVQuant), adaptive head-level budgets
 (HeadKV), and hybrid compression combining SnapKV selection with 4-bit quantization of
