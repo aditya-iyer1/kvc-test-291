@@ -1,0 +1,135 @@
+{
+  "fullkv_baseline_mem": 14.7606,
+  "rows": [
+    {
+      "method": "FullKV",
+      "budget": "full",
+      "total_ms": 2413.0,
+      "speedup_total": 1.0,
+      "peak_vram_gb": 14.7606,
+      "memory_reduction_ratio": 1.0,
+      "tokens_per_sec_4k": 29.07,
+      "tokens_per_sec_16k": 18.61
+    },
+    {
+      "method": "StreamingLLM",
+      "budget": "100pct",
+      "total_ms": 2534.2,
+      "speedup_total": 0.908,
+      "peak_vram_gb": 16.2606,
+      "memory_reduction_ratio": 0.908,
+      "tokens_per_sec_4k": 27.25,
+      "tokens_per_sec_16k": 26.23
+    },
+    {
+      "method": "StreamingLLM",
+      "budget": "50pct",
+      "total_ms": 2504.6,
+      "speedup_total": 0.911,
+      "peak_vram_gb": 16.2107,
+      "memory_reduction_ratio": 0.911,
+      "tokens_per_sec_4k": 27.73,
+      "tokens_per_sec_16k": 27.22
+    },
+    {
+      "method": "StreamingLLM",
+      "budget": "20pct",
+      "total_ms": 2494.8,
+      "speedup_total": 0.982,
+      "peak_vram_gb": 15.0369,
+      "memory_reduction_ratio": 0.982,
+      "tokens_per_sec_4k": 27.66,
+      "tokens_per_sec_16k": 27.56
+    },
+    {
+      "method": "StreamingLLM",
+      "budget": "10pct",
+      "total_ms": 2516.3,
+      "speedup_total": 1.007,
+      "peak_vram_gb": 14.657,
+      "memory_reduction_ratio": 1.007,
+      "tokens_per_sec_4k": 27.08,
+      "tokens_per_sec_16k": 28.2
+    },
+    {
+      "method": "SnapKV",
+      "budget": "100pct",
+      "total_ms": 2495.9,
+      "speedup_total": 0.908,
+      "peak_vram_gb": 16.2606,
+      "memory_reduction_ratio": 0.908,
+      "tokens_per_sec_4k": 27.91,
+      "tokens_per_sec_16k": 26.63
+    },
+    {
+      "method": "SnapKV",
+      "budget": "50pct",
+      "total_ms": 2510.7,
+      "speedup_total": 0.911,
+      "peak_vram_gb": 16.2033,
+      "memory_reduction_ratio": 0.911,
+      "tokens_per_sec_4k": 27.68,
+      "tokens_per_sec_16k": 27.21
+    },
+    {
+      "method": "SnapKV",
+      "budget": "20pct",
+      "total_ms": 2624.6,
+      "speedup_total": 0.982,
+      "peak_vram_gb": 15.0369,
+      "memory_reduction_ratio": 0.982,
+      "tokens_per_sec_4k": 25.54,
+      "tokens_per_sec_16k": 27.66
+    },
+    {
+      "method": "SnapKV",
+      "budget": "10pct",
+      "total_ms": 2479.8,
+      "speedup_total": 1.007,
+      "peak_vram_gb": 14.657,
+      "memory_reduction_ratio": 1.007,
+      "tokens_per_sec_4k": 27.51,
+      "tokens_per_sec_16k": 27.73
+    },
+    {
+      "method": "PyramidKV",
+      "budget": "100pct",
+      "total_ms": 2466.6,
+      "speedup_total": 0.908,
+      "peak_vram_gb": 16.2606,
+      "memory_reduction_ratio": 0.908,
+      "tokens_per_sec_4k": 28.42,
+      "tokens_per_sec_16k": 27.03
+    },
+    {
+      "method": "PyramidKV",
+      "budget": "50pct",
+      "total_ms": 2529.4,
+      "speedup_total": 0.911,
+      "peak_vram_gb": 16.2033,
+      "memory_reduction_ratio": 0.911,
+      "tokens_per_sec_4k": 27.36,
+      "tokens_per_sec_16k": 26.69
+    },
+    {
+      "method": "PyramidKV",
+      "budget": "20pct",
+      "total_ms": 2516.3,
+      "speedup_total": 0.981,
+      "peak_vram_gb": 15.0473,
+      "memory_reduction_ratio": 0.981,
+      "tokens_per_sec_4k": 27.03,
+      "tokens_per_sec_16k": 27.74
+    },
+    {
+      "method": "PyramidKV",
+      "budget": "10pct",
+      "total_ms": 2517.1,
+      "speedup_total": 1.007,
+      "peak_vram_gb": 14.6567,
+      "memory_reduction_ratio": 1.007,
+      "tokens_per_sec_4k": 26.99,
+      "tokens_per_sec_16k": 27.38
+    }
+  ]
+}
