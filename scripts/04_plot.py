@@ -25,6 +25,13 @@ warnings.filterwarnings("ignore")
 SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
 PROJECT_DIR = os.path.dirname(SCRIPT_DIR)
 RESULTS_DIR = os.path.join(PROJECT_DIR, "results")
+config_path = os.path.join(SCRIPT_DIR, "config.env")
+if os.path.exists(config_path):
+    with open(config_path) as f:
+        for line in f:
+            if line.startswith("RESULTS_DIR="):
+                RESULTS_DIR = line.strip().split("=", 1)[1].strip('"\'')
+                break
 SCORES_DIR  = os.path.join(RESULTS_DIR, "scores")
 TIMING_DIR  = os.path.join(RESULTS_DIR, "timing")
 FIGS_DIR    = os.path.join(RESULTS_DIR, "figures")
@@ -171,9 +178,10 @@ if latency:
     for r in rows:
         m = r["method"]
         b = r["budget"]
-        if "tokens_per_sec_4k" in r:
+        if m == "FullKV" or m not in METHODS_COMP:
+            continue
+        if r.get("tokens_per_sec_4k", 0) > 0 and r.get("tokens_per_sec_16k", 0) > 0:
             tps_4k_by.setdefault(m, {})[b] = r["tokens_per_sec_4k"]
-        if "tokens_per_sec_16k" in r:
             tps_16k_by.setdefault(m, {})[b] = r["tokens_per_sec_16k"]
 
     budgets_plot = [b for b in BUDGET_ORDER if b != "full"]
