@@ -119,9 +119,7 @@ All other tokens are permanently evicted once they fall out of the window.
 
 
 $$
-
 \text{Cache}_t = \underbrace{[t_1, \ldots, t_{k_s}]}_{\text{sinks}} \cup \underbrace{[t_{t-W+1}, \ldots, t_t]}_{\text{recent window}}
-
 $$
 
 
