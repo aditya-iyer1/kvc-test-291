@@ -1,0 +1,32 @@
+======================================================
+  KV Cache Compression — LongBench Evaluation
+======================================================
+Model      : mistralai/Mistral-7B-Instruct-v0.2
+GPU(s)     : 0
+Methods    : PyramidKV
+Budgets    : 0.1 0.2
+AttnImpl   : sdpa
+Results    : /home/jovyan/kvc-test-291/results_mistral_run6
+
+===============================
+  Method: PyramidKV
+===============================
+
+
+  Budget: 10pct  (max_capacity_prompts=795)
+    Running dataset: narrativeqa ... 
+    done (807s)
+    Running dataset: hotpotqa ... 
+    done (453s)
+    Running dataset: multi_news ... 
+    done (4390s)
+    Running dataset: triviaqa ... 
+    done (456s)
+    Running dataset: passage_retrieval_en ... 
+    done (403s)
+    Running dataset: lcc ... 
+    done (800s)
+
+
+  Budget: 20pct  (max_capacity_prompts=1590)
+    Running dataset: narrativeqa ... Terminated

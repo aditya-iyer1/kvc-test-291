@@ -1,0 +1,32 @@
+======================================================
+  KV Cache Compression — LongBench Evaluation
+======================================================
+Model      : mistralai/Mistral-7B-Instruct-v0.2
+GPU(s)     : 1
+Methods    : SnapKV
+Budgets    : 0.1 0.2
+AttnImpl   : sdpa
+Results    : /home/jovyan/kvc-test-291/results_mistral_run6
+
+===============================
+  Method: SnapKV
+===============================
+
+
+  Budget: 10pct  (max_capacity_prompts=795)
+    Running dataset: narrativeqa ... 
+    done (718s)
+    Running dataset: hotpotqa ... 
+    done (450s)
+    Running dataset: multi_news ... 
+    done (4320s)
+    Running dataset: triviaqa ... 
+    done (513s)
+    Running dataset: passage_retrieval_en ... 
+    done (401s)
+    Running dataset: lcc ... 
+    done (791s)
+
+
+  Budget: 20pct  (max_capacity_prompts=1590)
+    Running dataset: narrativeqa ... 

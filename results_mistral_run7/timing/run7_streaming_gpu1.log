@@ -1,0 +1,33 @@
+======================================================
+  KV Cache Compression — LongBench Evaluation
+======================================================
+Model      : mistralai/Mistral-7B-Instruct-v0.2
+GPU(s)     : 1
+Methods    : StreamingLLM
+Budgets    : 0.5
+AttnImpl   : sdpa
+Results    : /home/jovyan/kvc-test-291/results_mistral_run7
+
+===============================
+  Method: StreamingLLM
+===============================
+
+
+  Budget: 50pct  (max_capacity_prompts=15750)
+    Running dataset: narrativeqa ... 
+    done (725s)
+    Running dataset: hotpotqa ... 
+    done (494s)
+    Running dataset: multi_news ... 
+    done (4691s)
+    Running dataset: triviaqa ... 
+    done (525s)
+    Running dataset: passage_retrieval_en ... 
+    done (414s)
+    Running dataset: lcc ... 
+    done (800s)
+
+======================================================
+  All evaluations complete.
+  Next step: run scripts/02_score.sh
+======================================================

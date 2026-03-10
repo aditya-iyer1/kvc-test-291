@@ -46,7 +46,7 @@ IFS=',' read -ra METHODS <<< "$METHODS_STR"
 IFS=',' read -ra BUDGETS <<< "$BUDGETS_STR"
 
 # Llama-3-8B has a model_max_len of 7950 in KVCache-Factory (see run_longbench.py)
-MODEL_MAX_LEN=7950
+MODEL_MAX_LEN=31500
 
 # ── LongBench datasets ─────────────────────────────────────────────────────────
 DATASETS=(
@@ -139,7 +139,7 @@ for METHOD in "${METHODS[@]}"; do
                     --save_dir    "$OUT_DIR"
                     --use_cache   True
                     --eval_batch_size 1
-                    --max_num_examples 200
+                    --max_num_examples 150
                     --seed        42
                     --dataset     "$DATASET"
             )

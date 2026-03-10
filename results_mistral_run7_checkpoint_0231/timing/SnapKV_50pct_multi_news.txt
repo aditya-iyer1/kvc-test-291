@@ -1,0 +1,10 @@
+Using SnapKV!
+Using SnapKV!
+Loading checkpoint shards:   0%|                                                             | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|█████████████████▋                                   | 1/3 [00:15<00:31, 15.69s/it]Loading checkpoint shards:  67%|███████████████████████████████████▎                 | 2/3 [00:30<00:14, 14.94s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:40<00:00, 12.77s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:40<00:00, 13.43s/it]
+Working on max_capacity_prompts 15750 dataset multi_news - 0/1
+Loading data...
+Max Length is 10933
+Finish loading model and tokenizer
+  0%|                                                                                      | 0/150 [00:00<?, ?it/s]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+  1%|▌                                                                           | 1/150 [00:30<1:16:29, 30.80s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+  1%|█                                                                           | 2/150 [01:04<1:19:35, 32.26s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
