@@ -1,0 +1,19 @@
+Loading checkpoint shards:   0%|                                                             | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|█████████████████▋                                   | 1/3 [00:11<00:22, 11.34s/it]Loading checkpoint shards:  67%|███████████████████████████████████▎                 | 2/3 [00:20<00:10, 10.18s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:34<00:00, 11.82s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:34<00:00, 11.49s/it]
+
+ Batch  CacheTokens   CacheGB        TPS    Speedup
+-------------------------------------------------------
+We detected that you are passing `past_key_values` as a tuple and this is deprecated and will be removed in v4.43. Please use an appropriate `Cache` class (https://huggingface.co/docs/transformers/v4.41.3/en/internal/generation_utils#transformers.Cache)
+     1       31,500     4.129       13.5      1.000x
+     1       15,750     2.064       14.1      1.043x
+     1        6,300     0.826       13.6      1.008x
+     1        3,150     0.413       13.4      0.991x
+     4       31,500   OOM
+     4       15,750     8.258       34.5      1.000x
+     4        6,300     3.303       55.1      1.599x
+     4        3,150     1.652       54.6      1.585x
+     8       31,500   OOM
+     8       15,750   OOM
+     8        6,300     6.606       77.7      1.000x
+     8        3,150     3.303      103.1      1.328x
+
+Done.

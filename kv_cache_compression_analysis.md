@@ -285,10 +285,10 @@ We evaluate on **6 representative English datasets**, one per task category from
 
 | Method | 10% | 20% | 50% | Full |
 |--------| ---: | ---: | ---: | ---: |
-| StreamingLLM | 21.93 | 25.4 | 32.42 | — |
-| SnapKV | 32.04 | 32.34 | 32.86 | — |
-| PyramidKV | 32.05 | 32.1 | 32.86 | — |
-| Full KV (baseline) | — | — | — | 33.67 |
+| StreamingLLM | 30.4 | 33.93 | 40.97 | — |
+| SnapKV | 40.55 | 40.89 | 41.4 | — |
+| PyramidKV | 40.53 | 40.64 | 41.4 | — |
+| Full KV (baseline) | — | — | — | 42.01 |
 
 *Scores are averaged equally across all 6 datasets. Higher is better.*
 *Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
@@ -307,9 +307,9 @@ We evaluate on **6 representative English datasets**, one per task category from
 
 | Method | Single-Doc QA | Multi-Doc QA | Summarization | Few-Shot | Synthetic | Code |
 |--------| ---: | ---: | ---: | ---: | ---: | ---: |
-| StreamingLLM | 24.14 | 35.99 | 0.0 | 55.58 | 36.67 | 0.0 |
-| SnapKV | 26.57 | 39.04 | 0.0 | 52.42 | 76.0 | 0.0 |
-| PyramidKV | 26.41 | 38.2 | 0.0 | 53.31 | 74.67 | 0.0 |
+| StreamingLLM | 24.14 | 35.99 | 26.74 | 55.58 | 36.67 | 24.47 |
+| SnapKV | 26.57 | 39.04 | 26.96 | 52.42 | 76.0 | 24.33 |
+| PyramidKV | 26.41 | 38.2 | 26.95 | 53.31 | 74.67 | 24.29 |
 
 ![Fig 2 — Category Heatmap](results_mistral_run5/figures/fig2_category_heatmap.png)
 
@@ -319,9 +319,9 @@ We evaluate on **6 representative English datasets**, one per task category from
 
 | Method | Single-Doc QA | Multi-Doc QA | Summarization | Few-Shot | Synthetic | Code |
 |--------| ---: | ---: | ---: | ---: | ---: | ---: |
-| StreamingLLM | 23.73 | 30.67 | 0.0 | 57.86 | 19.33 | 0.0 |
-| SnapKV | 26.27 | 39.5 | 0.0 | 51.14 | 75.33 | 0.0 |
-| PyramidKV | 26.11 | 38.16 | 0.0 | 52.68 | 75.33 | 0.0 |
+| StreamingLLM | 23.73 | 30.67 | 26.69 | 57.86 | 19.33 | 24.11 |
+| SnapKV | 26.27 | 39.5 | 26.78 | 51.14 | 75.33 | 24.28 |
+| PyramidKV | 26.11 | 38.16 | 26.7 | 52.68 | 75.33 | 24.18 |
 
 ---
 

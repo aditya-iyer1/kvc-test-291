@@ -1,0 +1,90 @@
+{
+  "PyramidKV": {
+    "10pct": {
+      "narrativeqa": 26.11,
+      "hotpotqa": 38.16,
+      "multi_news": 26.7,
+      "triviaqa": 86.12,
+      "passage_retrieval_en": 83.69,
+      "lcc": 59.67
+    },
+    "20pct": {
+      "narrativeqa": 26.41,
+      "hotpotqa": 38.2,
+      "multi_news": 26.95,
+      "triviaqa": 85.9,
+      "passage_retrieval_en": 83.02,
+      "lcc": 59.67
+    },
+    "50pct": {
+      "narrativeqa": 26.74,
+      "hotpotqa": 39.78,
+      "multi_news": 26.95,
+      "triviaqa": 86.12,
+      "passage_retrieval_en": 84.86,
+      "lcc": 59.67
+    }
+  },
+  "SnapKV": {
+    "10pct": {
+      "narrativeqa": 26.27,
+      "hotpotqa": 39.5,
+      "multi_news": 26.78,
+      "triviaqa": 86.24,
+      "passage_retrieval_en": 84.52,
+      "lcc": 59.62
+    },
+    "20pct": {
+      "narrativeqa": 26.57,
+      "hotpotqa": 39.04,
+      "multi_news": 26.96,
+      "triviaqa": 85.9,
+      "passage_retrieval_en": 84.52,
+      "lcc": 59.67
+    },
+    "50pct": {
+      "narrativeqa": 26.72,
+      "hotpotqa": 39.78,
+      "multi_news": 26.95,
+      "triviaqa": 86.12,
+      "passage_retrieval_en": 84.86,
+      "lcc": 59.67
+    }
+  },
+  "StreamingLLM": {
+    "10pct": {
+      "narrativeqa": 23.73,
+      "hotpotqa": 30.67,
+      "multi_news": 26.69,
+      "triviaqa": 85.76,
+      "passage_retrieval_en": 30.67,
+      "lcc": 59.14
+    },
+    "20pct": {
+      "narrativeqa": 24.14,
+      "hotpotqa": 35.99,
+      "multi_news": 26.74,
+      "triviaqa": 85.92,
+      "passage_retrieval_en": 45.89,
+      "lcc": 59.66
+    },
+    "50pct": {
+      "narrativeqa": 26.04,
+      "hotpotqa": 38.41,
+      "multi_news": 26.94,
+      "triviaqa": 86.12,
+      "passage_retrieval_en": 84.86,
+      "lcc": 59.69
+    }
+  },
+  "FullKV": {
+    "full": {
+      "narrativeqa": 26.77,
+      "hotpotqa": 42.77,
+      "multi_news": 27.12,
+      "triviaqa": 86.23,
+      "passage_retrieval_en": 86.98,
+      "lcc": 57.22
+    }
+  }
+}
