@@ -1,0 +1,174 @@
+#!/usr/bin/env python3
+import csv
+import json
+import os
+from pathlib import Path
+from statistics import mean
+
+METHODS = ["FullKV", "SnapKV", "PyramidKV", "StreamingLLM"]
+COMP_METHODS = ["SnapKV", "PyramidKV", "StreamingLLM"]
+BUDGETS_COMP = ["10pct", "20pct", "50pct"]
+
+
+def parse_score(raw: str):
+    if raw is None:
+        return None
+    s = str(raw).strip()
+    if s == "":
+        return None
+    try:
+        v = float(s)
+    except ValueError:
+        return None
+    if v == -1.0:
+        return None
+    return round(v, 2)
+
+
+def safe_mean(vals):
+    vals = list(vals)
+    return round(mean(vals), 2) if vals else None
+
+
+def read_results_csv(csv_path: Path):
+    with csv_path.open("r", newline="", encoding="utf-8") as f:
+        rows = list(csv.reader(f))
+    if not rows:
+        return {}
+
+    datasets = rows[0][1:]
+    method_scores = {}
+    for row in rows[1:]:
+        if not row:
+            continue
+        method = row[0].strip()
+        if method not in METHODS:
+            continue
+        scores = {}
+        for ds, raw in zip(datasets, row[1:]):
+            val = parse_score(raw)
+            if val is not None:
+                scores[ds] = val
+        method_scores[method] = scores
+    return method_scores
+
+
+def build_intersections(comp_scores_by_budget):
+    intersections = {}
+    for budget in BUDGETS_COMP:
+        by_method = comp_scores_by_budget.get(budget, {})
+        sets = [set(by_method.get(m, {}).keys()) for m in COMP_METHODS]
+        if all(sets):
+            inter = set.intersection(*sets)
+        else:
+            inter = set()
+        intersections[budget] = sorted(inter)
+    return intersections
+
+
+def compute_comparison(comp_scores_by_budget, full_scores, intersections):
+    # rows: FullKV(full), SnapKV, PyramidKV, StreamingLLM
+    # cols: 10pct, 20pct, 50pct
+    table = {
+        "FullKV(full)": {},
+        "SnapKV": {},
+        "PyramidKV": {},
+        "StreamingLLM": {},
+    }
+
+    for budget in BUDGETS_COMP:
+        inter = intersections[budget]
+
+        # compressed methods: mean on that budget's 3-method intersection
+        for method in COMP_METHODS:
+            ds_scores = comp_scores_by_budget.get(budget, {}).get(method, {})
+            vals = [ds_scores[d] for d in inter if d in ds_scores]
+            table[method][budget] = safe_mean(vals)
+
+        # FullKV(full) reference: mean over overlap between full and this intersection
+        overlap = [d for d in inter if d in full_scores]
+        table["FullKV(full)"][budget] = safe_mean(full_scores[d] for d in overlap)
+
+    return table
+
+
+def print_table_1(comparison):
+    print("Table 1: Overall scores on 3-method intersection datasets (per budget)")
+    header = ["Method", "10pct overall", "20pct overall", "50pct overall"]
+    print(" | ".join(f"{h:>14}" for h in header))
+    print("-" * (len(" | ".join(f"{h:>14}" for h in header))))
+
+    order = ["FullKV(full)", "SnapKV", "PyramidKV", "StreamingLLM"]
+    for method in order:
+        row = [
+            method,
+            "-" if comparison[method]["10pct"] is None else f"{comparison[method]['10pct']:.2f}",
+            "-" if comparison[method]["20pct"] is None else f"{comparison[method]['20pct']:.2f}",
+            "-" if comparison[method]["50pct"] is None else f"{comparison[method]['50pct']:.2f}",
+        ]
+        print(" | ".join(f"{c:>14}" for c in row))
+
+
+def print_table_2(intersections, full_scores):
+    print("\nTable 2: Intersection datasets by compressed budget")
+    full_set = set(full_scores.keys())
+    for budget in BUDGETS_COMP:
+        inter = intersections[budget]
+        overlap = [d for d in inter if d in full_set]
+        missing_in_full = [d for d in inter if d not in full_set]
+
+        print(f"\n[{budget}] n={len(inter)}")
+        print("intersection:", ", ".join(inter) if inter else "(none)")
+        print("FullKV overlap:", ", ".join(overlap) if overlap else "(none)")
+        print("FullKV missing from intersection:", ", ".join(missing_in_full) if missing_in_full else "(none)")
+
+
+def main():
+    results_dir = Path(os.environ.get("RESULTS_DIR", "~/kvc-test-291/results_mistral_run7")).expanduser()
+
+    budget_csv = {
+        "10pct": results_dir / "budget_10pct" / "mistral-7b-instruct-v0.2_3150" / "results.csv",
+        "20pct": results_dir / "budget_20pct" / "mistral-7b-instruct-v0.2_6300" / "results.csv",
+        "50pct": results_dir / "budget_50pct" / "mistral-7b-instruct-v0.2_15750" / "results.csv",
+        "full": results_dir / "budget_full" / "mistral-7b-instruct-v0.2_7950" / "results.csv",
+    }
+
+    comp_scores_by_budget = {}
+    for budget in BUDGETS_COMP:
+        p = budget_csv[budget]
+        if not p.exists():
+            print(f"[SKIP] missing: {p}")
+            comp_scores_by_budget[budget] = {}
+            continue
+        comp_scores_by_budget[budget] = read_results_csv(p)
+
+    full_scores = {}
+    p_full = budget_csv["full"]
+    if p_full.exists():
+        full_scores = read_results_csv(p_full).get("FullKV", {})
+    else:
+        print(f"[SKIP] missing: {p_full}")
+
+    intersections = build_intersections(comp_scores_by_budget)
+    comparison = compute_comparison(comp_scores_by_budget, full_scores, intersections)
+
+    # Keep writing summary_run8.json for downstream use.
+    out = {
+        "comparison": comparison,
+        "intersections": intersections,
+        "fullkv_full_available": sorted(full_scores.keys()),
+    }
+
+    out_dir = results_dir / "scores"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / "summary_run8.json"
+    with out_path.open("w", encoding="utf-8") as f:
+        json.dump(out, f, indent=2, ensure_ascii=False)
+
+    print(f"Wrote: {out_path}\n")
+    print_table_1(comparison)
+    print_table_2(intersections, full_scores)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,48 @@
+======================================================
+  KV Cache Compression — LongBench Evaluation
+======================================================
+Model      : mistralai/Mistral-7B-Instruct-v0.2
+GPU(s)     : 0
+Methods    : SnapKV
+Budgets    : 0.1 0.2 0.5
+AttnImpl   : sdpa
+Results    : /home/jovyan/kvc-test-291/results_mistral_run7
+
+===============================
+  Method: SnapKV
+===============================
+
+
+  Budget: 10pct  (max_capacity_prompts=3150)
+    [SKIP] /home/jovyan/kvc-test-291/results_mistral_run7/budget_10pct/SnapKV_2wikimqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results_mistral_run7/budget_10pct/SnapKV_qmsum.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results_mistral_run7/budget_10pct/SnapKV_repobench-p.json already exists
+    Running dataset: gov_report ... 
+    done (2797s)
+
+
+  Budget: 20pct  (max_capacity_prompts=6300)
+    Running dataset: 2wikimqa ... 
+    done (298s)
+    Running dataset: qmsum ... 
+    done (1025s)
+    Running dataset: repobench-p ... 
+    done (770s)
+    Running dataset: gov_report ... 
+    done (2882s)
+
+
+  Budget: 50pct  (max_capacity_prompts=15750)
+    Running dataset: 2wikimqa ... 
+    done (300s)
+    Running dataset: qmsum ... 
+    done (1215s)
+    Running dataset: repobench-p ... 
+    done (862s)
+    Running dataset: gov_report ... 
+    done (3444s)
+
+======================================================
+  All evaluations complete.
+  Next step: run scripts/02_score.sh
+======================================================

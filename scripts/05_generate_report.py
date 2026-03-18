@@ -8,7 +8,7 @@ Usage:
 Output:
     291_proj/kv_cache_compression_analysis.md
 
-The script reads results/scores/summary.json and results/timing/latency_report.json,
+The script reads results/scores/summary_run8.json and results/timing/latency_report.json,
 formats all tables and embeds figure references, then writes the full writeup.
 """
 
@@ -31,7 +31,7 @@ def load_json(path):
     with open(path) as f:
         return json.load(f)
 
-summary = load_json(os.path.join(RESULTS_DIR, "scores", "summary.json")) or {}
+summary = load_json(os.path.join(RESULTS_DIR, "scores", "summary_run8.json")) or {}
 latency = load_json(os.path.join(RESULTS_DIR, "timing", "latency_report.json")) or {}
 
 METHODS_NAMES = {
@@ -44,6 +44,7 @@ BUDGETS   = ["10pct", "20pct", "50pct"]
 B_LABELS  = {"10pct": "10%", "20pct": "20%", "50pct": "50%", "full": "Full"}
 METHODS   = ["StreamingLLM", "SnapKV", "PyramidKV"]
 CATS      = ["Single-Doc QA", "Multi-Doc QA", "Summarization", "Few-Shot", "Synthetic", "Code"]
+DATASETS  = ["narrativeqa", "hotpotqa", "multi_news", "triviaqa", "passage_retrieval_en", "lcc", "2wikimqa", "qmsum", "repobench-p", "gov_report"]
 
 def _s(method, budget, *keys, default="—"):
     d = summary
@@ -423,7 +424,7 @@ SECTIONS.append("""\
 > - StreamingLLM suffers the largest degradation at all budgets, reflecting the loss
 >   of mid-context information.
 
-![Fig 1 — Accuracy vs Budget](results_mistral_run5/figures/fig1_accuracy_by_budget.png)
+![Fig 1 — Accuracy vs Budget](results_mistral_run7/figures/fig1_accuracy_by_budget.png)
 
 ---
 
@@ -431,7 +432,7 @@ SECTIONS.append("""\
 
 {}
 
-![Fig 2 — Category Heatmap](results_mistral_run5/figures/fig2_category_heatmap.png)
+![Fig 2 — Category Heatmap](results_mistral_run7/figures/fig2_category_heatmap.png)
 
 ---
 
@@ -448,7 +449,7 @@ SECTIONS.append("""\
 *Theoretical KV cache memory reduction computed from Mistral-7B GQA architecture: 32 layers × 8 KV heads × head dim 128 × float16. Memory reduction is method-independent and determined solely by cache budget ratio.*
 *Note: H2O was excluded from evaluation due to GPU out-of-memory errors on long-context datasets with SDPA attention backend.*
 
-![Fig 3 — Speedup vs Budget](results_mistral_run5/figures/fig3_speedup.png)
+![Fig 3 — Speedup vs Budget](results_mistral_run7/figures/fig3_speedup.png)
 
 ---
 """.format(overall_table(), category_table("20pct"), category_table("10pct"), speedup_table()))
@@ -550,7 +551,7 @@ H2O) catch up as their approximation errors shrink with larger caches.
 
 ### 5.2 Efficiency-Accuracy Trade-off
 
-![Fig 4 — Accuracy-Speedup Pareto](results_mistral_run5/figures/fig4_accuracy_vs_speedup.png)
+![Fig 4 — Accuracy-Speedup Pareto](results_mistral_run7/figures/fig4_accuracy_vs_speedup.png)
 
 **Prefill speedup** comes from shorter KV cache length, reducing attention computation from
 $O(N^2)$ to approximately $O(N \\cdot K)$. All methods produce comparable speedup at a given
@@ -589,7 +590,7 @@ pooling cost but remains a tiny fraction of the $O(N^2)$ attention cost.
 
 ### 5.4 Task-Category Profile
 
-![Fig 5 — Radar Chart](results_mistral_run5/figures/fig5_dataset_radar.png)
+![Fig 5 — Radar Chart](results_mistral_run7/figures/fig5_dataset_radar.png)
 
 The radar chart reveals that no single method dominates across all categories, reflecting the
 fundamental diversity of attention patterns across task types:
@@ -672,7 +673,7 @@ SECTIONS.append("""\
     ├── budget_10pct/           # Raw prediction JSONs at 10% budget
     ├── budget_20pct/           # ...at 20% budget
     ├── budget_50pct/           # ...at 50% budget
-    ├── scores/summary.json     # All aggregated scores
+    ├── scores/summary_run8.json     # All aggregated scores
     ├── timing/                 # Latency report + speedup table
     └── figures/                # All .png figures
 ```

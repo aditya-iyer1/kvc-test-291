@@ -38,7 +38,7 @@ FIGS_DIR    = os.path.join(RESULTS_DIR, "figures")
 os.makedirs(FIGS_DIR, exist_ok=True)
 
 # ── Load data ──────────────────────────────────────────────────────────────────
-summary_path = os.path.join(SCORES_DIR, "summary.json")
+summary_path = os.path.join(SCORES_DIR, "summary_run8.json")
 latency_path = os.path.join(TIMING_DIR, "latency_report.json")
 
 if not os.path.exists(summary_path):
@@ -83,6 +83,7 @@ BUDGET_ORDER   = ["10pct", "20pct", "50pct", "full"]
 BUDGET_LABELS  = {"10pct":"10%", "20pct":"20%", "50pct":"50%", "full":"Full"}
 METHODS_COMP   = ["StreamingLLM", "SnapKV", "PyramidKV"]  # excluding FullKV for plots
 CATEGORIES     = ["Single-Doc QA","Multi-Doc QA","Summarization","Few-Shot","Synthetic","Code"]
+DATASETS       = ["narrativeqa", "hotpotqa", "multi_news", "triviaqa", "passage_retrieval_en", "lcc", "2wikimqa", "qmsum", "repobench-p", "gov_report"]
 
 def safe_get(d, *keys, default=None):
     for k in keys:

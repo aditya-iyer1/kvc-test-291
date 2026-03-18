@@ -1,0 +1,48 @@
+======================================================
+  KV Cache Compression — LongBench Evaluation
+======================================================
+Model      : mistralai/Mistral-7B-Instruct-v0.2
+GPU(s)     : 2
+Methods    : StreamingLLM
+Budgets    : 0.1 0.2 0.5
+AttnImpl   : sdpa
+Results    : /home/jovyan/kvc-test-291/results_mistral_run7
+
+===============================
+  Method: StreamingLLM
+===============================
+
+
+  Budget: 10pct  (max_capacity_prompts=3150)
+    [SKIP] /home/jovyan/kvc-test-291/results_mistral_run7/budget_10pct/StreamingLLM_2wikimqa.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results_mistral_run7/budget_10pct/StreamingLLM_qmsum.json already exists
+    [SKIP] /home/jovyan/kvc-test-291/results_mistral_run7/budget_10pct/StreamingLLM_repobench-p.json already exists
+    Running dataset: gov_report ... 
+    done (2526s)
+
+
+  Budget: 20pct  (max_capacity_prompts=6300)
+    Running dataset: 2wikimqa ... 
+    done (290s)
+    Running dataset: qmsum ... 
+    done (1004s)
+    Running dataset: repobench-p ... 
+    done (782s)
+    Running dataset: gov_report ... 
+    done (2827s)
+
+
+  Budget: 50pct  (max_capacity_prompts=15750)
+    Running dataset: 2wikimqa ... 
+    done (296s)
+    Running dataset: qmsum ... 
+    done (1206s)
+    Running dataset: repobench-p ... 
+    done (865s)
+    Running dataset: gov_report ... 
+    done (3362s)
+
+======================================================
+  All evaluations complete.
+  Next step: run scripts/02_score.sh
+======================================================

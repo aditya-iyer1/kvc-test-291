@@ -1,0 +1,29 @@
+======================================================
+  KV Cache Compression — LongBench Evaluation
+======================================================
+Model      : mistralai/Mistral-7B-Instruct-v0.2
+GPU(s)     : 3
+Methods    : FullKV
+Budgets    : 1.0
+AttnImpl   : sdpa
+Results    : /home/jovyan/kvc-test-291/results_mistral_run7
+
+===============================
+  Method: FullKV
+===============================
+
+
+  Budget: full  (max_capacity_prompts=-1)
+    Running dataset: 2wikimqa ... 
+    done (204s)
+    Running dataset: qmsum ... 
+    done (893s)
+    Running dataset: repobench-p ... 
+    done (620s)
+    Running dataset: gov_report ... 
+    done (2444s)
+
+======================================================
+  All evaluations complete.
+  Next step: run scripts/02_score.sh
+======================================================

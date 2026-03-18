@@ -1,0 +1,2456 @@
+loading from mistralai/Mistral-7B-Instruct-v0.2
+Using SnapKV!
+Loading checkpoint shards:   0%|                                                             | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|█████████████████▋                                   | 1/3 [00:03<00:06,  3.12s/it]Loading checkpoint shards:  67%|███████████████████████████████████▎                 | 2/3 [00:06<00:03,  3.21s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:08<00:00,  2.89s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:08<00:00,  2.97s/it]
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+
+
+Starting Needle In A Haystack Testing...
+- Model: mistralai/Mistral-7B-Instruct-v0.2
+- Context Lengths: 80, Min: 400, Max: 32000
+- Document Depths: 10, Min: 0%, Max: 100%
+- Needle: The best thing to do in San Francisco is eat a sandwich and sit in Dolores Park on a sunny day.
+
+
+
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result exists, skipping
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 846
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.8 seconds
+Context: 1200 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1200_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 0.8 seconds
+Context: 1200 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1200_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.0 seconds
+Context: 1600 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1600_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 135
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 0.9 seconds
+Context: 1600 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1600_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 300
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 0.9 seconds
+Context: 1600 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1600_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 416
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 0.9 seconds
+Context: 1600 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1600_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 598
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 0.9 seconds
+Context: 1600 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1600_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 750
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 0.9 seconds
+Context: 1600 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1600_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 902
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 0.9 seconds
+Context: 1600 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1600_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1056
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 0.9 seconds
+Context: 1600 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1600_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1220
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 0.9 seconds
+Context: 1600 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1600_depth_8900_results.jsonThe attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 0.9 seconds
+Context: 1600 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_1600_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.0 seconds
+Context: 2000 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2000_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 185
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.0 seconds
+Context: 2000 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2000_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 381
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.0 seconds
+Context: 2000 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2000_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 564
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.0 seconds
+Context: 2000 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2000_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 776
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2000 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2000_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 951
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.0 seconds
+Context: 2000 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2000_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1186
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2000 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2000_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1351
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.0 seconds
+Context: 2000 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2000_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1575
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.0 seconds
+Context: 2000 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2000_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.0 seconds
+Context: 2000 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2000_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2400 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2400_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 230
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2400 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2400_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 468
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2400 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2400_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 691
+eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2400 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2400_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 951
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2400 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2400_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1186
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2400 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2400_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1443
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2400 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2400_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1664
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.2 seconds
+Context: 2400 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2400_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1900
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2400 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2400_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2400 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2400_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.2 seconds
+Context: 2800 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2800_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 279
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.2 seconds
+Context: 2800 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2800_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 564
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.2 seconds
+Context: 2800 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2800_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 846
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.2 seconds
+Context: 2800 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2800_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1125
+Eat a sandwich and sit in Dolores Park on a sunny day. The author mentions this as a way to avoid the addictive
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 2800 tokens
+Depth: 44%
+Score: 6.363636363636365
+Response: Eat a sandwich and sit in Dolores Park on a sunny day. The author mentions this as a way to avoid the addictive
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2800_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1409
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.3 seconds
+Context: 2800 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2800_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1701
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.2 seconds
+Context: 2800 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2800_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1941
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.2 seconds
+Context: 2800 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2800_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2263
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.2 seconds
+Context: 2800 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2800_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.1 seconds
+Context: 2800 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_2800_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.3 seconds
+Context: 3200 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3200_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 315
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.3 seconds
+Context: 3200 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3200_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 654
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.3 seconds
+Context: 3200 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3200_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 951
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.3 seconds
+Context: 3200 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3200_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+
+result does not exist, testing
+insertion at 1292
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.3 seconds
+Context: 3200 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3200_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1664
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.3 seconds
+Context: 3200 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3200_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1941
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.3 seconds
+Context: 3200 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3200_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2311
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.3 seconds
+Context: 3200 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3200_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2634
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.3 seconds
+Context: 3200 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3200_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.2 seconds
+Context: 3200 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3200_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.4 seconds
+Context: 3600 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3600_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 361
+eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.4 seconds
+Context: 3600 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3600_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 739
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.4 seconds
+Context: 3600 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3600_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1091
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.4 seconds
+Context: 3600 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3600_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1457
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.4 seconds
+Context: 3600 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3600_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1834
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.4 seconds
+Context: 3600 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3600_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2251
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.4 seconds
+Context: 3600 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3600_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2598
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.4 seconds
+Context: 3600 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3600_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2991
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.4 seconds
+Context: 3600 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3600_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.4 seconds
+Context: 3600 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_3600_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.5 seconds
+Context: 4000 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4000_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 400
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.5 seconds
+Context: 4000 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4000_depth_1100_results.jsonThe attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 826
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.5 seconds
+Context: 4000 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4000_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1234
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.5 seconds
+Context: 4000 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4000_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1651
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.5 seconds
+Context: 4000 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4000_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2096
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.5 seconds
+Context: 4000 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4000_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2494
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.5 seconds
+Context: 4000 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4000_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2931
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.5 seconds
+Context: 4000 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4000_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3353
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.5 seconds
+Context: 4000 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4000_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.5 seconds
+Context: 4000 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4000_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 4400 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4400_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 416
+eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.5 seconds
+Context: 4400 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4400_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 902
+eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4400 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4400_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1351
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4400 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4400_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1834
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4400 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4400_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2311
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4400 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4400_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2768
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4400 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4400_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3239
+eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4400 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4400_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3688
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4400 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4400_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4400 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4400_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 4800 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4800_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 498
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 4800 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4800_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1003
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4800 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4800_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1495
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 4800 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4800_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1941
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 4800 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4800_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2540
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 4800 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4800_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3061
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 4800 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4800_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3557
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4800 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4800_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4065
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4800 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4800_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 4800 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_4800_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 5200 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5200_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 539
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 5200 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5200_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1091
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 5200 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5200_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1632
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 5200 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5200_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2148
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 5200 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5200_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2768
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 5200 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5200_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3331
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.6 seconds
+Context: 5200 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5200_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3878
+Eat a sandwich and sit in Dolores Park on a sunny day.The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 5200 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5200_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4423
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 5200 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5200_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 5200 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5200_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 5600 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5600_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 564
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.8 seconds
+Context: 5600 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5600_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1167
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.8 seconds
+Context: 5600 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5600_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1765
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 5600 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5600_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2363
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.8 seconds
+Context: 5600 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5600_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3008
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.8 seconds
+Context: 5600 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5600_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3580
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 5600 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5600_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4183
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.8 seconds
+Context: 5600 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5600_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4769
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.8 seconds
+Context: 5600 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5600_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 5600 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_5600_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6000 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6000_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 616
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6000 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6000_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1257
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.7 seconds
+Context: 6000 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6000_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1900
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6000 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6000_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2540
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6000 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6000_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+
+result does not exist, testing
+insertion at 3224
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6000 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6000_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3846
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6000 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6000_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4494
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6000 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6000_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 5128
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6000 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6000_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.8 seconds
+Context: 6000 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6000_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 6400 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6400_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 654
+eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6400 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6400_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1351
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6400 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6400_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2014
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6400 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6400_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2704
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6400 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6400_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3434
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6400 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6400_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4118
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6400 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6400_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4769
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 6400 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6400_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 5486
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6400 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6400_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 6400 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6400_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 6800 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6800_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 691
+eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6800 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6800_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1443
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 6800 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6800_depth_2200_results.jsonThe attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2148
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6800 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6800_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2884
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 6800 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6800_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3662
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6800 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6800_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4362
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 1.9 seconds
+Context: 6800 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6800_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 5118
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 6800 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6800_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 5832
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 6800 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6800_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 6800 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_6800_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 7200 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7200_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 750
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 7200 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7200_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1495
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 7200 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7200_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2294
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 7200 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7200_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3061
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 7200 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7200_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3878
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 7200 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7200_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4648
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 7200 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7200_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 5431
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 7200 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7200_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 6193
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 7200 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7200_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 7200 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7200_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.0 seconds
+Context: 7600 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7600_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 799
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 7600 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7600_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1599
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 7600 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7600_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2407
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 7600 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7600_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3239
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 7600 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7600_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4118
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 7600 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7600_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4926
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 7600 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7600_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 5747
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 7600 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7600_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 6547
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 7600 tokens
+Depth: 89%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7600_depth_8900_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 7600 tokens
+Depth: 100%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_7600_depth_10000_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 8000 tokens
+Depth: 0%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_8000_depth_0_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 846
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 8000 tokens
+Depth: 11%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_8000_depth_1100_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 1701
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 8000 tokens
+Depth: 22%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_8000_depth_2200_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 2565
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 8000 tokens
+Depth: 33%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_8000_depth_3300_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 3410
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 8000 tokens
+Depth: 44%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_8000_depth_4400_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 4345
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 8000 tokens
+Depth: 56%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_8000_depth_5600_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 5197
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.1 seconds
+Context: 8000 tokens
+Depth: 67%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_8000_depth_6700_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 6056
+Eat a sandwich and sit in Dolores Park on a sunny day.
+-- Test Summary -- 
+Duration: 2.2 seconds
+Context: 8000 tokens
+Depth: 78%
+Score: 7.272727272727273
+Response: Eat a sandwich and sit in Dolores Park on a sunny day.
+
+Writing at results_needle/results/Mistral_snapkv_10pct_run8/Mistral_snapkv_10pct_run8_len_8000_depth_7800_results.json
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 6885
+Eat a sandwich and sit in Dolores Park on a sunny day.The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.

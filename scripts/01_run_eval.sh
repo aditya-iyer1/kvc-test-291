@@ -31,6 +31,7 @@ source "$CONFIG_FILE"
 GPUS="0"
 METHODS_STR="FullKV,StreamingLLM,SnapKV,PyramidKV"   # methods to run
 BUDGETS_STR="0.1,0.2,0.5"                                  # cache budget ratios
+DATASETS_STR="narrativeqa,hotpotqa,multi_news,triviaqa,passage_retrieval_en,lcc"
 
 # ── Parse CLI overrides ────────────────────────────────────────────────────────
 while [[ $# -gt 0 ]]; do
@@ -38,25 +39,17 @@ while [[ $# -gt 0 ]]; do
         --gpu)      GPUS="$2";       shift 2 ;;
         --methods)  METHODS_STR="$2"; shift 2 ;;
         --budgets)  BUDGETS_STR="$2"; shift 2 ;;
+        --datasets) DATASETS_STR="$2"; shift 2 ;;
         *) echo "Unknown arg: $1"; exit 1 ;;
     esac
 done
 
 IFS=',' read -ra METHODS <<< "$METHODS_STR"
 IFS=',' read -ra BUDGETS <<< "$BUDGETS_STR"
+IFS=',' read -ra DATASETS <<< "$DATASETS_STR"
 
 # Llama-3-8B has a model_max_len of 7950 in KVCache-Factory (see run_longbench.py)
 MODEL_MAX_LEN=31500
-
-# ── LongBench datasets ─────────────────────────────────────────────────────────
-DATASETS=(
-    narrativeqa
-    hotpotqa
-    multi_news
-    triviaqa
-    passage_retrieval_en
-    lcc
-)
 
 mkdir -p "$RESULTS_DIR/timing"
 
@@ -139,7 +132,7 @@ for METHOD in "${METHODS[@]}"; do
                     --save_dir    "$OUT_DIR"
                     --use_cache   True
                     --eval_batch_size 1
-                    --max_num_examples 150
+                    --max_num_examples 200
                     --seed        42
                     --dataset     "$DATASET"
             )
@@ -153,7 +146,7 @@ for METHOD in "${METHODS[@]}"; do
             ELAPSED=$(( END_TS - START_TS ))
 
             # Copy results to flat structure immediately
-            MODEL_NAME=$(basename "$MODEL_PATH")
+            MODEL_NAME=$(basename "$MODEL_PATH" | tr '[:upper:]' '[:lower:]')
             if [[ "$METHOD" == "FullKV" ]]; then
                 CAP_FOR_DIR=7950
             else

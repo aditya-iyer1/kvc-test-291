@@ -1,0 +1,74 @@
+{
+  "comparison": {
+    "FullKV(full)": {
+      "10pct": 46.27,
+      "20pct": 46.27,
+      "50pct": 46.27
+    },
+    "SnapKV": {
+      "10pct": 45.97,
+      "20pct": 46.02,
+      "50pct": 46.25
+    },
+    "PyramidKV": {
+      "10pct": 45.66,
+      "20pct": 45.8,
+      "50pct": 46.26
+    },
+    "StreamingLLM": {
+      "10pct": 38.37,
+      "20pct": 41.11,
+      "50pct": 46.02
+    }
+  },
+  "intersections": {
+    "10pct": [
+      "2wikimqa",
+      "gov_report",
+      "hotpotqa",
+      "lcc",
+      "multi_news",
+      "narrativeqa",
+      "passage_retrieval_en",
+      "qmsum",
+      "repobench-p",
+      "triviaqa"
+    ],
+    "20pct": [
+      "2wikimqa",
+      "gov_report",
+      "hotpotqa",
+      "lcc",
+      "multi_news",
+      "narrativeqa",
+      "passage_retrieval_en",
+      "qmsum",
+      "repobench-p",
+      "triviaqa"
+    ],
+    "50pct": [
+      "2wikimqa",
+      "gov_report",
+      "hotpotqa",
+      "lcc",
+      "multi_news",
+      "narrativeqa",
+      "passage_retrieval_en",
+      "qmsum",
+      "repobench-p",
+      "triviaqa"
+    ]
+  },
+  "fullkv_full_available": [
+    "2wikimqa",
+    "gov_report",
+    "hotpotqa",
+    "lcc",
+    "multi_news",
+    "narrativeqa",
+    "passage_retrieval_en",
+    "qmsum",
+    "repobench-p",
+    "triviaqa"
+  ]
+}

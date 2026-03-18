@@ -1,0 +1,78 @@
+loading from mistralai/Mistral-7B-Instruct-v0.2
+Using SnapKV!
+Loading checkpoint shards:   0%|                                                             | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|█████████████████▋                                   | 1/3 [00:02<00:04,  2.29s/it]Loading checkpoint shards:  67%|███████████████████████████████████▎                 | 2/3 [00:04<00:02,  2.46s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:07<00:00,  2.34s/it]Loading checkpoint shards: 100%|█████████████████████████████████████████████████████| 3/3 [00:07<00:00,  2.35s/it]
+The attention mask and the pad token id were not set. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+The attention mask is not set and cannot be inferred from input because pad token is same as eos token. As a consequence, you may observe unexpected behavior. Please pass your input's `attention_mask` to obtain reliable results.
+
+
+Starting Needle In A Haystack Testing...
+- Model: mistralai/Mistral-7B-Instruct-v0.2
+- Context Lengths: 80, Min: 400, Max: 32000
+- Document Depths: 10, Min: 0%, Max: 100%
+- Needle: The best thing to do in San Francisco is eat a sandwich and sit in Dolores Park on a sunny day.
+
+
+
+Searching existing results at results_needle/results/Mistral_snapkv_10pct_run8
+result does not exist, testing
+insertion at 0
+Traceback (most recent call last):
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/run_needle_in_haystack.py", line 529, in <module>
+    ht.start_test(args)
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/run_needle_in_haystack.py", line 493, in start_test
+    self.run_test(args)
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/run_needle_in_haystack.py", line 230, in run_test
+    task = self.bound_evaluate_and_log(context_length, depth_percent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/run_needle_in_haystack.py", line 221, in bound_evaluate_and_log
+    self.evaluate_and_log(*args)
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/run_needle_in_haystack.py", line 281, in evaluate_and_log
+    output_ids = self.model_to_test.generate(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 116, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/generation/utils.py", line 2024, in generate
+    result = self._sample(
+             ^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/generation/utils.py", line 2982, in _sample
+    outputs = self(**model_inputs, return_dict=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/models/mistral/modeling_mistral.py", line 1033, in forward
+    outputs = self.model(
+              ^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/models/mistral/modeling_mistral.py", line 808, in forward
+    layer_outputs = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/models/mistral/modeling_mistral.py", line 549, in forward
+    hidden_states, self_attn_weights, present_key_value = self.self_attn(
+                                                          ^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jovyan/kvc-test-291/KVCache-Factory/pyramidkv/mistral_model.py", line 2344, in mistral_sdpa_attn_forward_SnapKV
+    cos, sin = position_embeddings
+               ^^^^^^^^^^^^^^^^^^^
+NameError: name 'position_embeddings' is not defined

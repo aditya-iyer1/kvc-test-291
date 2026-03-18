@@ -1,0 +1,12 @@
+Using SnapKV!
+Using SnapKV!
+Loading checkpoint shards:   0%|                                                             | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|█████████████████▎                                  | 1/3 [02:52<05:44, 172.39s/it]Loading checkpoint shards:  67%|██████████████████████████████████▋                 | 2/3 [05:52<02:56, 176.75s/it]Loading checkpoint shards: 100%|████████████████████████████████████████████████████| 3/3 [08:37<00:00, 171.53s/it]Loading checkpoint shards: 100%|████████████████████████████████████████████████████| 3/3 [08:37<00:00, 172.50s/it]
+Working on max_capacity_prompts 3150 dataset 2wikimqa - 0/1
+Loading data...
+Max Length is 11950
+Finish loading model and tokenizer
+  0%|                                                                                        | 0/3 [00:00<?, ?it/s]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 33%|██████████████████████████▋                                                     | 1/3 [00:04<00:08,  4.36s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+ 67%|█████████████████████████████████████████████████████▎                          | 2/3 [00:07<00:03,  3.88s/it]Setting `pad_token_id` to `eos_token_id`:2 for open-end generation.
+100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:12<00:00,  3.99s/it]100%|████████████████████████████████████████████████████████████████████████████████| 3/3 [00:12<00:00,  4.01s/it]
+  [DONE] 2wikimqa — 12s
