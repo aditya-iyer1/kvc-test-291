@@ -1,0 +1,2885 @@
+{
+  "meta": {
+    "results_dir": "/home/jovyan/kvc-test-291/results_mistral_run7",
+    "output_path": "/home/jovyan/kvc-test-291/results_mistral_run7/scores/bootstrap_ci_results.json",
+    "iterations": 10000,
+    "seed": 0,
+    "datasets": [
+      "narrativeqa",
+      "hotpotqa",
+      "2wikimqa",
+      "gov_report",
+      "qmsum",
+      "multi_news",
+      "triviaqa",
+      "passage_retrieval_en",
+      "lcc",
+      "repobench-p"
+    ],
+    "budgets": {
+      "10pct": 3150,
+      "20pct": 6300,
+      "50pct": 15750
+    },
+    "fullkv_source_budget": "full",
+    "notes": [
+      "Per-example scores are computed with the same dataset2metric mapping and prediction normalization as KVCache-Factory/eval.py.",
+      "Overall means are equal-weight averages across datasets, matching the paper's aggregate style.",
+      "FullKV uses budget_full predictions as a constant baseline for all budget comparisons.",
+      "Compression-active subsets keep examples with length > budget threshold, matching scripts/11_compression_active_analysis.py."
+    ]
+  },
+  "overall_means": [
+    {
+      "budget": "10pct",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 42.83941495840521,
+      "ci95": [
+        41.50756980246354,
+        44.1584236756167
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 64,
+        "triviaqa": 200,
+        "passage_retrieval_en": 200,
+        "lcc": 200,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "budget": "10pct",
+      "method": "SnapKV",
+      "source_budget": "10pct",
+      "mean": 42.60456834111445,
+      "ci95": [
+        41.22247823548258,
+        44.00387319311598
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 150,
+        "gov_report": 200,
+        "qmsum": 150,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 150
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "budget": "10pct",
+      "method": "PyramidKV",
+      "source_budget": "10pct",
+      "mean": 42.27284428820043,
+      "ci95": [
+        40.86208943312978,
+        43.70884322546082
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 150,
+        "gov_report": 200,
+        "qmsum": 150,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 150
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "budget": "10pct",
+      "method": "StreamingLLM",
+      "source_budget": "10pct",
+      "mean": 35.19514288538933,
+      "ci95": [
+        33.71371926397492,
+        36.64844860239527
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 150,
+        "gov_report": 200,
+        "qmsum": 150,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 150
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "budget": "20pct",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 42.83941495840521,
+      "ci95": [
+        41.50756980246354,
+        44.1584236756167
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 64,
+        "triviaqa": 200,
+        "passage_retrieval_en": 200,
+        "lcc": 200,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "budget": "20pct",
+      "method": "SnapKV",
+      "source_budget": "20pct",
+      "mean": 42.641687261300135,
+      "ci95": [
+        41.27289272757582,
+        44.04068501672194
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "budget": "20pct",
+      "method": "PyramidKV",
+      "source_budget": "20pct",
+      "mean": 42.37956203297807,
+      "ci95": [
+        41.001304612436556,
+        43.78678530926293
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "budget": "20pct",
+      "method": "StreamingLLM",
+      "source_budget": "20pct",
+      "mean": 37.82003741283288,
+      "ci95": [
+        36.39834372273441,
+        39.27462546627809
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "budget": "50pct",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 42.83941495840521,
+      "ci95": [
+        41.50756980246354,
+        44.1584236756167
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 64,
+        "triviaqa": 200,
+        "passage_retrieval_en": 200,
+        "lcc": 200,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "budget": "50pct",
+      "method": "SnapKV",
+      "source_budget": "50pct",
+      "mean": 42.81988886523267,
+      "ci95": [
+        41.46544447544246,
+        44.20721801054353
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "budget": "50pct",
+      "method": "PyramidKV",
+      "source_budget": "50pct",
+      "mean": 42.831529377053386,
+      "ci95": [
+        41.463851937464156,
+        44.22325156813391
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "budget": "50pct",
+      "method": "StreamingLLM",
+      "source_budget": "50pct",
+      "mean": 42.61524804270033,
+      "ci95": [
+        41.29382079873312,
+        43.97929908828446
+      ],
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    }
+  ],
+  "per_dataset_10pct_means": [
+    {
+      "budget": "10pct",
+      "dataset": "narrativeqa",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 26.90204208255247,
+      "ci95": [
+        22.196990712629205,
+        31.728778683670413
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "narrativeqa",
+      "method": "SnapKV",
+      "source_budget": "10pct",
+      "mean": 26.270387525203816,
+      "ci95": [
+        21.720259319742933,
+        30.887675813948302
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "narrativeqa",
+      "method": "PyramidKV",
+      "source_budget": "10pct",
+      "mean": 26.109308508798375,
+      "ci95": [
+        21.503062330864303,
+        30.764995501909947
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "narrativeqa",
+      "method": "StreamingLLM",
+      "source_budget": "10pct",
+      "mean": 23.72816071708744,
+      "ci95": [
+        19.08674392071587,
+        28.512376698251842
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "hotpotqa",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 39.45252673953261,
+      "ci95": [
+        33.04507484289426,
+        46.05086172393188
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "hotpotqa",
+      "method": "SnapKV",
+      "source_budget": "10pct",
+      "mean": 39.496340499528465,
+      "ci95": [
+        33.29359588397663,
+        45.906693454144616
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "hotpotqa",
+      "method": "PyramidKV",
+      "source_budget": "10pct",
+      "mean": 38.158202583309155,
+      "ci95": [
+        31.994065855567726,
+        44.466027586480024
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "hotpotqa",
+      "method": "StreamingLLM",
+      "source_budget": "10pct",
+      "mean": 30.66651554924853,
+      "ci95": [
+        24.76794937438281,
+        36.78432827146939
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "2wikimqa",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 27.414653300812947,
+      "ci95": [
+        23.164204822178366,
+        31.681875468574187
+      ],
+      "n_examples": 200
+    },
+    {
+      "budget": "10pct",
+      "dataset": "2wikimqa",
+      "method": "SnapKV",
+      "source_budget": "10pct",
+      "mean": 28.79791977315197,
+      "ci95": [
+        23.81999348750059,
+        33.88603173346698
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "2wikimqa",
+      "method": "PyramidKV",
+      "source_budget": "10pct",
+      "mean": 27.82973461928907,
+      "ci95": [
+        23.04572611535007,
+        32.71507704685374
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "2wikimqa",
+      "method": "StreamingLLM",
+      "source_budget": "10pct",
+      "mean": 23.32969684204709,
+      "ci95": [
+        18.714153427103653,
+        28.062999813117532
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "gov_report",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 19.168540649004925,
+      "ci95": [
+        18.55115316564885,
+        19.82725051617809
+      ],
+      "n_examples": 200
+    },
+    {
+      "budget": "10pct",
+      "dataset": "gov_report",
+      "method": "SnapKV",
+      "source_budget": "10pct",
+      "mean": 17.871319954166385,
+      "ci95": [
+        17.329388505679635,
+        18.44324236804836
+      ],
+      "n_examples": 200
+    },
+    {
+      "budget": "10pct",
+      "dataset": "gov_report",
+      "method": "PyramidKV",
+      "source_budget": "10pct",
+      "mean": 17.725159130636015,
+      "ci95": [
+        17.200714037901854,
+        18.281272033767497
+      ],
+      "n_examples": 200
+    },
+    {
+      "budget": "10pct",
+      "dataset": "gov_report",
+      "method": "StreamingLLM",
+      "source_budget": "10pct",
+      "mean": 16.94817905469539,
+      "ci95": [
+        16.41420182666966,
+        17.514396460618716
+      ],
+      "n_examples": 200
+    },
+    {
+      "budget": "10pct",
+      "dataset": "qmsum",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 18.52003854047076,
+      "ci95": [
+        17.768992638535508,
+        19.323469207623194
+      ],
+      "n_examples": 200
+    },
+    {
+      "budget": "10pct",
+      "dataset": "qmsum",
+      "method": "SnapKV",
+      "source_budget": "10pct",
+      "mean": 18.151414825143846,
+      "ci95": [
+        17.370318826139048,
+        18.949503785991
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "qmsum",
+      "method": "PyramidKV",
+      "source_budget": "10pct",
+      "mean": 17.78439653935235,
+      "ci95": [
+        16.941272818750026,
+        18.644638767085535
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "qmsum",
+      "method": "StreamingLLM",
+      "source_budget": "10pct",
+      "mean": 16.19025342321997,
+      "ci95": [
+        15.590260889514393,
+        16.787162329346216
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "multi_news",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 15.732499364386525,
+      "ci95": [
+        14.748930571690623,
+        16.815068661416827
+      ],
+      "n_examples": 64
+    },
+    {
+      "budget": "10pct",
+      "dataset": "multi_news",
+      "method": "SnapKV",
+      "source_budget": "10pct",
+      "mean": 15.656870544916313,
+      "ci95": [
+        15.067131304014923,
+        16.28894050348006
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "multi_news",
+      "method": "PyramidKV",
+      "source_budget": "10pct",
+      "mean": 15.66221909249701,
+      "ci95": [
+        15.069794404399287,
+        16.29801339050707
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "multi_news",
+      "method": "StreamingLLM",
+      "source_budget": "10pct",
+      "mean": 15.667143677164773,
+      "ci95": [
+        15.083234677641148,
+        16.278270644895834
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "triviaqa",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 86.2250111000111,
+      "ci95": [
+        81.97758863274854,
+        90.18976088154348
+      ],
+      "n_examples": 200
+    },
+    {
+      "budget": "10pct",
+      "dataset": "triviaqa",
+      "method": "SnapKV",
+      "source_budget": "10pct",
+      "mean": 86.23536833536834,
+      "ci95": [
+        81.42167920067534,
+        90.77612342533439
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "triviaqa",
+      "method": "PyramidKV",
+      "source_budget": "10pct",
+      "mean": 86.12425722425722,
+      "ci95": [
+        81.29844972144535,
+        90.68111017596269
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "triviaqa",
+      "method": "StreamingLLM",
+      "source_budget": "10pct",
+      "mean": 85.75788961441135,
+      "ci95": [
+        80.87275858330543,
+        90.40871801213473
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "passage_retrieval_en",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 86.97619047619048,
+      "ci95": [
+        82.27380768484657,
+        91.33333129187425
+      ],
+      "n_examples": 200
+    },
+    {
+      "budget": "10pct",
+      "dataset": "passage_retrieval_en",
+      "method": "SnapKV",
+      "source_budget": "10pct",
+      "mean": 84.52380952380952,
+      "ci95": [
+        78.85714402039801,
+        89.76309722306073
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "passage_retrieval_en",
+      "method": "PyramidKV",
+      "source_budget": "10pct",
+      "mean": 83.69047619047619,
+      "ci95": [
+        77.8333344726291,
+        89.16666798933875
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "passage_retrieval_en",
+      "method": "StreamingLLM",
+      "source_budget": "10pct",
+      "mean": 30.666666666666668,
+      "ci95": [
+        23.666667053475976,
+        38.00000027054921
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "lcc",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 55.40750710281538,
+      "ci95": [
+        50.504593613283355,
+        60.267802917658095
+      ],
+      "n_examples": 200
+    },
+    {
+      "budget": "10pct",
+      "dataset": "lcc",
+      "method": "SnapKV",
+      "source_budget": "10pct",
+      "mean": 57.75551789640595,
+      "ci95": [
+        52.090645835159144,
+        63.50138493169187
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "lcc",
+      "method": "PyramidKV",
+      "source_budget": "10pct",
+      "mean": 57.769495126015514,
+      "ci95": [
+        52.109529898402776,
+        63.53132054034226
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "lcc",
+      "method": "StreamingLLM",
+      "source_budget": "10pct",
+      "mean": 57.356429278057455,
+      "ci95": [
+        51.887565263951274,
+        62.9184311129268
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "repobench-p",
+      "method": "FullKV",
+      "source_budget": "full",
+      "mean": 52.595140228274886,
+      "ci95": [
+        47.88438195002728,
+        57.24664419442886
+      ],
+      "n_examples": 200
+    },
+    {
+      "budget": "10pct",
+      "dataset": "repobench-p",
+      "method": "SnapKV",
+      "source_budget": "10pct",
+      "mean": 51.28673453344994,
+      "ci95": [
+        45.76269460870341,
+        56.636018396838374
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "repobench-p",
+      "method": "PyramidKV",
+      "source_budget": "10pct",
+      "mean": 51.875193867373405,
+      "ci95": [
+        46.27768716811247,
+        57.22221277695498
+      ],
+      "n_examples": 150
+    },
+    {
+      "budget": "10pct",
+      "dataset": "repobench-p",
+      "method": "StreamingLLM",
+      "source_budget": "10pct",
+      "mean": 51.64049403129463,
+      "ci95": [
+        46.290114590683054,
+        56.80111869100373
+      ],
+      "n_examples": 150
+    }
+  ],
+  "comparisons": [
+    {
+      "section": "overall_fullkv_gap",
+      "metric": "overall_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.2787561328649486,
+      "ci95": [
+        -0.6553834459645778,
+        0.07819040756276915
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 150,
+        "gov_report": 200,
+        "qmsum": 150,
+        "multi_news": 64,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 150
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "overall_fullkv_gap",
+      "metric": "overall_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.6061659097261659,
+      "ci95": [
+        -1.0373351467505771,
+        -0.2000678793974983
+      ],
+      "significant": true,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 150,
+        "gov_report": 200,
+        "qmsum": 150,
+        "multi_news": 64,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 150
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "overall_fullkv_gap",
+      "metric": "overall_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -7.713721521364208,
+      "ci95": [
+        -8.747146357938782,
+        -6.704955970198159
+      ],
+      "significant": true,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 150,
+        "gov_report": 200,
+        "qmsum": 150,
+        "multi_news": 64,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 150
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "overall_fullkv_gap",
+      "metric": "overall_20pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.20990259139554096,
+      "ci95": [
+        -0.49676832650027763,
+        0.042992306252781984
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 64,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "overall_fullkv_gap",
+      "metric": "overall_20pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.4724777760328669,
+      "ci95": [
+        -0.8336223650121002,
+        -0.14967468145891982
+      ],
+      "significant": true,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 64,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "overall_fullkv_gap",
+      "metric": "overall_20pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -5.034725282168633,
+      "ci95": [
+        -6.028510073884473,
+        -4.028223071190468
+      ],
+      "significant": true,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 64,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "overall_fullkv_gap",
+      "metric": "overall_50pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.03617363772938372,
+      "ci95": [
+        -0.12887447241675704,
+        0.06431922170381084
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 64,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "overall_fullkv_gap",
+      "metric": "overall_50pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.02453312590867278,
+      "ci95": [
+        -0.10069421453429042,
+        0.06776985285669374
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 64,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "overall_fullkv_gap",
+      "metric": "overall_50pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -0.2400610636680336,
+      "ci95": [
+        -0.6154464117800684,
+        0.12753958842238255
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 64,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "narrativeqa_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.6316545573486549,
+      "ci95": [
+        -1.6722834158563638,
+        0.25563992467365326
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "narrativeqa_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.7927335737540948,
+      "ci95": [
+        -1.9469802527580073,
+        0.3017629959618256
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "narrativeqa_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -3.173881365465024,
+      "ci95": [
+        -5.861954509324568,
+        -0.6288417531962687
+      ],
+      "significant": true,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "hotpotqa_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": 0.04381375999583923,
+      "ci95": [
+        -1.8510254252804121,
+        1.7077095560970652
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "hotpotqa_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -1.2943241562234697,
+      "ci95": [
+        -3.87916798060716,
+        0.9501335326315534
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "hotpotqa_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -8.786011190284086,
+      "ci95": [
+        -13.364314746830058,
+        -4.480934918473627
+      ],
+      "significant": true,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "2wikimqa_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": 0.7629023114902777,
+      "ci95": [
+        -0.6588962258528701,
+        2.567652418955485
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "2wikimqa_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.20528284237262573,
+      "ci95": [
+        -1.859797198734531,
+        1.3836350336769563
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "2wikimqa_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -4.705320619614603,
+      "ci95": [
+        -7.7293407436462385,
+        -1.8197095667269236
+      ],
+      "significant": true,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "gov_report_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": -1.2972206948385396,
+      "ci95": [
+        -1.8265189249184743,
+        -0.7959863362741215
+      ],
+      "significant": true,
+      "n_examples": 200,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "gov_report_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -1.443381518368908,
+      "ci95": [
+        -1.9199695936812586,
+        -0.9842297590120317
+      ],
+      "significant": true,
+      "n_examples": 200,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "gov_report_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -2.2203615943095314,
+      "ci95": [
+        -2.879887075274493,
+        -1.574637901439947
+      ],
+      "significant": true,
+      "n_examples": 200,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "qmsum_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.16395030537322494,
+      "ci95": [
+        -0.7203483212215014,
+        0.37748652060413435
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "qmsum_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.5309685911647208,
+      "ci95": [
+        -1.1798509303255982,
+        0.11529517830598446
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "qmsum_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -2.125111707297104,
+      "ci95": [
+        -2.892178344275838,
+        -1.384039820881105
+      ],
+      "significant": true,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "multi_news_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.010666310935099288,
+      "ci95": [
+        -0.18533692031493948,
+        0.16720863882937703
+      ],
+      "significant": false,
+      "n_examples": 64,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "multi_news_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": 0.037824997173663555,
+      "ci95": [
+        -0.16407630934589573,
+        0.24776316817369307
+      ],
+      "significant": false,
+      "n_examples": 64,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "multi_news_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -0.2557925064280061,
+      "ci95": [
+        -0.6322537524423235,
+        0.06797313716525916
+      ],
+      "significant": false,
+      "n_examples": 64,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "triviaqa_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": 0.11111111111111105,
+      "ci95": [
+        -0.6031746177801067,
+        0.9047618867563348
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "triviaqa_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": 0.0,
+      "ci95": [
+        -0.6666666517655057,
+        0.6666666517655057
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "triviaqa_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -0.3663676098458706,
+      "ci95": [
+        -1.4973544803935859,
+        0.6560846409272583
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "passage_retrieval_en_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.3333333333333333,
+      "ci95": [
+        -1.9999999552965164,
+        0.9999999776482582
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "passage_retrieval_en_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -1.1666666666666667,
+      "ci95": [
+        -3.3333334140479565,
+        0.5000000121071935
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "passage_retrieval_en_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -54.19047619047619,
+      "ci95": [
+        -62.41309645835177,
+        -46.00000082748011
+      ],
+      "significant": true,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "lcc_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.02638322136393723,
+      "ci95": [
+        -0.8687513253248565,
+        0.7364831107309698
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "lcc_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.012405991754374573,
+      "ci95": [
+        -0.855656459417211,
+        0.7517437306481499
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "lcc_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -0.4254718397124293,
+      "ci95": [
+        -2.2358138139568626,
+        1.3123928600864794
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "repobench-p_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": -1.2421800880539247,
+      "ci95": [
+        -2.8881297771126335,
+        0.16580240038545963
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "repobench-p_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.6537207541304622,
+      "ci95": [
+        -2.2889144739470675,
+        0.79315835745648
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "per_dataset_10pct_vs_fullkv",
+      "metric": "repobench-p_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -0.8884205902092307,
+      "ci95": [
+        -2.865148487122054,
+        1.0657241599438934
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "snapkv_vs_pyramidkv",
+      "metric": "overall_10pct",
+      "method_a": "SnapKV",
+      "method_b": "PyramidKV",
+      "mean_diff": 0.3317240529140233,
+      "ci95": [
+        -0.04762776554843671,
+        0.7334782160785501
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 150,
+        "gov_report": 200,
+        "qmsum": 150,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 150
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "snapkv_vs_pyramidkv",
+      "metric": "compression_active_10pct",
+      "method_a": "SnapKV",
+      "method_b": "PyramidKV",
+      "mean_diff": 0.386929822786663,
+      "ci95": [
+        -0.03446455375289369,
+        0.8399953369569226
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 145,
+        "2wikimqa": 115,
+        "gov_report": 179,
+        "qmsum": 149,
+        "multi_news": 28,
+        "triviaqa": 130,
+        "passage_retrieval_en": 150,
+        "lcc": 6,
+        "repobench-p": 83
+      },
+      "n_datasets": 10,
+      "compression_active": true
+    },
+    {
+      "section": "snapkv_vs_pyramidkv",
+      "metric": "overall_20pct",
+      "method_a": "SnapKV",
+      "method_b": "PyramidKV",
+      "mean_diff": 0.26212522832205476,
+      "ci95": [
+        0.029668609620847726,
+        0.5390573935566794
+      ],
+      "significant": true,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "snapkv_vs_pyramidkv",
+      "metric": "compression_active_20pct",
+      "method_a": "SnapKV",
+      "method_b": "PyramidKV",
+      "mean_diff": 0.22947335825748505,
+      "ci95": [
+        -0.1865475566079425,
+        0.631600612391567
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 146,
+        "hotpotqa": 128,
+        "2wikimqa": 43,
+        "gov_report": 112,
+        "qmsum": 160,
+        "multi_news": 5,
+        "triviaqa": 99,
+        "passage_retrieval_en": 150,
+        "lcc": 2,
+        "repobench-p": 41
+      },
+      "n_datasets": 10,
+      "compression_active": true
+    },
+    {
+      "section": "snapkv_vs_pyramidkv",
+      "metric": "overall_50pct",
+      "method_a": "SnapKV",
+      "method_b": "PyramidKV",
+      "mean_diff": -0.011640511820710948,
+      "ci95": [
+        -0.07014181806721675,
+        0.032595252818063934
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "snapkv_vs_pyramidkv",
+      "metric": "compression_active_50pct",
+      "method_a": "SnapKV",
+      "method_b": "PyramidKV",
+      "mean_diff": -0.3532993451807194,
+      "ci95": [
+        -0.9374517601501926,
+        0.1825454377927475
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "gov_report",
+        "qmsum",
+        "triviaqa"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 90,
+        "gov_report": 10,
+        "qmsum": 22,
+        "triviaqa": 1
+      },
+      "n_datasets": 4,
+      "compression_active": true
+    },
+    {
+      "section": "lcc_anomaly",
+      "metric": "lcc_10pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.02638322136393723,
+      "ci95": [
+        -0.8687513253248565,
+        0.7364831107309698
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "lcc_anomaly",
+      "metric": "lcc_10pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": -0.012405991754374573,
+      "ci95": [
+        -0.855656459417211,
+        0.7517437306481499
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "lcc_anomaly",
+      "metric": "lcc_10pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": -0.4254718397124293,
+      "ci95": [
+        -2.2358138139568626,
+        1.3123928600864794
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "lcc_anomaly",
+      "metric": "lcc_20pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "lcc_anomaly",
+      "metric": "lcc_20pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": 0.0037735849056603735,
+      "ci95": [
+        0.0,
+        0.011320754463942534
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "lcc_anomaly",
+      "metric": "lcc_20pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": 0.018077476927610785,
+      "ci95": [
+        -0.029812362582559333,
+        0.08269315388461351
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "lcc_anomaly",
+      "metric": "lcc_50pct",
+      "method_a": "SnapKV",
+      "method_b": "FullKV",
+      "mean_diff": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "lcc_anomaly",
+      "metric": "lcc_50pct",
+      "method_a": "PyramidKV",
+      "method_b": "FullKV",
+      "mean_diff": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "lcc_anomaly",
+      "metric": "lcc_50pct",
+      "method_a": "StreamingLLM",
+      "method_b": "FullKV",
+      "mean_diff": 0.023721777438895232,
+      "ci95": [
+        0.0,
+        0.07116533072601657
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "streaming_vs_sliding",
+      "metric": "overall_10pct",
+      "method_a": "StreamingLLMSliding",
+      "method_b": "StreamingLLM",
+      "mean_diff": -8.26814398425843,
+      "ci95": [
+        -9.701896128652722,
+        -6.787908399886338
+      ],
+      "significant": true,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 150,
+        "gov_report": 200,
+        "qmsum": 150,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 150
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "streaming_vs_sliding",
+      "metric": "passage_retrieval_en_10pct",
+      "method_a": "StreamingLLMSliding",
+      "method_b": "StreamingLLM",
+      "mean_diff": -3.444444444444444,
+      "ci95": [
+        -12.44444442098029,
+        5.666666617617011
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "streaming_vs_sliding",
+      "metric": "overall_20pct",
+      "method_a": "StreamingLLMSliding",
+      "method_b": "StreamingLLM",
+      "mean_diff": -7.162691739536934,
+      "ci95": [
+        -8.711914449284139,
+        -5.6687899361862835
+      ],
+      "significant": true,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "streaming_vs_sliding",
+      "metric": "passage_retrieval_en_20pct",
+      "method_a": "StreamingLLMSliding",
+      "method_b": "StreamingLLM",
+      "mean_diff": -9.444444444444445,
+      "ci95": [
+        -21.444444498047233,
+        2.6666665469141058
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    },
+    {
+      "section": "streaming_vs_sliding",
+      "metric": "overall_50pct",
+      "method_a": "StreamingLLMSliding",
+      "method_b": "StreamingLLM",
+      "mean_diff": -2.877280247024998,
+      "ci95": [
+        -3.709047546759084,
+        -2.0648536139009632
+      ],
+      "significant": true,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 200,
+        "gov_report": 200,
+        "qmsum": 200,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 200
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    {
+      "section": "streaming_vs_sliding",
+      "metric": "passage_retrieval_en_50pct",
+      "method_a": "StreamingLLMSliding",
+      "method_b": "StreamingLLM",
+      "mean_diff": -1.4285714285714286,
+      "ci95": [
+        -5.333333369344473,
+        1.9999999552965164
+      ],
+      "significant": false,
+      "n_examples": 150,
+      "compression_active": false
+    }
+  ],
+  "flags": {
+    "per_dataset_10pct_vs_fullkv_ci_includes_zero": [
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "narrativeqa_10pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.6316545573486549,
+        "ci95": [
+          -1.6722834158563638,
+          0.25563992467365326
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "narrativeqa_10pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.7927335737540948,
+        "ci95": [
+          -1.9469802527580073,
+          0.3017629959618256
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "hotpotqa_10pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": 0.04381375999583923,
+        "ci95": [
+          -1.8510254252804121,
+          1.7077095560970652
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "hotpotqa_10pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": -1.2943241562234697,
+        "ci95": [
+          -3.87916798060716,
+          0.9501335326315534
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "2wikimqa_10pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": 0.7629023114902777,
+        "ci95": [
+          -0.6588962258528701,
+          2.567652418955485
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "2wikimqa_10pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.20528284237262573,
+        "ci95": [
+          -1.859797198734531,
+          1.3836350336769563
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "qmsum_10pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.16395030537322494,
+        "ci95": [
+          -0.7203483212215014,
+          0.37748652060413435
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "qmsum_10pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.5309685911647208,
+        "ci95": [
+          -1.1798509303255982,
+          0.11529517830598446
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "multi_news_10pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.010666310935099288,
+        "ci95": [
+          -0.18533692031493948,
+          0.16720863882937703
+        ],
+        "significant": false,
+        "n_examples": 64,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "multi_news_10pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": 0.037824997173663555,
+        "ci95": [
+          -0.16407630934589573,
+          0.24776316817369307
+        ],
+        "significant": false,
+        "n_examples": 64,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "multi_news_10pct",
+        "method_a": "StreamingLLM",
+        "method_b": "FullKV",
+        "mean_diff": -0.2557925064280061,
+        "ci95": [
+          -0.6322537524423235,
+          0.06797313716525916
+        ],
+        "significant": false,
+        "n_examples": 64,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "triviaqa_10pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": 0.11111111111111105,
+        "ci95": [
+          -0.6031746177801067,
+          0.9047618867563348
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "triviaqa_10pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": 0.0,
+        "ci95": [
+          -0.6666666517655057,
+          0.6666666517655057
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "triviaqa_10pct",
+        "method_a": "StreamingLLM",
+        "method_b": "FullKV",
+        "mean_diff": -0.3663676098458706,
+        "ci95": [
+          -1.4973544803935859,
+          0.6560846409272583
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "passage_retrieval_en_10pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.3333333333333333,
+        "ci95": [
+          -1.9999999552965164,
+          0.9999999776482582
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "passage_retrieval_en_10pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": -1.1666666666666667,
+        "ci95": [
+          -3.3333334140479565,
+          0.5000000121071935
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "lcc_10pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.02638322136393723,
+        "ci95": [
+          -0.8687513253248565,
+          0.7364831107309698
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "lcc_10pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.012405991754374573,
+        "ci95": [
+          -0.855656459417211,
+          0.7517437306481499
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "lcc_10pct",
+        "method_a": "StreamingLLM",
+        "method_b": "FullKV",
+        "mean_diff": -0.4254718397124293,
+        "ci95": [
+          -2.2358138139568626,
+          1.3123928600864794
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "repobench-p_10pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": -1.2421800880539247,
+        "ci95": [
+          -2.8881297771126335,
+          0.16580240038545963
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "repobench-p_10pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.6537207541304622,
+        "ci95": [
+          -2.2889144739470675,
+          0.79315835745648
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "per_dataset_10pct_vs_fullkv",
+        "metric": "repobench-p_10pct",
+        "method_a": "StreamingLLM",
+        "method_b": "FullKV",
+        "mean_diff": -0.8884205902092307,
+        "ci95": [
+          -2.865148487122054,
+          1.0657241599438934
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      }
+    ],
+    "snapkv_minus_pyramidkv_10pct_overall": {
+      "section": "snapkv_vs_pyramidkv",
+      "metric": "overall_10pct",
+      "method_a": "SnapKV",
+      "method_b": "PyramidKV",
+      "mean_diff": 0.3317240529140233,
+      "ci95": [
+        -0.04762776554843671,
+        0.7334782160785501
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 150,
+        "2wikimqa": 150,
+        "gov_report": 200,
+        "qmsum": 150,
+        "multi_news": 150,
+        "triviaqa": 150,
+        "passage_retrieval_en": 150,
+        "lcc": 150,
+        "repobench-p": 150
+      },
+      "n_datasets": 10,
+      "compression_active": false
+    },
+    "snapkv_minus_pyramidkv_10pct_compression_active": {
+      "section": "snapkv_vs_pyramidkv",
+      "metric": "compression_active_10pct",
+      "method_a": "SnapKV",
+      "method_b": "PyramidKV",
+      "mean_diff": 0.386929822786663,
+      "ci95": [
+        -0.03446455375289369,
+        0.8399953369569226
+      ],
+      "significant": false,
+      "datasets": [
+        "narrativeqa",
+        "hotpotqa",
+        "2wikimqa",
+        "gov_report",
+        "qmsum",
+        "multi_news",
+        "triviaqa",
+        "passage_retrieval_en",
+        "lcc",
+        "repobench-p"
+      ],
+      "n_examples_by_dataset": {
+        "narrativeqa": 150,
+        "hotpotqa": 145,
+        "2wikimqa": 115,
+        "gov_report": 179,
+        "qmsum": 149,
+        "multi_news": 28,
+        "triviaqa": 130,
+        "passage_retrieval_en": 150,
+        "lcc": 6,
+        "repobench-p": 83
+      },
+      "n_datasets": 10,
+      "compression_active": true
+    },
+    "lcc_anomaly_rows": [
+      {
+        "section": "lcc_anomaly",
+        "metric": "lcc_10pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.02638322136393723,
+        "ci95": [
+          -0.8687513253248565,
+          0.7364831107309698
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "lcc_anomaly",
+        "metric": "lcc_10pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": -0.012405991754374573,
+        "ci95": [
+          -0.855656459417211,
+          0.7517437306481499
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "lcc_anomaly",
+        "metric": "lcc_10pct",
+        "method_a": "StreamingLLM",
+        "method_b": "FullKV",
+        "mean_diff": -0.4254718397124293,
+        "ci95": [
+          -2.2358138139568626,
+          1.3123928600864794
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "lcc_anomaly",
+        "metric": "lcc_20pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "lcc_anomaly",
+        "metric": "lcc_20pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": 0.0037735849056603735,
+        "ci95": [
+          0.0,
+          0.011320754463942534
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "lcc_anomaly",
+        "metric": "lcc_20pct",
+        "method_a": "StreamingLLM",
+        "method_b": "FullKV",
+        "mean_diff": 0.018077476927610785,
+        "ci95": [
+          -0.029812362582559333,
+          0.08269315388461351
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "lcc_anomaly",
+        "metric": "lcc_50pct",
+        "method_a": "SnapKV",
+        "method_b": "FullKV",
+        "mean_diff": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "lcc_anomaly",
+        "metric": "lcc_50pct",
+        "method_a": "PyramidKV",
+        "method_b": "FullKV",
+        "mean_diff": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "lcc_anomaly",
+        "metric": "lcc_50pct",
+        "method_a": "StreamingLLM",
+        "method_b": "FullKV",
+        "mean_diff": 0.023721777438895232,
+        "ci95": [
+          0.0,
+          0.07116533072601657
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      }
+    ],
+    "streaming_vs_sliding_rows": [
+      {
+        "section": "streaming_vs_sliding",
+        "metric": "overall_10pct",
+        "method_a": "StreamingLLMSliding",
+        "method_b": "StreamingLLM",
+        "mean_diff": -8.26814398425843,
+        "ci95": [
+          -9.701896128652722,
+          -6.787908399886338
+        ],
+        "significant": true,
+        "datasets": [
+          "narrativeqa",
+          "hotpotqa",
+          "2wikimqa",
+          "gov_report",
+          "qmsum",
+          "multi_news",
+          "triviaqa",
+          "passage_retrieval_en",
+          "lcc",
+          "repobench-p"
+        ],
+        "n_examples_by_dataset": {
+          "narrativeqa": 150,
+          "hotpotqa": 150,
+          "2wikimqa": 150,
+          "gov_report": 200,
+          "qmsum": 150,
+          "multi_news": 150,
+          "triviaqa": 150,
+          "passage_retrieval_en": 150,
+          "lcc": 150,
+          "repobench-p": 150
+        },
+        "n_datasets": 10,
+        "compression_active": false
+      },
+      {
+        "section": "streaming_vs_sliding",
+        "metric": "passage_retrieval_en_10pct",
+        "method_a": "StreamingLLMSliding",
+        "method_b": "StreamingLLM",
+        "mean_diff": -3.444444444444444,
+        "ci95": [
+          -12.44444442098029,
+          5.666666617617011
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "streaming_vs_sliding",
+        "metric": "overall_20pct",
+        "method_a": "StreamingLLMSliding",
+        "method_b": "StreamingLLM",
+        "mean_diff": -7.162691739536934,
+        "ci95": [
+          -8.711914449284139,
+          -5.6687899361862835
+        ],
+        "significant": true,
+        "datasets": [
+          "narrativeqa",
+          "hotpotqa",
+          "2wikimqa",
+          "gov_report",
+          "qmsum",
+          "multi_news",
+          "triviaqa",
+          "passage_retrieval_en",
+          "lcc",
+          "repobench-p"
+        ],
+        "n_examples_by_dataset": {
+          "narrativeqa": 150,
+          "hotpotqa": 150,
+          "2wikimqa": 200,
+          "gov_report": 200,
+          "qmsum": 200,
+          "multi_news": 150,
+          "triviaqa": 150,
+          "passage_retrieval_en": 150,
+          "lcc": 150,
+          "repobench-p": 200
+        },
+        "n_datasets": 10,
+        "compression_active": false
+      },
+      {
+        "section": "streaming_vs_sliding",
+        "metric": "passage_retrieval_en_20pct",
+        "method_a": "StreamingLLMSliding",
+        "method_b": "StreamingLLM",
+        "mean_diff": -9.444444444444445,
+        "ci95": [
+          -21.444444498047233,
+          2.6666665469141058
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      },
+      {
+        "section": "streaming_vs_sliding",
+        "metric": "overall_50pct",
+        "method_a": "StreamingLLMSliding",
+        "method_b": "StreamingLLM",
+        "mean_diff": -2.877280247024998,
+        "ci95": [
+          -3.709047546759084,
+          -2.0648536139009632
+        ],
+        "significant": true,
+        "datasets": [
+          "narrativeqa",
+          "hotpotqa",
+          "2wikimqa",
+          "gov_report",
+          "qmsum",
+          "multi_news",
+          "triviaqa",
+          "passage_retrieval_en",
+          "lcc",
+          "repobench-p"
+        ],
+        "n_examples_by_dataset": {
+          "narrativeqa": 150,
+          "hotpotqa": 150,
+          "2wikimqa": 200,
+          "gov_report": 200,
+          "qmsum": 200,
+          "multi_news": 150,
+          "triviaqa": 150,
+          "passage_retrieval_en": 150,
+          "lcc": 150,
+          "repobench-p": 200
+        },
+        "n_datasets": 10,
+        "compression_active": false
+      },
+      {
+        "section": "streaming_vs_sliding",
+        "metric": "passage_retrieval_en_50pct",
+        "method_a": "StreamingLLMSliding",
+        "method_b": "StreamingLLM",
+        "mean_diff": -1.4285714285714286,
+        "ci95": [
+          -5.333333369344473,
+          1.9999999552965164
+        ],
+        "significant": false,
+        "n_examples": 150,
+        "compression_active": false
+      }
+    ]
+  },
+  "warnings": []
+}

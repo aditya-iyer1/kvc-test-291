@@ -1,0 +1,63 @@
+======================================================
+  KV Cache Compression — LongBench Evaluation
+======================================================
+Model      : mistralai/Mistral-7B-Instruct-v0.2
+GPU(s)     : 0
+Methods    : StreamingLLMSliding
+Budgets    : 0.1 0.2 0.5
+AttnImpl   : sdpa
+Results    : /home/jovyan/kvc-test-291/results_mistral_run7
+
+===============================
+  Method: StreamingLLMSliding
+===============================
+
+
+  Budget: 10pct  (max_capacity_prompts=3150)
+    Running dataset: narrativeqa ... 
+    done (815s)
+    Running dataset: hotpotqa ... 
+    done (511s)
+    Running dataset: multi_news ... 
+    done (2958s)
+    Running dataset: triviaqa ... 
+    done (554s)
+    Running dataset: passage_retrieval_en ... 
+    done (472s)
+    Running dataset: lcc ... 
+    done (572s)
+
+
+  Budget: 20pct  (max_capacity_prompts=6300)
+    Running dataset: narrativeqa ... 
+    done (798s)
+    Running dataset: hotpotqa ... 
+    done (511s)
+    Running dataset: multi_news ... 
+    done (2997s)
+    Running dataset: triviaqa ... 
+    done (574s)
+    Running dataset: passage_retrieval_en ... 
+    done (508s)
+    Running dataset: lcc ... 
+    done (576s)
+
+
+  Budget: 50pct  (max_capacity_prompts=15750)
+    Running dataset: narrativeqa ... 
+    done (834s)
+    Running dataset: hotpotqa ... 
+    done (538s)
+    Running dataset: multi_news ... 
+    done (3023s)
+    Running dataset: triviaqa ... 
+    done (564s)
+    Running dataset: passage_retrieval_en ... 
+    done (471s)
+    Running dataset: lcc ... 
+    done (596s)
+
+======================================================
+  All evaluations complete.
+  Next step: run scripts/02_score.sh
+======================================================

@@ -1,4 +1,542 @@
 {
+  "FullKV": {
+    "full": {
+      "overall": 46.27,
+      "categories": {
+        "Single-Doc QA": 26.9,
+        "Multi-Doc QA": 33.43,
+        "Summarization": 28.12,
+        "Few-Shot": 86.23,
+        "Synthetic": 86.98,
+        "Code": 55.68
+      },
+      "datasets": {
+        "2wikimqa": {
+          "score": 27.41,
+          "category": "Multi-Doc QA"
+        },
+        "gov_report": {
+          "score": 32.94,
+          "category": "Summarization"
+        },
+        "hotpotqa": {
+          "score": 39.45,
+          "category": "Multi-Doc QA"
+        },
+        "lcc": {
+          "score": 57.22,
+          "category": "Code"
+        },
+        "multi_news": {
+          "score": 27.15,
+          "category": "Summarization"
+        },
+        "narrativeqa": {
+          "score": 26.9,
+          "category": "Single-Doc QA"
+        },
+        "passage_retrieval_en": {
+          "score": 86.98,
+          "category": "Synthetic"
+        },
+        "qmsum": {
+          "score": 24.27,
+          "category": "Summarization"
+        },
+        "repobench-p": {
+          "score": 54.14,
+          "category": "Code"
+        },
+        "triviaqa": {
+          "score": 86.23,
+          "category": "Few-Shot"
+        }
+      }
+    }
+  },
+  "SnapKV": {
+    "10pct": {
+      "overall": 45.97,
+      "categories": {
+        "Single-Doc QA": 26.27,
+        "Multi-Doc QA": 34.15,
+        "Summarization": 27.23,
+        "Few-Shot": 86.24,
+        "Synthetic": 84.52,
+        "Code": 56.35
+      },
+      "datasets": {
+        "2wikimqa": {
+          "score": 28.8,
+          "category": "Multi-Doc QA"
+        },
+        "gov_report": {
+          "score": 30.64,
+          "category": "Summarization"
+        },
+        "hotpotqa": {
+          "score": 39.5,
+          "category": "Multi-Doc QA"
+        },
+        "lcc": {
+          "score": 59.62,
+          "category": "Code"
+        },
+        "multi_news": {
+          "score": 26.78,
+          "category": "Summarization"
+        },
+        "narrativeqa": {
+          "score": 26.27,
+          "category": "Single-Doc QA"
+        },
+        "passage_retrieval_en": {
+          "score": 84.52,
+          "category": "Synthetic"
+        },
+        "qmsum": {
+          "score": 24.27,
+          "category": "Summarization"
+        },
+        "repobench-p": {
+          "score": 53.08,
+          "category": "Code"
+        },
+        "triviaqa": {
+          "score": 86.24,
+          "category": "Few-Shot"
+        }
+      }
+    },
+    "20pct": {
+      "overall": 46.02,
+      "categories": {
+        "Single-Doc QA": 26.57,
+        "Multi-Doc QA": 33.3,
+        "Summarization": 27.64,
+        "Few-Shot": 85.9,
+        "Synthetic": 84.52,
+        "Code": 56.86
+      },
+      "datasets": {
+        "2wikimqa": {
+          "score": 27.57,
+          "category": "Multi-Doc QA"
+        },
+        "gov_report": {
+          "score": 31.99,
+          "category": "Summarization"
+        },
+        "hotpotqa": {
+          "score": 39.04,
+          "category": "Multi-Doc QA"
+        },
+        "lcc": {
+          "score": 59.67,
+          "category": "Code"
+        },
+        "multi_news": {
+          "score": 26.96,
+          "category": "Summarization"
+        },
+        "narrativeqa": {
+          "score": 26.57,
+          "category": "Single-Doc QA"
+        },
+        "passage_retrieval_en": {
+          "score": 84.52,
+          "category": "Synthetic"
+        },
+        "qmsum": {
+          "score": 23.97,
+          "category": "Summarization"
+        },
+        "repobench-p": {
+          "score": 54.05,
+          "category": "Code"
+        },
+        "triviaqa": {
+          "score": 85.9,
+          "category": "Few-Shot"
+        }
+      }
+    },
+    "50pct": {
+      "overall": 46.25,
+      "categories": {
+        "Single-Doc QA": 26.72,
+        "Multi-Doc QA": 33.59,
+        "Summarization": 28.03,
+        "Few-Shot": 86.12,
+        "Synthetic": 84.86,
+        "Code": 56.78
+      },
+      "datasets": {
+        "2wikimqa": {
+          "score": 27.41,
+          "category": "Multi-Doc QA"
+        },
+        "gov_report": {
+          "score": 32.81,
+          "category": "Summarization"
+        },
+        "hotpotqa": {
+          "score": 39.78,
+          "category": "Multi-Doc QA"
+        },
+        "lcc": {
+          "score": 59.67,
+          "category": "Code"
+        },
+        "multi_news": {
+          "score": 26.95,
+          "category": "Summarization"
+        },
+        "narrativeqa": {
+          "score": 26.72,
+          "category": "Single-Doc QA"
+        },
+        "passage_retrieval_en": {
+          "score": 84.86,
+          "category": "Synthetic"
+        },
+        "qmsum": {
+          "score": 24.33,
+          "category": "Summarization"
+        },
+        "repobench-p": {
+          "score": 53.88,
+          "category": "Code"
+        },
+        "triviaqa": {
+          "score": 86.12,
+          "category": "Few-Shot"
+        }
+      }
+    }
+  },
+  "PyramidKV": {
+    "10pct": {
+      "overall": 45.66,
+      "categories": {
+        "Single-Doc QA": 26.11,
+        "Multi-Doc QA": 32.99,
+        "Summarization": 27.05,
+        "Few-Shot": 86.12,
+        "Synthetic": 83.69,
+        "Code": 56.76
+      },
+      "datasets": {
+        "2wikimqa": {
+          "score": 27.83,
+          "category": "Multi-Doc QA"
+        },
+        "gov_report": {
+          "score": 30.45,
+          "category": "Summarization"
+        },
+        "hotpotqa": {
+          "score": 38.16,
+          "category": "Multi-Doc QA"
+        },
+        "lcc": {
+          "score": 59.67,
+          "category": "Code"
+        },
+        "multi_news": {
+          "score": 26.7,
+          "category": "Summarization"
+        },
+        "narrativeqa": {
+          "score": 26.11,
+          "category": "Single-Doc QA"
+        },
+        "passage_retrieval_en": {
+          "score": 83.69,
+          "category": "Synthetic"
+        },
+        "qmsum": {
+          "score": 23.99,
+          "category": "Summarization"
+        },
+        "repobench-p": {
+          "score": 53.84,
+          "category": "Code"
+        },
+        "triviaqa": {
+          "score": 86.12,
+          "category": "Few-Shot"
+        }
+      }
+    },
+    "20pct": {
+      "overall": 45.8,
+      "categories": {
+        "Single-Doc QA": 26.41,
+        "Multi-Doc QA": 33.02,
+        "Summarization": 27.83,
+        "Few-Shot": 85.9,
+        "Synthetic": 83.02,
+        "Code": 56.58
+      },
+      "datasets": {
+        "2wikimqa": {
+          "score": 27.84,
+          "category": "Multi-Doc QA"
+        },
+        "gov_report": {
+          "score": 32.25,
+          "category": "Summarization"
+        },
+        "hotpotqa": {
+          "score": 38.2,
+          "category": "Multi-Doc QA"
+        },
+        "lcc": {
+          "score": 59.67,
+          "category": "Code"
+        },
+        "multi_news": {
+          "score": 26.95,
+          "category": "Summarization"
+        },
+        "narrativeqa": {
+          "score": 26.41,
+          "category": "Single-Doc QA"
+        },
+        "passage_retrieval_en": {
+          "score": 83.02,
+          "category": "Synthetic"
+        },
+        "qmsum": {
+          "score": 24.29,
+          "category": "Summarization"
+        },
+        "repobench-p": {
+          "score": 53.49,
+          "category": "Code"
+        },
+        "triviaqa": {
+          "score": 85.9,
+          "category": "Few-Shot"
+        }
+      }
+    },
+    "50pct": {
+      "overall": 46.26,
+      "categories": {
+        "Single-Doc QA": 26.74,
+        "Multi-Doc QA": 33.59,
+        "Summarization": 28.03,
+        "Few-Shot": 86.12,
+        "Synthetic": 84.86,
+        "Code": 56.78
+      },
+      "datasets": {
+        "2wikimqa": {
+          "score": 27.41,
+          "category": "Multi-Doc QA"
+        },
+        "gov_report": {
+          "score": 32.87,
+          "category": "Summarization"
+        },
+        "hotpotqa": {
+          "score": 39.78,
+          "category": "Multi-Doc QA"
+        },
+        "lcc": {
+          "score": 59.67,
+          "category": "Code"
+        },
+        "multi_news": {
+          "score": 26.95,
+          "category": "Summarization"
+        },
+        "narrativeqa": {
+          "score": 26.74,
+          "category": "Single-Doc QA"
+        },
+        "passage_retrieval_en": {
+          "score": 84.86,
+          "category": "Synthetic"
+        },
+        "qmsum": {
+          "score": 24.26,
+          "category": "Summarization"
+        },
+        "repobench-p": {
+          "score": 53.9,
+          "category": "Code"
+        },
+        "triviaqa": {
+          "score": 86.12,
+          "category": "Few-Shot"
+        }
+      }
+    }
+  },
+  "StreamingLLM": {
+    "10pct": {
+      "overall": 38.37,
+      "categories": {
+        "Single-Doc QA": 23.73,
+        "Multi-Doc QA": 27.0,
+        "Summarization": 25.6,
+        "Few-Shot": 85.76,
+        "Synthetic": 30.67,
+        "Code": 56.35
+      },
+      "datasets": {
+        "2wikimqa": {
+          "score": 23.33,
+          "category": "Multi-Doc QA"
+        },
+        "gov_report": {
+          "score": 29.02,
+          "category": "Summarization"
+        },
+        "hotpotqa": {
+          "score": 30.67,
+          "category": "Multi-Doc QA"
+        },
+        "lcc": {
+          "score": 59.14,
+          "category": "Code"
+        },
+        "multi_news": {
+          "score": 26.69,
+          "category": "Summarization"
+        },
+        "narrativeqa": {
+          "score": 23.73,
+          "category": "Single-Doc QA"
+        },
+        "passage_retrieval_en": {
+          "score": 30.67,
+          "category": "Synthetic"
+        },
+        "qmsum": {
+          "score": 21.1,
+          "category": "Summarization"
+        },
+        "repobench-p": {
+          "score": 53.56,
+          "category": "Code"
+        },
+        "triviaqa": {
+          "score": 85.76,
+          "category": "Few-Shot"
+        }
+      }
+    },
+    "20pct": {
+      "overall": 41.11,
+      "categories": {
+        "Single-Doc QA": 24.14,
+        "Multi-Doc QA": 30.91,
+        "Summarization": 26.58,
+        "Few-Shot": 85.92,
+        "Synthetic": 45.89,
+        "Code": 56.81
+      },
+      "datasets": {
+        "2wikimqa": {
+          "score": 25.84,
+          "category": "Multi-Doc QA"
+        },
+        "gov_report": {
+          "score": 31.19,
+          "category": "Summarization"
+        },
+        "hotpotqa": {
+          "score": 35.99,
+          "category": "Multi-Doc QA"
+        },
+        "lcc": {
+          "score": 59.66,
+          "category": "Code"
+        },
+        "multi_news": {
+          "score": 26.74,
+          "category": "Summarization"
+        },
+        "narrativeqa": {
+          "score": 24.14,
+          "category": "Single-Doc QA"
+        },
+        "passage_retrieval_en": {
+          "score": 45.89,
+          "category": "Synthetic"
+        },
+        "qmsum": {
+          "score": 21.8,
+          "category": "Summarization"
+        },
+        "repobench-p": {
+          "score": 53.96,
+          "category": "Code"
+        },
+        "triviaqa": {
+          "score": 85.92,
+          "category": "Few-Shot"
+        }
+      }
+    },
+    "50pct": {
+      "overall": 46.02,
+      "categories": {
+        "Single-Doc QA": 26.04,
+        "Multi-Doc QA": 33.05,
+        "Summarization": 27.71,
+        "Few-Shot": 86.12,
+        "Synthetic": 84.86,
+        "Code": 56.97
+      },
+      "datasets": {
+        "2wikimqa": {
+          "score": 27.68,
+          "category": "Multi-Doc QA"
+        },
+        "gov_report": {
+          "score": 32.47,
+          "category": "Summarization"
+        },
+        "hotpotqa": {
+          "score": 38.41,
+          "category": "Multi-Doc QA"
+        },
+        "lcc": {
+          "score": 59.69,
+          "category": "Code"
+        },
+        "multi_news": {
+          "score": 26.94,
+          "category": "Summarization"
+        },
+        "narrativeqa": {
+          "score": 26.04,
+          "category": "Single-Doc QA"
+        },
+        "passage_retrieval_en": {
+          "score": 84.86,
+          "category": "Synthetic"
+        },
+        "qmsum": {
+          "score": 23.73,
+          "category": "Summarization"
+        },
+        "repobench-p": {
+          "score": 54.26,
+          "category": "Code"
+        },
+        "triviaqa": {
+          "score": 86.12,
+          "category": "Few-Shot"
+        }
+      }
+    }
+  },
   "comparison": {
     "FullKV(full)": {
       "10pct": 46.27,

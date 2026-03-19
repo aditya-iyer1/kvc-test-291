@@ -1,15 +1,15 @@
 from importlib.metadata import version
 import transformers
 
-from pyramidkv.llama_model import llama_flash_attn2_forward_HeadKV, llama_flash_attn2_forward_AdaKV, llama_flash_attn2_forward_PyramidKV,llama_flash_attn2_forward_CAM,llama_flash_attn2_forward_H2O,llama_flash_attn2_forward_SnapKV,llama_flash_attn2_forward_StreamingLLM, llama_flash_attn2_forward_L2Norm
-from pyramidkv.llama_model import llama_attn_forward_PyramidKV,llama_attn_forward_CAM,llama_attn_forward_H2O,llama_attn_forward_SnapKV,llama_attn_forward_StreamingLLM, llama_attn_forward_L2Norm
-from pyramidkv.llama_model import llama_sdpa_attn_forward_PyramidKV,llama_sdpa_attn_forward_CAM,llama_sdpa_attn_forward_H2O,llama_sdpa_attn_forward_SnapKV,llama_sdpa_attn_forward_StreamingLLM, llama_sdpa_attn_forward_L2Norm
+from pyramidkv.llama_model import llama_flash_attn2_forward_HeadKV, llama_flash_attn2_forward_AdaKV, llama_flash_attn2_forward_PyramidKV,llama_flash_attn2_forward_CAM,llama_flash_attn2_forward_H2O,llama_flash_attn2_forward_SnapKV,llama_flash_attn2_forward_StreamingLLM,llama_flash_attn2_forward_StreamingLLMSliding, llama_flash_attn2_forward_L2Norm
+from pyramidkv.llama_model import llama_attn_forward_PyramidKV,llama_attn_forward_CAM,llama_attn_forward_H2O,llama_attn_forward_SnapKV,llama_attn_forward_StreamingLLM,llama_attn_forward_StreamingLLMSliding, llama_attn_forward_L2Norm
+from pyramidkv.llama_model import llama_sdpa_attn_forward_PyramidKV,llama_sdpa_attn_forward_CAM,llama_sdpa_attn_forward_H2O,llama_sdpa_attn_forward_SnapKV,llama_sdpa_attn_forward_StreamingLLM,llama_sdpa_attn_forward_StreamingLLMSliding, llama_sdpa_attn_forward_L2Norm
 from pyramidkv.llama_model import adaptive_LlamaModel_forward
 from pyramidkv.llama_model_think import llama_attn_forward_SnapKV_ThinK, think_model_forward
 
-from pyramidkv.mistral_model import mistral_flash_attn2_forward_AdaKV, mistral_flash_attn2_forward_HeadKV, mistral_flash_attn2_forward_PyramidKV,mistral_flash_attn2_forward_CAM,mistral_flash_attn2_forward_H2O,mistral_flash_attn2_forward_SnapKV,mistral_flash_attn2_forward_StreamingLLM, mistral_flash_attn2_forward_L2Norm
-from pyramidkv.mistral_model import mistral_attn_forward_PyramidKV,mistral_attn_forward_CAM,mistral_attn_forward_H2O,mistral_attn_forward_SnapKV,mistral_attn_forward_StreamingLLM, mistral_attn_forward_L2Norm
-from pyramidkv.mistral_model import mistral_sdpa_attn_forward_PyramidKV,mistral_sdpa_attn_forward_CAM,mistral_sdpa_attn_forward_H2O,mistral_sdpa_attn_forward_SnapKV,mistral_sdpa_attn_forward_StreamingLLM, mistral_sdpa_attn_forward_L2Norm
+from pyramidkv.mistral_model import mistral_flash_attn2_forward_AdaKV, mistral_flash_attn2_forward_HeadKV, mistral_flash_attn2_forward_PyramidKV,mistral_flash_attn2_forward_CAM,mistral_flash_attn2_forward_H2O,mistral_flash_attn2_forward_SnapKV,mistral_flash_attn2_forward_StreamingLLM,mistral_flash_attn2_forward_StreamingLLMSliding, mistral_flash_attn2_forward_L2Norm
+from pyramidkv.mistral_model import mistral_attn_forward_PyramidKV,mistral_attn_forward_CAM,mistral_attn_forward_H2O,mistral_attn_forward_SnapKV,mistral_attn_forward_StreamingLLM,mistral_attn_forward_StreamingLLMSliding, mistral_attn_forward_L2Norm
+from pyramidkv.mistral_model import mistral_sdpa_attn_forward_PyramidKV,mistral_sdpa_attn_forward_CAM,mistral_sdpa_attn_forward_H2O,mistral_sdpa_attn_forward_SnapKV,mistral_sdpa_attn_forward_StreamingLLM,mistral_sdpa_attn_forward_StreamingLLMSliding, mistral_sdpa_attn_forward_L2Norm
 from pyramidkv.mistral_model import adaptive_MistralModel_forward
 
 from pyramidkv.llama_model import prepare_inputs_for_generation_llama, prepare_inputs_for_generation_llama_new
@@ -39,6 +39,18 @@ def replace_llama(method, model_name=None):
             pass
         try:
             transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_StreamingLLM
+        except AttributeError:
+            pass
+
+    elif method == "streamingllmsliding":
+        print("Using StreamingLLMSliding!")
+        transformers.models.llama.modeling_llama.LlamaAttention.forward = llama_attn_forward_StreamingLLMSliding
+        try:
+            transformers.models.llama.modeling_llama.LlamaFlashAttention2.forward = llama_flash_attn2_forward_StreamingLLMSliding
+        except AttributeError:
+            pass
+        try:
+            transformers.models.llama.modeling_llama.LlamaSdpaAttention.forward = llama_sdpa_attn_forward_StreamingLLMSliding
         except AttributeError:
             pass
         
@@ -166,6 +178,18 @@ def replace_mistral(method):
             pass
         try:
             transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_sdpa_attn_forward_StreamingLLM
+        except AttributeError:
+            pass
+
+    elif method == "streamingllmsliding":
+        print("Using StreamingLLMSliding!")
+        transformers.models.mistral.modeling_mistral.MistralAttention.forward = mistral_attn_forward_StreamingLLMSliding
+        try:
+            transformers.models.mistral.modeling_mistral.MistralFlashAttention2.forward = mistral_flash_attn2_forward_StreamingLLMSliding
+        except AttributeError:
+            pass
+        try:
+            transformers.models.mistral.modeling_mistral.MistralSdpaAttention.forward = mistral_sdpa_attn_forward_StreamingLLMSliding
         except AttributeError:
             pass
         

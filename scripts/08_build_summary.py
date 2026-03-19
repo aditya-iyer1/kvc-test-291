@@ -8,6 +8,19 @@ from statistics import mean
 METHODS = ["FullKV", "SnapKV", "PyramidKV", "StreamingLLM"]
 COMP_METHODS = ["SnapKV", "PyramidKV", "StreamingLLM"]
 BUDGETS_COMP = ["10pct", "20pct", "50pct"]
+CATEGORY_MAP = {
+    "Single-Doc QA": ["narrativeqa"],
+    "Multi-Doc QA": ["hotpotqa", "2wikimqa"],
+    "Summarization": ["gov_report", "qmsum", "multi_news"],
+    "Few-Shot": ["triviaqa"],
+    "Synthetic": ["passage_retrieval_en"],
+    "Code": ["lcc", "repobench-p"],
+}
+DATASET_TO_CATEGORY = {
+    dataset: category
+    for category, datasets in CATEGORY_MAP.items()
+    for dataset in datasets
+}
 
 
 def parse_score(raw: str):
@@ -57,7 +70,7 @@ def build_intersections(comp_scores_by_budget):
     intersections = {}
     for budget in BUDGETS_COMP:
         by_method = comp_scores_by_budget.get(budget, {})
-        sets = [set(by_method.get(m, {}).keys()) for m in COMP_METHODS]
+        sets = [set(by_method.get(method, {}).keys()) for method in COMP_METHODS]
         if all(sets):
             inter = set.intersection(*sets)
         else:
@@ -66,9 +79,39 @@ def build_intersections(comp_scores_by_budget):
     return intersections
 
 
+def category_scores_for(dataset_scores):
+    categories = {}
+    for category, datasets in CATEGORY_MAP.items():
+        vals = [dataset_scores[d] for d in datasets if d in dataset_scores]
+        categories[category] = safe_mean(vals)
+    return categories
+
+
+def datasets_block_for(dataset_scores):
+    return {
+        dataset: {
+            "score": score,
+            "category": DATASET_TO_CATEGORY[dataset],
+        }
+        for dataset, score in sorted(dataset_scores.items())
+        if dataset in DATASET_TO_CATEGORY
+    }
+
+
+def build_budget_entry(method_scores, dataset_subset):
+    effective_scores = {
+        dataset: method_scores[dataset]
+        for dataset in dataset_subset
+        if dataset in method_scores and dataset in DATASET_TO_CATEGORY
+    }
+    return {
+        "overall": safe_mean(effective_scores.values()),
+        "categories": category_scores_for(effective_scores),
+        "datasets": datasets_block_for(effective_scores),
+    }
+
+
 def compute_comparison(comp_scores_by_budget, full_scores, intersections):
-    # rows: FullKV(full), SnapKV, PyramidKV, StreamingLLM
-    # cols: 10pct, 20pct, 50pct
     table = {
         "FullKV(full)": {},
         "SnapKV": {},
@@ -78,14 +121,11 @@ def compute_comparison(comp_scores_by_budget, full_scores, intersections):
 
     for budget in BUDGETS_COMP:
         inter = intersections[budget]
-
-        # compressed methods: mean on that budget's 3-method intersection
         for method in COMP_METHODS:
             ds_scores = comp_scores_by_budget.get(budget, {}).get(method, {})
             vals = [ds_scores[d] for d in inter if d in ds_scores]
             table[method][budget] = safe_mean(vals)
 
-        # FullKV(full) reference: mean over overlap between full and this intersection
         overlap = [d for d in inter if d in full_scores]
         table["FullKV(full)"][budget] = safe_mean(full_scores[d] for d in overlap)
 
@@ -135,29 +175,39 @@ def main():
 
     comp_scores_by_budget = {}
     for budget in BUDGETS_COMP:
-        p = budget_csv[budget]
-        if not p.exists():
-            print(f"[SKIP] missing: {p}")
+        path = budget_csv[budget]
+        if not path.exists():
+            print(f"[SKIP] missing: {path}")
             comp_scores_by_budget[budget] = {}
             continue
-        comp_scores_by_budget[budget] = read_results_csv(p)
+        comp_scores_by_budget[budget] = read_results_csv(path)
 
     full_scores = {}
-    p_full = budget_csv["full"]
-    if p_full.exists():
-        full_scores = read_results_csv(p_full).get("FullKV", {})
+    full_path = budget_csv["full"]
+    if full_path.exists():
+        full_scores = read_results_csv(full_path).get("FullKV", {})
     else:
-        print(f"[SKIP] missing: {p_full}")
+        print(f"[SKIP] missing: {full_path}")
 
     intersections = build_intersections(comp_scores_by_budget)
     comparison = compute_comparison(comp_scores_by_budget, full_scores, intersections)
 
-    # Keep writing summary_run8.json for downstream use.
-    out = {
-        "comparison": comparison,
-        "intersections": intersections,
-        "fullkv_full_available": sorted(full_scores.keys()),
-    }
+    out = {method: {} for method in METHODS}
+
+    for budget in BUDGETS_COMP:
+        inter = intersections[budget]
+        for method in COMP_METHODS:
+            method_scores = comp_scores_by_budget.get(budget, {}).get(method, {})
+            out[method][budget] = build_budget_entry(method_scores, inter)
+
+    # 04_plot.py expects a single FullKV/full entry. Use overlap with the
+    # common compressed-task set so the reference row is comparable.
+    full_overlap = sorted(set(full_scores.keys()) & set(DATASET_TO_CATEGORY))
+    out["FullKV"]["full"] = build_budget_entry(full_scores, full_overlap)
+
+    out["comparison"] = comparison
+    out["intersections"] = intersections
+    out["fullkv_full_available"] = sorted(full_scores.keys())
 
     out_dir = results_dir / "scores"
     out_dir.mkdir(parents=True, exist_ok=True)

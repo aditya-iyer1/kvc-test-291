@@ -1,0 +1,51 @@
+======================================================
+  KV Cache Compression — LongBench Evaluation
+======================================================
+Model      : mistralai/Mistral-7B-Instruct-v0.2
+GPU(s)     : 1
+Methods    : StreamingLLMSliding
+Budgets    : 0.1 0.2 0.5
+AttnImpl   : sdpa
+Results    : /home/jovyan/kvc-test-291/results_mistral_run7
+
+===============================
+  Method: StreamingLLMSliding
+===============================
+
+
+  Budget: 10pct  (max_capacity_prompts=3150)
+    Running dataset: 2wikimqa ... 
+    done (319s)
+    Running dataset: qmsum ... 
+    done (1342s)
+    Running dataset: repobench-p ... 
+    done (808s)
+    Running dataset: gov_report ... 
+    done (2926s)
+
+
+  Budget: 20pct  (max_capacity_prompts=6300)
+    Running dataset: 2wikimqa ... 
+    done (351s)
+    Running dataset: qmsum ... 
+    done (1330s)
+    Running dataset: repobench-p ... 
+    done (825s)
+    Running dataset: gov_report ... 
+    done (3193s)
+
+
+  Budget: 50pct  (max_capacity_prompts=15750)
+    Running dataset: 2wikimqa ... 
+    done (345s)
+    Running dataset: qmsum ... 
+    done (1448s)
+    Running dataset: repobench-p ... 
+    done (909s)
+    Running dataset: gov_report ... 
+    done (3520s)
+
+======================================================
+  All evaluations complete.
+  Next step: run scripts/02_score.sh
+======================================================

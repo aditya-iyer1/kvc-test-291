@@ -619,6 +619,49 @@ class StreamingLLMKVCluster():
             value_states = torch.cat([v_past_compress, v_cur], dim = 2)
             return key_states, value_states
 
+
+class StreamingLLMSlidingKVCluster():
+    def __init__(self, window_size = 64, max_capacity_prompt = 256 + 64, kernel_size = 5, pooling = 'avgpool', merge = None):
+        self.window_size = window_size
+        self.max_capacity_prompt = max_capacity_prompt
+        assert self.max_capacity_prompt - self.window_size > 0
+        self.kernel_size = kernel_size
+        self.pooling = pooling
+        self.merge = merge
+
+    def reset(self, window_size = 64, max_capacity_prompt = 256 + 64, kernel_size = 5, pooling = 'avgpool', merge = None):
+        self.window_size = window_size
+        self.max_capacity_prompt = max_capacity_prompt
+        assert self.max_capacity_prompt - self.window_size > 0
+        self.kernel_size = kernel_size
+        self.pooling = pooling
+        self.merge = merge
+
+    def update_kv(self, key_states, query_states, value_states, attention_mask, num_key_value_groups):
+        # check if prefix phase
+        assert key_states.shape[-2] == query_states.shape[-2]
+        bsz, num_heads, q_len, head_dim = query_states.shape
+
+        if q_len < self.max_capacity_prompt:
+            return key_states, value_states
+
+        if self.merge is not None:
+            raise ValueError("StreamingLLMSlidingKVCluster does not support merge modes.")
+
+        sink_keep = self.window_size
+        recent_keep = self.max_capacity_prompt - self.window_size
+
+        sink_indices = torch.arange(sink_keep, dtype=torch.int64, device=key_states.device)
+        sink_indices = sink_indices.unsqueeze(0).unsqueeze(0).unsqueeze(-1).repeat(bsz, num_heads, 1, head_dim)
+
+        k_sink = key_states.gather(dim=2, index=sink_indices)
+        v_sink = value_states.gather(dim=2, index=sink_indices)
+        k_recent = key_states[:, :, -recent_keep:, :]
+        v_recent = value_states[:, :, -recent_keep:, :]
+        key_states = torch.cat([k_sink, k_recent], dim=2)
+        value_states = torch.cat([v_sink, v_recent], dim=2)
+        return key_states, value_states
+
 class AdaKVCluster():
     '''
     adapt from https://github.com/FFY0/AdaKV.
@@ -1025,6 +1068,27 @@ def init_StreamingLLM(self):
     self.kv_cluster = StreamingLLMKVCluster(
         window_size = self.config.window_size, 
         max_capacity_prompt = self.config.max_capacity_prompt, 
+        kernel_size = self.config.kernel_size,
+        pooling = self.config.pooling,
+        merge = self.config.merge,
+        )
+
+def init_StreamingLLMSliding(self):
+    if not hasattr(self, "kv_cluster"):
+        if not hasattr(self.config, 'window_size'):
+            self.config.window_size = 32
+        if not hasattr(self.config, 'max_capacity_prompt'):
+            self.config.max_capacity_prompt = 2048
+        if not hasattr(self.config, 'kernel_size'):
+            self.config.kernel_size = 5
+        if not hasattr(self.config, 'pooling'):
+            self.config.pooling = 'avgpool'
+        if not hasattr(self.config, 'merge'):
+            self.config.merge = None
+
+    self.kv_cluster = StreamingLLMSlidingKVCluster(
+        window_size = self.config.window_size,
+        max_capacity_prompt = self.config.max_capacity_prompt,
         kernel_size = self.config.kernel_size,
         pooling = self.config.pooling,
         merge = self.config.merge,

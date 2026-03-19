@@ -221,7 +221,7 @@ def main(args):
         if args.method != "FullKV":
             if args.method.lower() in ["snapkv","pyramidkv","h2o","cam", "l2norm", "adakv", "headkv", "think"]:
                 window_sizes = 8
-            elif args.method.lower() in ["streamingllm"]:
+            elif args.method.lower() in ["streamingllm", "streamingllmsliding"]:
                 window_sizes = max_capacity_prompts - 4
 
             if args.method.lower() =='headkv':
